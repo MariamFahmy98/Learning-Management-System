@@ -22,10 +22,10 @@ class UserIdentify extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
-            // FittedBox(
-            // fit: BoxFit.cover,
-            //child: Image.asset('assets/images/LMS.png'),
-            // ),
+            FittedBox(
+              fit: BoxFit.cover,
+              child: Image.asset('assets/images/LMS.png'),
+            ),
             SizedBox(
               height: 8,
             ),

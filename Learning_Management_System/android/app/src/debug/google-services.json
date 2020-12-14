@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "116860494068",
-    "project_id": "learning-management-syst-9077f",
-    "storage_bucket": "learning-management-syst-9077f.appspot.com"
+    "project_number": "406306305168",
+    "project_id": "learning-mangement-syste-7d1e7",
+    "storage_bucket": "learning-mangement-syste-7d1e7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:116860494068:android:82b58f5c3a04144be27ea1",
+        "mobilesdk_app_id": "1:406306305168:android:f74b9f349c1ba5963cd415",
         "android_client_info": {
           "package_name": "com.example.Learning_Management_System"
         }
       },
       "oauth_client": [
         {
-          "client_id": "116860494068-vmmmosfp0b73urqrt8vtekdsvc48k673.apps.googleusercontent.com",
+          "client_id": "406306305168-f3a05a0i781t0fhbpopnsnkf6h3c3vdm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC4MRTDKJHECo_jnIUYjelj2c6ByXpkAgw"
+          "current_key": "AIzaSyCenRopjThI_qFaiKI1mtOGGFQOzu85Q5U"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "116860494068-vmmmosfp0b73urqrt8vtekdsvc48k673.apps.googleusercontent.com",
+              "client_id": "406306305168-f3a05a0i781t0fhbpopnsnkf6h3c3vdm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
