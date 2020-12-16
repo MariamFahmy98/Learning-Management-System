@@ -1,3 +1,4 @@
+import 'package:LMS_application/Widgets/MyDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -5,6 +6,7 @@ class ChatF extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(() => {}),
       appBar: AppBar(
         title: Text("Flutter Chat"),
         actions: [
