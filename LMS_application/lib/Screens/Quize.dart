@@ -1,3 +1,4 @@
+import 'package:LMS_application/Screens/CreateQuiz.dart';
 import 'package:flutter/material.dart';
 
 class Quizes extends StatelessWidget {
@@ -5,7 +6,9 @@ class Quizes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        brightness: Brightness.light,
         title: Text("كويزات مجنونة"),
       ),
       body: Center(
@@ -18,6 +21,15 @@ class Quizes extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CreateQuize()),
+          );
+        },
       ),
     );
   }

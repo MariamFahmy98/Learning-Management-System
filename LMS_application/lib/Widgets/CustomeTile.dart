@@ -4,7 +4,7 @@ import '../Screens/MyCourses.dart';
 import '../Screens/Announcements.dart';
 import '../Screens/Assignments.dart';
 import '../Screens/Grades.dart';
-import '../Screens/Quizes.dart';
+import '../Screens/Quize.dart';
 
 class CustomeTile extends StatelessWidget {
   IconData myIcon;
