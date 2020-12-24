@@ -1,12 +1,16 @@
+import 'package:LMS_application/Screens/Teacher/Teacher_Drawer.dart';
 import 'package:LMS_application/Widgets/MyDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ChatF extends StatelessWidget {
+class TeacherHomeScreen extends StatelessWidget {
+  String teacherId;
+  TeacherHomeScreen(@required this.teacherId);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(() => {}),
+      drawer: TeacherDrawer(() => {}),
       appBar: AppBar(
         title: Text("Flutter Chat"),
         actions: [

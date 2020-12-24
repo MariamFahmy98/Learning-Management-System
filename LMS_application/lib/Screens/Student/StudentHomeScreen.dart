@@ -2,7 +2,10 @@ import 'package:LMS_application/Widgets/MyDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ChatF extends StatelessWidget {
+class StudentHomeScreen extends StatelessWidget {
+  final String _studentID;
+
+  StudentHomeScreen(this._studentID);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +44,7 @@ class ChatF extends StatelessWidget {
       ),
       body: Container(
         child: Text(
-          'Hello, Teacher',
+          _studentID,
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
       ),

@@ -1,10 +1,7 @@
+import 'package:LMS_application/Screens/Announcements.dart';
+import 'package:LMS_application/Screens/Assignments.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
-import '../Mustafa/MyCourses.dart';
-import '../Screens/Announcements.dart';
-import '../Screens/Assignments.dart';
-import '../Screens/Grades.dart';
-import '../Screens/Teacher/Quiz/Quize.dart';
 
 class CustomeTile extends StatelessWidget {
   IconData myIcon;
@@ -12,11 +9,14 @@ class CustomeTile extends StatelessWidget {
   Function tap;
 
   Map<String, Widget> screens = {
-    'MyCourses': MyCourses(),
-    'Announcements': Announcements(),
-    'Grades': Grades(),
-    'Quizes': Quizes(),
     'Assignments': Assignments(),
+    'Announcements': Announcements(),
+    //'My Courses': MyCourses(),// registered courses
+    //'Courses': MyCourses(),//teacher courses
+    //'Available Courses' : AvailableCourses(),
+    //'Info' : Info(),
+    //'Library' : Library(),
+    'LogOut': LogOut(),
   };
   CustomeTile({this.myIcon, this.txt, this.tap});
 
@@ -56,5 +56,16 @@ class CustomeTile extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class LogOut extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton(
+        child: Text('mmm'),
+        onPressed: () {
+          FirebaseAuth.instance.signOut();
+        });
   }
 }

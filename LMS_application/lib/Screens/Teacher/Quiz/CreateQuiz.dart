@@ -1,4 +1,4 @@
-import './AddQuestion.dart';
+import 'AddQuestion.dart';
 import 'package:LMS_application/Widgets/CustomeButton.dart';
 import 'package:LMS_application/services/DataBase.dart';
 import 'package:flutter/material.dart';

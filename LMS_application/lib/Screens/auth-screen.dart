@@ -1,3 +1,5 @@
+import 'package:LMS_application/Screens/Student/StudentHomeScreen.dart';
+import 'package:LMS_application/Screens/Teacher/TeacherHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
@@ -46,7 +48,10 @@ class _AuthScreenState extends State<AuthScreen> {
       userID = authResult.user.uid;
       _isTeacher = await _isSpecificUser(userID, 'Teachers');
 
-      print(_isTeacher);
+      setState(() {
+        _isLoading = false;
+      });
+
     } on PlatformException catch (error) {
       var message = "An error occurred, please check your credentials";
       if (error.message != null) message = error.message;
@@ -65,21 +70,22 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: FirebaseAuth.instance.onAuthStateChanged,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            if (_isTeacher)
-              return TeacherHomeScreen();
-            else
-              return StudentHomeScreen();
-          } else
-            return Scaffold(
-              backgroundColor: Theme.of(context).primaryColor,
-              body: AuthForm(
-                _submitAuthForm,
-                _isLoading,
-              ),
-            );
-        });
+      stream: FirebaseAuth.instance.onAuthStateChanged,
+      builder: (context, snapshot) {
+        if (snapshot.hasData && _isTeacher != null) {
+          if (_isTeacher)
+            return TeacherHomeScreen(userID);
+          else
+            return StudentHomeScreen(userID);
+        } else
+          return Scaffold(
+            backgroundColor: Theme.of(context).primaryColor,
+            body: AuthForm(
+              _submitAuthForm,
+              _isLoading,
+            ),
+          );
+      },
+    );
   }
 }

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DataBaseServices {
   Future<void> addQuizData(Map quizData, String quizId) async {
     await Firestore.instance
-        .collection("quizes")
+        .collection("Courses")
         .document(quizId)
         .setData(quizData)
         .catchError((e) {

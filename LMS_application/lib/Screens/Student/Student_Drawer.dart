@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import './CustomeTile.dart';
+import '../../Widgets/CustomeTile.dart';
 
-class MyDrawer extends StatelessWidget {
+class StudentDrawer extends StatelessWidget {
   Function ontap;
 
-  MyDrawer(this.ontap);
+  StudentDrawer(this.ontap);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -36,29 +36,24 @@ class MyDrawer extends StatelessWidget {
             txt: "Person",
             tap: () => {},
           ),*/
-          /*CustomeTile(
-            myIcon: Icons.book,
-            txt: "MyCourses",
-            tap: () => {},
-          ),*/
           CustomeTile(
-            myIcon: Icons.notifications,
-            txt: "Announcements",
-            tap: () => {},
-          ),
-          /* CustomeTile(
-            myIcon: Icons.grade,
-            txt: "Grades",
+            myIcon: Icons.info,
+            txt: "Info",
             tap: () => {},
           ),
           CustomeTile(
             myIcon: Icons.assignment_sharp,
-            txt: "Quizes",
+            txt: "My Courses",
             tap: () => {},
-          ),*/
+          ),
           CustomeTile(
-            myIcon: Icons.pages_outlined,
-            txt: "Assignments",
+            myIcon: Icons.assignment_turned_in,
+            txt: "Available Courses",
+            tap: () => {},
+          ),
+          CustomeTile(
+            myIcon: Icons.library_books,
+            txt: "Library",
             tap: () => {},
           ),
           CustomeTile(
