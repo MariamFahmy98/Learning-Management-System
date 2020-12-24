@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../Screens/MyCourses.dart';
+import '../Mustafa/MyCourses.dart';
 import '../Screens/Announcements.dart';
 import '../Screens/Assignments.dart';
 import '../Screens/Grades.dart';
-import '../Screens/Quize.dart';
+import '../Screens/Teacher/Quiz/Quize.dart';
 
 class CustomeTile extends StatelessWidget {
   IconData myIcon;
