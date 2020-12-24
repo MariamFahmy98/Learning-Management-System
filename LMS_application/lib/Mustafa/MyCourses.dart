@@ -1,32 +1,13 @@
 import 'package:flutter/material.dart';
-import '../Screens/classes/student.dart';
-import '../Screens/classes/teacher.dart';
-import '../Screens/classes/course.dart';
-import '../Screens/classes/quiz.dart';
-import '../Screens/widgets/students_avalabile_courses.dart';
-import '../Screens/widgets/student_courses.dart';
-import '../Screens/widgets/teacher_courses.dart';
+import '../classes/student.dart';
+import '../classes/teacher.dart';
+import '../classes/course.dart';
+import '../classes/quiz.dart';
+import './students_avalabile_courses.dart';
+import './student_courses.dart';
+import './teacher_courses.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'LMS',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class MyCourses extends StatelessWidget {
   final Teacher userTeacher = new Teacher(myCourses: [
     Course(
       courseName: 'Data Communication',

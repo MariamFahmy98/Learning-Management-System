@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:student_teacher_course/widgets/teacher_requests_list.dart';
+import './teacher_requests_list.dart';
 import '../classes/course.dart';
 import '../classes/quiz.dart';
 import './teacher_requests_list.dart';
