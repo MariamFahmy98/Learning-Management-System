@@ -1,5 +1,6 @@
+import 'package:LMS_application/Screens/auth-screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import './Screens/identifyUser-screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: UserIdentify(),
+      home: AuthScreen(),
     );
   }
 }

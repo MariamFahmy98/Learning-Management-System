@@ -5,8 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Widgets/auth/auth_form.dart';
 
 class AuthScreen extends StatefulWidget {
-  final bool student;
-  AuthScreen(this.student);
+  AuthScreen();
   @override
   _AuthScreenState createState() => _AuthScreenState();
 }
@@ -14,11 +13,22 @@ class AuthScreen extends StatefulWidget {
 class _AuthScreenState extends State<AuthScreen> {
   final _auth = FirebaseAuth.instance;
   var _isLoading = false;
+  String userID;
+  bool _isTeacher;
+
+  Future<bool> _isSpecificUser(String userID, String users) async {
+    var snapshot = await Firestore.instance.collection(users).getDocuments();
+    var teachers = snapshot.documents;
+
+    for (int i = 0; i < teachers.length; i++)
+      if (teachers[i].documentID == userID) return true;
+
+    return false;
+  }
+
   void _submitAuthForm(
     String email,
     String password,
-    String username,
-    bool isLogin,
     BuildContext ctx,
   ) async {
     AuthResult authResult;
@@ -27,34 +37,16 @@ class _AuthScreenState extends State<AuthScreen> {
       setState(() {
         _isLoading = true;
       });
-      if (isLogin) {
-        authResult = await _auth.signInWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-      } else {
-        authResult = await _auth.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
-        if (widget.student) {
-          await Firestore.instance
-              .collection('Students')
-              .document(authResult.user.uid)
-              .setData({
-            'username': username,
-            'email': email,
-          });
-        } else {
-          await Firestore.instance
-              .collection('Teachers')
-              .document(authResult.user.uid)
-              .setData({
-            'username': username,
-            'email': email,
-          });
-        }
-      }
+
+      authResult = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      userID = authResult.user.uid;
+      _isTeacher = await _isSpecificUser(userID, 'Teachers');
+
+      print(_isTeacher);
     } on PlatformException catch (error) {
       var message = "An error occurred, please check your credentials";
       if (error.message != null) message = error.message;
@@ -72,12 +64,22 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: AuthForm(
-        _submitAuthForm,
-        _isLoading,
-      ),
-    );
+    return StreamBuilder(
+        stream: FirebaseAuth.instance.onAuthStateChanged,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            if (_isTeacher)
+              return TeacherHomeScreen();
+            else
+              return StudentHomeScreen();
+          } else
+            return Scaffold(
+              backgroundColor: Theme.of(context).primaryColor,
+              body: AuthForm(
+                _submitAuthForm,
+                _isLoading,
+              ),
+            );
+        });
   }
 }

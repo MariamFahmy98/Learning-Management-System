@@ -7,8 +7,6 @@ class AuthForm extends StatefulWidget {
   final void Function(
     String email,
     String password,
-    String username,
-    bool isLogin,
     BuildContext ctx,
   ) submitFn;
   @override
@@ -17,10 +15,8 @@ class AuthForm extends StatefulWidget {
 
 class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
-  var _isLogin = true;
   var _userEmail = '';
   var _userPassword = '';
-  var _userName = '';
 
   void _trySubmit() {
     final isValid = _formKey.currentState.validate();
@@ -30,8 +26,6 @@ class _AuthFormState extends State<AuthForm> {
       widget.submitFn(
         _userEmail.trim(),
         _userPassword.trim(),
-        _userName.trim(),
-        _isLogin,
         context,
       );
     }
@@ -66,22 +60,6 @@ class _AuthFormState extends State<AuthForm> {
                       _userEmail = value;
                     },
                   ),
-                  if (!_isLogin)
-                    TextFormField(
-                      key: ValueKey('Username'),
-                      validator: (value) {
-                        if (value.isEmpty || value.length < 4) {
-                          return 'Please enter at least 4 characters.';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        labelText: 'Username',
-                      ),
-                      onSaved: (value) {
-                        _userName = value;
-                      },
-                    ),
                   TextFormField(
                     key: ValueKey('Password'),
                     validator: (value) {
@@ -104,20 +82,8 @@ class _AuthFormState extends State<AuthForm> {
                   if (widget.isLoading) CircularProgressIndicator(),
                   if (!widget.isLoading)
                     RaisedButton(
-                      child: Text(_isLogin ? 'Login' : 'Signup'),
+                      child: Text('Login'),
                       onPressed: _trySubmit,
-                    ),
-                  if (!widget.isLoading)
-                    FlatButton(
-                      child: Text(_isLogin
-                          ? 'Create a new account'
-                          : 'I already have an account'),
-                      textColor: Theme.of(context).primaryColor,
-                      onPressed: () {
-                        setState(() {
-                          _isLogin = !_isLogin;
-                        });
-                      },
                     ),
                 ],
               ),
