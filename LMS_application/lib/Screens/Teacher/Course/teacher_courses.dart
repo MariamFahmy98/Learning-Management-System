@@ -22,17 +22,17 @@ class _TeacherCourses extends State<TeacherCourses> {
     final newCr = Course(crCode);
     allCourses.add(newCr);
     setState(() {
-      teacher.myCourses.add(newCr);
+      // teacher.courses.add(newCr);
     });
   }
 
-  void _deleteCourse(String code) {
-    setState(() {
-      teacher.myCourses.removeWhere((course) {
-        return course.courseCode == code;
-      });
-    });
-  }
+  // void _deleteCourse(String code) {
+  //   setState(() {
+  //     teacher.myCourses.removeWhere((course) {
+  //       return course.courseCode == code;
+  //     });
+  //   });
+  // }
 
   void _startAddNewCourse(BuildContext ctx) {
     showModalBottomSheet(
@@ -59,8 +59,8 @@ class _TeacherCourses extends State<TeacherCourses> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TeacherCoursesList(
-              myCourses: teacher.myCourses,
-              deleteCourse: _deleteCourse,
+              //myCourses: teacher.myCourses,
+              //deleteCourse: _deleteCourse,
             ),
           ],
         ),

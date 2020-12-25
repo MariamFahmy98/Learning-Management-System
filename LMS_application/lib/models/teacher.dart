@@ -1,6 +1,13 @@
-import 'course.dart';
+import 'package:flutter/material.dart';
 
 class Teacher {
-  List<Course> myCourses;
-  Teacher({this.myCourses});
+  String name;
+  String id;
+  List<String> courses;
+  
+  Teacher({
+    @required this.id,
+    @required this.name,
+    @required this.courses,
+  });
 }

@@ -19,7 +19,7 @@ class Course {
 
   void teacherApprove(Student input) {
     //TO DO
-    input.addCourse(this);
+    // input.addCourse(this);
 
     /* requests.removeWhere((student) {
       return student.code == input.code;

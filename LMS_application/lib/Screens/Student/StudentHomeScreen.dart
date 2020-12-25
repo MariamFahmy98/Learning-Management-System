@@ -1,4 +1,5 @@
 import 'package:LMS_application/Widgets/MyDrawer.dart';
+import 'package:LMS_application/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -6,6 +7,7 @@ class StudentHomeScreen extends StatelessWidget {
   final String _studentID;
 
   StudentHomeScreen(this._studentID);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +45,18 @@ class StudentHomeScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        child: Text(
-          _studentID,
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        child: StreamBuilder(
+          stream: Database(_studentID).studentData,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData)
+              return CircularProgressIndicator();
+
+            var studentData = snapshot.data;
+            return Text(
+              "Hello " + studentData.name + " Student",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            );
+          },
         ),
       ),
     );

@@ -1,11 +1,12 @@
 import 'package:LMS_application/Screens/Teacher/Teacher_Drawer.dart';
-import 'package:LMS_application/Widgets/MyDrawer.dart';
+import 'package:LMS_application/models/teacher.dart';
+import 'package:LMS_application/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class TeacherHomeScreen extends StatelessWidget {
-  String teacherId;
-  TeacherHomeScreen(@required this.teacherId);
+  final String teacherId;
+  TeacherHomeScreen(this.teacherId);
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +45,17 @@ class TeacherHomeScreen extends StatelessWidget {
         ],
       ),
       body: Container(
-        child: Text(
-          'Hello, Teacher',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        child: StreamBuilder<Teacher>(
+          stream: Database(teacherId).teacherData,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData)
+              return CircularProgressIndicator();
+
+            return Text(
+              'Hello ' + snapshot.data.name + " Teacher",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            );
+          }
         ),
       ),
     );

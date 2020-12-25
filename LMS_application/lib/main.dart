@@ -1,5 +1,4 @@
 import 'package:LMS_application/Screens/auth-screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 void main() {
