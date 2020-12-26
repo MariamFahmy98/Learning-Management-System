@@ -2,7 +2,6 @@ import 'package:LMS_application/Screens/Student/Announcement/StudentAnnouncement
 import 'package:LMS_application/Screens/Student/Assignments/StudentAssignments.dart';
 import 'package:LMS_application/Screens/Student/Available_courses/students_avalabile_courses.dart';
 import 'package:LMS_application/Screens/Student/Discussion/StudentDiscussion.dart';
-import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourses.dart';
 import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncements.dart';
 import 'package:LMS_application/Screens/Teacher/Assignments/TeacherAssignments.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
@@ -12,13 +11,13 @@ import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
 import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
 
 class CustomeTile extends StatelessWidget {
-  IconData myIcon;
-  String txt;
-  Function tap;
-  bool isTeacher;
+  final IconData myIcon;
+  final String txt;
+  final Function tap;
+  final bool isTeacher;
   CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher});
 
-  Map<String, Widget> teacherScreens = {
+  final Map<String, Widget> teacherScreens = {
     'Assignments': TeacherAssignments(),
     'Announcements': TeacherAnnouncements(),
     'Courses': TeacherCourses(),
@@ -27,7 +26,7 @@ class CustomeTile extends StatelessWidget {
     'LogOut': LogOut(),
   };
 
-  Map<String, Widget> studentScreens = {
+  final Map<String, Widget> studentScreens = {
     'Assignments': StudentAssignments(),
     'Announcements': StudentAnnouncements(),
     //'My Courses': StudentCourses(),

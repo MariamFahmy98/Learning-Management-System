@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
 
 class StudentDrawer extends StatelessWidget {
-  Function ontap;
+  final Function ontap;
 
   StudentDrawer(this.ontap);
   @override
