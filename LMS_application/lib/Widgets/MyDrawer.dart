@@ -66,6 +66,11 @@ class MyDrawer extends StatelessWidget {
             txt: "LogOut",
             tap: () => {},
           ),
+          CustomeTile(
+            myIcon: Icons.chat,
+            txt: "Discussion",
+            tap: () => {},
+          ),
         ]),
       ),
     );

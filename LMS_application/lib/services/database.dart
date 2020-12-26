@@ -39,5 +39,3 @@ class Database {
         .map(_teacherDataFromSnapshot);
   }
 }
-
-

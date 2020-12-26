@@ -52,6 +52,11 @@ class StudentDrawer extends StatelessWidget {
             tap: () => {},
           ),
           CustomeTile(
+            myIcon: Icons.chat,
+            txt: "Discussion",
+            tap: () => {},
+          ),
+          CustomeTile(
             myIcon: Icons.library_books,
             txt: "Library",
             tap: () => {},
