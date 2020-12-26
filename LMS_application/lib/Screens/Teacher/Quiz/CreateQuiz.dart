@@ -2,18 +2,19 @@ import 'package:LMS_application/services/database.dart';
 
 import 'AddQuestion.dart';
 import 'package:LMS_application/Widgets/CustomeButton.dart';
-import 'package:LMS_application/services/DataBase2.dart';
 import 'package:flutter/material.dart';
 import 'package:random_string/random_string.dart';
 
 class CreateQuize extends StatefulWidget {
+  final String courseId;
+  CreateQuize(this.courseId);
   @override
   _CreateQuizeState createState() => _CreateQuizeState();
 }
 
 class _CreateQuizeState extends State<CreateQuize> {
   final _formKey = GlobalKey<FormState>();
-  String quizTitle, quizDescription, quizId;
+  String quizTitle, quizDescription, quizId, quizDuration;
 
   DataBaseServices dataBaseService = new DataBaseServices();
 
@@ -31,8 +32,11 @@ class _CreateQuizeState extends State<CreateQuize> {
         "quizId": quizId,
         "quizTitle": quizTitle,
         "quizDes": quizDescription,
+        "quizDuration": quizDuration,
       };
-      await dataBaseService.addQuizData(quizMap, quizId).then((value) {
+      await dataBaseService
+          .addQuizData(quizMap, quizId, widget.courseId)
+          .then((value) {
         setState(() {
           _isLoading = false;
           Navigator.pushReplacement(
@@ -89,6 +93,16 @@ class _CreateQuizeState extends State<CreateQuize> {
                     SizedBox(
                       height: 6,
                     ),
+                    TextFormField(
+                      validator: (val) =>
+                          val.isEmpty ? "enter quize duration" : null,
+                      decoration: InputDecoration(
+                        hintText: "Quize duration in min.",
+                      ),
+                      onChanged: (val) {
+                        quizDuration = val;
+                      },
+                    ),
                     Spacer(),
                     GestureDetector(
                         onTap: () {
@@ -108,23 +122,3 @@ class _CreateQuizeState extends State<CreateQuize> {
     );
   }
 }
-
-/*
-Widget AddButton(BuildContext context) {
-  return Container(
-    padding: EdgeInsets.symmetric(vertical: 18),
-    decoration: BoxDecoration(
-      color: Colors.purple,
-      borderRadius: BorderRadius.circular(30),
-    ),
-    alignment: Alignment.center,
-    width: MediaQuery.of(context).size.width - 48,
-    child: Text(
-      "Create Quiz",
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 16,
-      ),
-    ),
-  );
-}*/

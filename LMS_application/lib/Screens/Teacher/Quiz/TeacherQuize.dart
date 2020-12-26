@@ -28,7 +28,8 @@ class TeacherQuize extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CreateQuize()),
+            //quiz'll be in course's drawer and 'll fetch its id from there
+            MaterialPageRoute(builder: (context) => CreateQuize("CSE311")),
           );
         },
       ),
