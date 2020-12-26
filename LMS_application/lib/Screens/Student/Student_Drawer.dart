@@ -31,40 +31,41 @@ class StudentDrawer extends StatelessWidget {
               ),
             ),
           ),
-          /*CustomeTile(
-            myIcon: Icons.person,
-            txt: "Person",
-            tap: () => {},
-          ),*/
           CustomeTile(
             myIcon: Icons.info,
             txt: "Info",
             tap: () => {},
+            isTeacher: false,
           ),
           CustomeTile(
             myIcon: Icons.assignment_sharp,
             txt: "My Courses",
             tap: () => {},
+            isTeacher: false,
           ),
           CustomeTile(
             myIcon: Icons.assignment_turned_in,
             txt: "Available Courses",
             tap: () => {},
+            isTeacher: false,
           ),
           CustomeTile(
             myIcon: Icons.chat,
             txt: "Discussion",
             tap: () => {},
+            isTeacher: false,
           ),
           CustomeTile(
             myIcon: Icons.library_books,
             txt: "Library",
             tap: () => {},
+            isTeacher: false,
           ),
           CustomeTile(
             myIcon: Icons.logout,
             txt: "LogOut",
             tap: () => {},
+            isTeacher: false,
           ),
         ]),
       ),

@@ -1,5 +1,11 @@
-import 'package:LMS_application/Screens/Announcements.dart';
-import 'package:LMS_application/Screens/Assignments.dart';
+import 'package:LMS_application/Screens/Student/Announcement/StudentAnnouncements.dart';
+import 'package:LMS_application/Screens/Student/Assignments/StudentAssignments.dart';
+import 'package:LMS_application/Screens/Student/Available_courses/students_avalabile_courses.dart';
+import 'package:LMS_application/Screens/Student/Discussion/StudentDiscussion.dart';
+import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourses.dart';
+import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncements.dart';
+import 'package:LMS_application/Screens/Teacher/Assignments/TeacherAssignments.dart';
+import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -7,23 +13,32 @@ class CustomeTile extends StatelessWidget {
   IconData myIcon;
   String txt;
   Function tap;
+  bool isTeacher;
+  CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher});
 
-  Map<String, Widget> screens = {
-    'Assignments': Assignments(),
-    'Announcements': Announcements(),
-    //'My Courses': MyCourses(),// registered courses
-    //'Courses': MyCourses(),//teacher courses
-    //'Available Courses' : AvailableCourses(),
+  Map<String, Widget> teacherScreens = {
+    'Assignments': TeacherAssignments(),
+    'Announcements': TeacherAnnouncements(),
+    'Courses': TeacherCourses(),
     //'Info' : Info(),
     //'Library' : Library(),
     'LogOut': LogOut(),
   };
-  CustomeTile({this.myIcon, this.txt, this.tap});
 
+  Map<String, Widget> studentScreens = {
+    'Assignments': StudentAssignments(),
+    'Announcements': StudentAnnouncements(),
+    //'My Courses': StudentCourses(),
+    'Discussion': StudentDiscussion(),
+    'Available Courses': StudentAvalabileCourse(),
+    //'Info' : Info(),
+    //'Library' : Library(),
+    'LogOut': LogOut(),
+  };
   void selectScreen(BuildContext ctx) {
     Navigator.of(ctx).push(
       MaterialPageRoute(builder: (_) {
-        return screens[txt];
+        return isTeacher ? teacherScreens[txt] : studentScreens[txt];
       }),
     );
   }
