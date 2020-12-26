@@ -6,6 +6,8 @@ import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourse
 import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncements.dart';
 import 'package:LMS_application/Screens/Teacher/Assignments/TeacherAssignments.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
+import 'package:LMS_application/Screens/Teacher/Quiz/TeacherQuize.dart';
+import 'package:LMS_application/models/quiz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +22,7 @@ class CustomeTile extends StatelessWidget {
     'Assignments': TeacherAssignments(),
     'Announcements': TeacherAnnouncements(),
     'Courses': TeacherCourses(),
-    //'Info' : Info(),
+    'Quiz': TeacherQuize(),
     //'Library' : Library(),
     'LogOut': LogOut(),
   };
