@@ -6,6 +6,7 @@ import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncement
 import 'package:LMS_application/Screens/Teacher/Assignments/TeacherAssignments.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
 import 'package:LMS_application/Screens/Teacher/Discussion/TeacherDiscussion.dart';
+import 'package:LMS_application/Screens/Teacher/Quiz/TeacherQuize.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
@@ -22,10 +23,16 @@ class CustomeTile extends StatelessWidget {
     'Assignments': TeacherAssignments(),
     'Announcements': TeacherAnnouncements(),
     'Courses': TeacherCourses(),
+<<<<<<< HEAD
     'Discussion': TeacherDiscussionForm(),
     //'Info' : Info(),
     'Library': Library(),
     'LogOut': () => FirebaseAuth.instance.signOut(),
+=======
+    'Quiz': TeacherQuize(),
+    //'Library' : Library(),
+    'LogOut': LogOut(),
+>>>>>>> 9f8216d (edit the drawers)
   };
 
   final Map<String, dynamic> studentScreens = {

@@ -51,8 +51,7 @@ class TeacherDrawer extends StatelessWidget {
           ),
           CustomeTile(
             myIcon: Icons.library_books,
-            txt: "Library",
-            tap: () => {},
+            txt: "Library",            tap: () => {},
             isTeacher: true,
           ),
           CustomeTile(
