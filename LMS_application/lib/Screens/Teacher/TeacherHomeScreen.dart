@@ -1,3 +1,4 @@
+import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncements.dart';
 import 'package:LMS_application/Screens/Teacher/Teacher_Drawer.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:LMS_application/services/DataBase2.dart';
@@ -51,10 +52,11 @@ class TeacherHomeScreen extends StatelessWidget {
             builder: (context, snapshot) {
               if (!snapshot.hasData) return CircularProgressIndicator();
 
-              return Text(
+              /*return Text(
                 'Hello ' + snapshot.data.name + " Teacher",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              );
+              ); */
+              return TeacherAnnouncements(teacherId);
             }),
       ),
     );
