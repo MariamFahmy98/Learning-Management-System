@@ -1,6 +1,7 @@
+import 'package:LMS_application/models/User.dart';
 import 'package:flutter/material.dart';
 
-class Student {
+class Student extends User {
   String name;
   String id;
   List<String> courses;

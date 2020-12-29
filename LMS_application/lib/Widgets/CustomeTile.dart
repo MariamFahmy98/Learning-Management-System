@@ -7,42 +7,58 @@ import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncement
 import 'package:LMS_application/Screens/Teacher/Assignments/TeacherAssignments.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
 import 'package:LMS_application/Screens/Teacher/Quiz/TeacherQuize.dart';
+import 'package:LMS_application/models/User.dart';
 import 'package:LMS_application/models/quiz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class CustomeTile extends StatelessWidget {
+class CustomeTile extends StatefulWidget {
   final IconData myIcon;
   final String txt;
   final Function tap;
   final bool isTeacher;
-  final String userId;
+  User user;
 
-  CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher, this.userId});
+  CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher, this.user});
 
-  Map<String, Widget> teacherScreens = {
-    'Assignments': TeacherAssignments(),
-    'Announcements': TeacherAnnouncements(),
-    'Courses': TeacherCourses(),
-    'Quiz': TeacherQuize(),
-    //'Library' : Library(),
-    'LogOut': LogOut(),
-  };
+  @override
+  _CustomeTileState createState() => _CustomeTileState();
+}
 
-  Map<String, Widget> studentScreens = {
-    'Assignments': StudentAssignments(),
-    'Announcements': StudentAnnouncements(),
-    //'My Courses': StudentCourses(),
-    'Discussion': StudentDiscussion(),
-    'Available Courses': StudentAvalabileCourse(),
-    //'Info' : Info(),
-    //'Library' : Library(),
-    'LogOut': LogOut(),
-  };
+class _CustomeTileState extends State<CustomeTile> {
+  Map<String, Widget> teacherScreens;
+
+  Map<String, Widget> studentScreens;
+
+  @override
+  void initState() {
+    teacherScreens = {
+      'Assignments': TeacherAssignments(),
+      'Announcements': TeacherAnnouncements(),
+      'Courses': TeacherCourses(),
+      'Quiz': TeacherQuize(),
+      //'Library' : Library(),
+      'LogOut': LogOut(),
+    };
+    studentScreens = {
+      'Assignments': StudentAssignments(),
+      'Announcements': StudentAnnouncements(),
+      'My Courses': StudentCourses(widget.user),
+      'Discussion': StudentDiscussion(widget.user),
+      'Available Courses': StudentAvalabileCourse(),
+      //'Info' : Info(),
+      //'Library' : Library(),
+      'LogOut': LogOut(),
+    };
+    super.initState();
+  }
+
   void selectScreen(BuildContext ctx) {
     Navigator.of(ctx).push(
       MaterialPageRoute(builder: (_) {
-        return isTeacher ? teacherScreens[txt] : studentScreens[txt];
+        return widget.isTeacher
+            ? teacherScreens[widget.txt]
+            : studentScreens[widget.txt];
       }),
     );
   }
@@ -60,11 +76,11 @@ class CustomeTile extends StatelessWidget {
           height: 50.0,
           child: Row(
             children: <Widget>[
-              Icon(myIcon),
+              Icon(widget.myIcon),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  txt,
+                  widget.txt,
                   style: TextStyle(
                     fontSize: 16.0,
                   ),

@@ -1,6 +1,10 @@
+import 'package:LMS_application/models/User.dart';
 import 'package:flutter/material.dart';
 
 class StudentDiscussion extends StatelessWidget {
+  final User name;
+  StudentDiscussion(this.name);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +15,7 @@ class StudentDiscussion extends StatelessWidget {
       body: Center(
         child: Container(
           child: Text(
-            "منورين الديسكاشن يا طالب",
+            "منورين الديسكاشن يا طالب" + name.name,
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,

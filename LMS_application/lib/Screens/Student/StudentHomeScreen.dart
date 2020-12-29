@@ -13,58 +13,61 @@ class StudentHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: StudentDrawer(() => {}, _studentID),
-      appBar: AppBar(
-        title: Text("Flutter Chat"),
-        actions: [
-          DropdownButton(
-            icon: Icon(
-              Icons.more_vert,
-              color: Theme.of(context).primaryIconTheme.color,
-            ),
-            items: [
-              DropdownMenuItem(
-                child: Container(
-                  child: Row(
-                    children: [
-                      Icon(Icons.exit_to_app),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text('logout'),
-                    ],
-                  ),
-                ),
-                value: 'logout',
-              ),
-            ],
-            onChanged: (itemIndentifier) {
-              if (itemIndentifier == 'logout') {
-                FirebaseAuth.instance.signOut();
-              }
-            },
-          ),
-        ],
-      ),
-      body: Container(
-        child: StreamBuilder(
-          stream: Database(_studentID).studentData,
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return CircularProgressIndicator();
+    return StreamBuilder<Student>(
+        stream: Database(_studentID).studentData,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return CircularProgressIndicator();
 
-            var studentData = snapshot.data;
-            // Student student = Student(
-            //     id: studentData.id,
-            //     name: studentData.name,
-            //     courses: studentData.courses);
-            return Text(
-              "Hello " + studentData.name + " Student",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            );
-          },
-        ),
-      ),
-    );
+          var student = snapshot.data;
+          return Scaffold(
+            drawer: StudentDrawer(() => {}, student),
+            appBar: AppBar(
+              title: Text("Flutter Chat"),
+              actions: [
+                DropdownButton(
+                  icon: Icon(
+                    Icons.more_vert,
+                    color: Theme.of(context).primaryIconTheme.color,
+                  ),
+                  items: [
+                    DropdownMenuItem(
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Icon(Icons.exit_to_app),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text('logout'),
+                          ],
+                        ),
+                      ),
+                      value: 'logout',
+                    ),
+                  ],
+                  onChanged: (itemIndentifier) {
+                    if (itemIndentifier == 'logout') {
+                      FirebaseAuth.instance.signOut();
+                    }
+                  },
+                ),
+              ],
+            ),
+            body: Container(
+                // child: StreamBuilder(
+                //   stream: Database(_studentID).studentData,
+                //   builder: (context, snapshot) {
+                //     if (!snapshot.hasData) return CircularProgressIndicator();
+
+                //     var studentData = snapshot.data;
+                //     return Text(
+                //       "Hello " + studentData.name + " Student",
+                //       style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                //     );
+                //   },
+                // ),
+                ),
+          );
+        });
   }
 }

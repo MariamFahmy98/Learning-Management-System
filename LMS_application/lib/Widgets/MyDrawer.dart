@@ -31,16 +31,6 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
           ),
-          /*CustomeTile(
-            myIcon: Icons.person,
-            txt: "Person",
-            tap: () => {},
-          ),*/
-          /*CustomeTile(
-            myIcon: Icons.book,
-            txt: "MyCourses",
-            tap: () => {},
-          ),*/
           CustomeTile(
             myIcon: Icons.notifications,
             txt: "Announcements",

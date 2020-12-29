@@ -1,11 +1,12 @@
+import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
 
 class StudentDrawer extends StatelessWidget {
   Function ontap;
-  final String studentId;
+  final Student student;
 
-  StudentDrawer(this.ontap, this.studentId);
+  StudentDrawer(this.ontap, this.student);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -37,42 +38,42 @@ class StudentDrawer extends StatelessWidget {
             txt: "Info",
             tap: () => {},
             isTeacher: false,
-            userId: studentId,
+            user: student,
           ),
           CustomeTile(
             myIcon: Icons.assignment_sharp,
             txt: "My Courses",
             tap: () => {},
             isTeacher: false,
-            userId: studentId,
+            user: student,
           ),
           CustomeTile(
             myIcon: Icons.assignment_turned_in,
             txt: "Available Courses",
             tap: () => {},
             isTeacher: false,
-            userId: studentId,
+            user: student,
           ),
           CustomeTile(
             myIcon: Icons.chat,
             txt: "Discussion",
             tap: () => {},
             isTeacher: false,
-            userId: studentId,
+            user: student,
           ),
           CustomeTile(
             myIcon: Icons.library_books,
             txt: "Library",
             tap: () => {},
             isTeacher: false,
-            userId: studentId,
+            user: student,
           ),
           CustomeTile(
             myIcon: Icons.logout,
             txt: "LogOut",
             tap: () => {},
             isTeacher: false,
-            userId: studentId,
+            user: student,
           ),
         ]),
       ),

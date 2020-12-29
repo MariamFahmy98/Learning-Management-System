@@ -3,7 +3,7 @@ import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
 
 class RequestsPage extends StatelessWidget {
-  Course requestedCr = new Course('CSE311');
+  Course requestedCr = new Course();
   //RequestsPage(this.requestedCr);
 
   @override
