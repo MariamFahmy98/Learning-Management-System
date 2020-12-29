@@ -1,9 +1,15 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:LMS_application/models/teacher.dart';
+import 'package:LMS_application/services/DataBase2.dart';
 
 class PostCard extends StatelessWidget {
   final String postTitle;
   final String postBody;
-  PostCard(this.postTitle, this.postBody);
+  final DateTime postTime;
+  final String teacherID;
+  PostCard(this.postTitle, this.postBody, this.postTime, this.teacherID);
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
@@ -15,7 +21,7 @@ class PostCard extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           child: Column(
             children: <Widget>[
-              // _PostDetails(),
+              _PostDetails(teacherID, postTime),
               Divider(color: Colors.grey),
               _Post(postTitle, postBody),
             ],
@@ -68,56 +74,72 @@ class _PostTitleAndBody extends StatelessWidget {
   }
 }
 
-/*class _PostDetails extends StatelessWidget {
-  const _PostDetails({Key key}) : super(key: key);
-
+class _PostDetails extends StatelessWidget {
+  final String teacherID;
+  final DateTime postTime;
+  _PostDetails(this.teacherID, this.postTime);
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        // _UserImage(),
-        _UserNameAndEmail(),
-        _PostTimeStamp(),
-      ],
+    return Expanded(
+      flex: 2,
+      child: Row(
+        children: <Widget>[
+          // _UserImage(),
+          _UserName(teacherID),
+          _PostTimeStamp(postTime),
+        ],
+      ),
     );
   }
 }
 
-class _UserNameAndEmail extends StatelessWidget {
-  const _UserNameAndEmail({Key key}) : super(key: key);
+/*class _UserImage extends StatelessWidget {
+  const _UserImage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle nameTheme = Theme.of(context).textTheme.subtitle;
-    final TextStyle emailTheme = Theme.of(context).textTheme.body1;
-
+    final UserModel userData = InheritedUserModel.of(context).userData;
     return Expanded(
+      flex: 1,
+      child: CircleAvatar(backgroundImage: AssetImage(userData.image)),
+    );
+  }
+} */
+class _UserName extends StatelessWidget {
+  final String teacherID;
+  _UserName(this.teacherID);
+  var user = FirebaseAuth.instance.currentUser();
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
       flex: 5,
       child: Padding(
         padding: const EdgeInsets.all(4.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(DemoValues.userName, style: nameTheme),
-            SizedBox(height: 2.0),
-            Text(DemoValues.userEmail, style: emailTheme),
-          ],
-        ),
+        child: StreamBuilder<Teacher>(
+            stream: Database(teacherID).teacherData,
+            builder: (context, snapshot) {
+              return Text(snapshot.data.name);
+            }),
       ),
     );
   }
 }
 
 class _PostTimeStamp extends StatelessWidget {
-  const _PostTimeStamp({Key key}) : super(key: key);
-
+  final DateTime postTime;
+  _PostTimeStamp(this.postTime);
   @override
   Widget build(BuildContext context) {
-    final TextStyle timeTheme = TextThemes.dateStyle;
-    return Expanded(
-      flex: 2,
-      child: Text(DemoValues.postTime, style: timeTheme),
-    );
+    return Flexible(
+        flex: 2,
+        child: postTime != null
+            ? Text(
+                DateFormat.yMMMMEEEEd().format(postTime),
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
+              )
+            : Text("null"));
   }
-} */
+}

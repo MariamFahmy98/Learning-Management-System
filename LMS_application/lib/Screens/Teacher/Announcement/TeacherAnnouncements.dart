@@ -50,7 +50,8 @@ class _TeacherAnnouncementsState extends State<TeacherAnnouncements> {
                 itemBuilder: (BuildContext context, int index) {
                   final String title = getPostsNum[index]['title'];
                   final String body = getPostsNum[index]['body'];
-                  return PostCard(title, body);
+                  DateTime postTime = getPostsNum[index]['time'];
+                  return PostCard(title, body, postTime, widget.teacherID);
                 });
           }),
       floatingActionButton: FloatingActionButton(
