@@ -12,11 +12,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomeTile extends StatelessWidget {
-  IconData myIcon;
-  String txt;
-  Function tap;
-  bool isTeacher;
-  CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher});
+  final IconData myIcon;
+  final String txt;
+  final Function tap;
+  final bool isTeacher;
+  final String userId;
+
+  CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher, this.userId});
 
   Map<String, Widget> teacherScreens = {
     'Assignments': TeacherAssignments(),
