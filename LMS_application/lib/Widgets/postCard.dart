@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:LMS_application/services/DataBase2.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expandable/expandable.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class PostCard extends StatelessWidget {
   final String postTitle;
@@ -16,6 +18,7 @@ class PostCard extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 6 / 3,
       child: Card(
+        clipBehavior: Clip.antiAlias,
         elevation: 2,
         child: Container(
           margin: const EdgeInsets.all(4.0),
@@ -24,12 +27,23 @@ class PostCard extends StatelessWidget {
             children: <Widget>[
               _PostDetails(teacherID, postTime),
               Divider(color: Colors.grey),
-              _Post(postTitle, postBody),
+              Expanded(
+                child: _Post(postTitle, postBody),
+              ),
             ],
           ),
         ),
       ),
     );
+    /*return ListView(
+      shrinkWrap: true,
+      physics: const BouncingScrollPhysics(),
+      children: <Widget>[
+        _PostDetails(teacherID, postTime),
+        Divider(color: Colors.grey),
+        _Post(postTitle, postBody),
+      ],
+    ); */
   }
 }
 
@@ -41,38 +55,47 @@ class _Post extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 3,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          _PostTitleAndBody(postTitle, postBody),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                icon: Icon(Icons.thumb_up),
-                tooltip: 'like',
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.chat_bubble),
-                tooltip: 'Write a comment',
-                onPressed: () {},
-              ),
-            ],
-          )
-        ],
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            _PostTitleAndBody(postTitle, postBody),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.thumb_up),
+                  tooltip: 'like',
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.chat_bubble),
+                  tooltip: 'Write a comment',
+                  onPressed: () {},
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 }
 
-class _PostTitleAndBody extends StatelessWidget {
+class _PostTitleAndBody extends StatefulWidget {
   final String postTitle;
   final String postBody;
   _PostTitleAndBody(this.postTitle, this.postBody);
+
+  @override
+  __PostTitleAndBodyState createState() => __PostTitleAndBodyState();
+}
+
+class __PostTitleAndBodyState extends State<_PostTitleAndBody> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    /*return Container(
       child: Expanded(
         flex: 2,
         child: Column(
@@ -89,7 +112,61 @@ class _PostTitleAndBody extends StatelessWidget {
             Text(postBody),
           ],
         ),
-        //     PostTimeStamp(alignment: Alignment.centerRight),
+      ),
+    ); */
+    return ExpandableNotifier(
+      child: Padding(
+        padding: const EdgeInsets.all(3),
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: ScrollOnExpand(
+            scrollOnExpand: true,
+            scrollOnCollapse: false,
+            child: ExpandablePanel(
+              header: Padding(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  widget.postTitle,
+                  style: TextStyle(
+                    // color: Colors.deepPurple,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  //style: Theme.of(context).primaryColor,
+                ),
+              ),
+              collapsed: Text(
+                widget.postBody,
+                softWrap: true,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              expanded: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  for (var _ in Iterable.generate(10))
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10),
+                      child: Text(
+                        widget.postBody,
+                        softWrap: true,
+                        overflow: TextOverflow.fade,
+                      ),
+                    ),
+                ],
+              ),
+              builder: (_, collapsed, expanded) {
+                return Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                  child: Expandable(
+                    collapsed: collapsed,
+                    expanded: expanded,
+                    theme: const ExpandableThemeData(crossFadePoint: 0),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -174,14 +251,18 @@ class _UserName extends StatelessWidget {
 class _PostTimeStamp extends StatelessWidget {
   final DateTime postTime;
   _PostTimeStamp(this.postTime);
+  String timeUntil() {
+    return timeago.format(postTime, allowFromNow: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Flexible(
         flex: 2,
         child: postTime != null
             ? Text(
-                DateFormat.yMd().add_jm().format(postTime),
-                // DateFormat.yMd().add_jm(postTime).toString(),
+                // DateFormat.yMd().add_jm().format(postTime),
+                timeUntil(),
                 style: TextStyle(
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,
