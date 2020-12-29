@@ -2,8 +2,6 @@ import 'package:LMS_application/models/student.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-
 class Database {
   String documentID;
 
