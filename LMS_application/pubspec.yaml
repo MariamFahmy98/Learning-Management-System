@@ -33,6 +33,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
 
+  stream_chat_flutter: ^0.1.8
+  start_jwt: ^0.2.0
+  provider: ^4.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -49,6 +53,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/LMS.png
+    - images/logo.jpg
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:
