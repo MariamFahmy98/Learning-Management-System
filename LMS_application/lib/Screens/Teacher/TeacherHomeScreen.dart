@@ -1,5 +1,6 @@
 import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncements.dart';
 import 'package:LMS_application/Screens/Teacher/Teacher_Drawer.dart';
+import 'package:LMS_application/Widgets/postCard.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:LMS_application/services/DataBase2.dart';
 

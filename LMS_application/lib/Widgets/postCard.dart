@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:LMS_application/services/DataBase2.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class PostCard extends StatelessWidget {
   final String postTitle;
@@ -40,7 +41,27 @@ class _Post extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 3,
-      child: Row(children: <Widget>[_PostTitleAndBody(postTitle, postBody)]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _PostTitleAndBody(postTitle, postBody),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: Icon(Icons.thumb_up),
+                tooltip: 'like',
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.chat_bubble),
+                tooltip: 'Write a comment',
+                onPressed: () {},
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
@@ -83,32 +104,51 @@ class _PostDetails extends StatelessWidget {
     return Expanded(
       flex: 2,
       child: Row(
-        children: <Widget>[
-          // _UserImage(),
-          _UserName(teacherID),
-          _PostTimeStamp(postTime),
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.all(6),
+            child: _UserImage(),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              // _UserImage(),
+              SizedBox(height: 10),
+              _UserName(teacherID),
+              _PostTimeStamp(postTime),
+            ],
+          ),
         ],
       ),
     );
   }
 }
 
-/*class _UserImage extends StatelessWidget {
-  const _UserImage({Key key}) : super(key: key);
-
+class _UserImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final UserModel userData = InheritedUserModel.of(context).userData;
     return Expanded(
       flex: 1,
-      child: CircleAvatar(backgroundImage: AssetImage(userData.image)),
+      child: Container(
+        width: 50,
+        height: 50,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image: NetworkImage('https://googleflutter.com/sample_image.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
     );
   }
-} */
+}
+
 class _UserName extends StatelessWidget {
   final String teacherID;
   _UserName(this.teacherID);
-  var user = FirebaseAuth.instance.currentUser();
+  //var user = FirebaseAuth.instance.currentUser();
   @override
   Widget build(BuildContext context) {
     return Flexible(
@@ -118,7 +158,13 @@ class _UserName extends StatelessWidget {
         child: StreamBuilder<Teacher>(
             stream: Database(teacherID).teacherData,
             builder: (context, snapshot) {
-              return Text(snapshot.data.name);
+              return Text(
+                snapshot.data.name,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              );
             }),
       ),
     );
@@ -134,7 +180,8 @@ class _PostTimeStamp extends StatelessWidget {
         flex: 2,
         child: postTime != null
             ? Text(
-                DateFormat.yMMMMEEEEd().format(postTime),
+                DateFormat.yMd().add_jm().format(postTime),
+                // DateFormat.yMd().add_jm(postTime).toString(),
                 style: TextStyle(
                   color: Colors.grey,
                   fontWeight: FontWeight.bold,

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:LMS_application/Widgets/postCard.dart';
 import './Add_New_Announcement.dart';
@@ -44,15 +46,26 @@ class _TeacherAnnouncementsState extends State<TeacherAnnouncements> {
               );
             }
             final getPostsNum = snapshot.data.documents;
-            return ListView.builder(
-                // itemCount should be the number of posts stored in firebase
-                itemCount: getPostsNum.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final String title = getPostsNum[index]['title'];
-                  final String body = getPostsNum[index]['body'];
-                  DateTime postTime = getPostsNum[index]['time'];
-                  return PostCard(title, body, postTime, widget.teacherID);
-                });
+            if (getPostsNum.length >= 1) {
+              return ListView.builder(
+                  // itemCount should be the number of posts stored in firebase
+                  itemCount: getPostsNum.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    final String title = getPostsNum[index]['title'];
+                    final String body = getPostsNum[index]['body'];
+                    Timestamp pTime = getPostsNum[index]['postTime'];
+                    DateTime postTime = pTime.toDate();
+                    return PostCard(title, body, postTime, widget.teacherID);
+                  });
+            } else {
+              return Center(
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Image.asset('assets/images/announcements.png'),
+                ),
+              );
+            }
           }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

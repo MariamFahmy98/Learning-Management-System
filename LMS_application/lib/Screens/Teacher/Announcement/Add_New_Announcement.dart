@@ -19,7 +19,7 @@ class _AddNewPostState extends State<AddNewPost> {
     Firestore.instance.collection('/Teachers/PostDocument/Posts').add({
       'title': titleController.text,
       'body': bodyController.text,
-      'postTime': DateTime.now().toString(),
+      'postTime': DateTime.now(),
     });
     /* widget.addPost(
         titleController.text, bodyController.text, authorController.text); */
