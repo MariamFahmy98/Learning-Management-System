@@ -5,6 +5,7 @@ import 'package:LMS_application/Screens/Student/Discussion/StudentDiscussion.dar
 import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncements.dart';
 import 'package:LMS_application/Screens/Teacher/Assignments/TeacherAssignments.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
+import 'package:LMS_application/Screens/Teacher/Discussion/TeacherDiscussion.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
@@ -21,6 +22,7 @@ class CustomeTile extends StatelessWidget {
     'Assignments': TeacherAssignments(),
     'Announcements': TeacherAnnouncements(),
     'Courses': TeacherCourses(),
+    'Discussion': TeacherDiscussionForm(),
     //'Info' : Info(),
     'Library': Library(),
     'LogOut': LogOut(),
@@ -30,7 +32,7 @@ class CustomeTile extends StatelessWidget {
     'Assignments': StudentAssignments(),
     'Announcements': StudentAnnouncements(),
     //'My Courses': StudentCourses(),
-    'Discussion': StudentDiscussion(),
+    'Discussion': StudentDiscussionForm(),
     'Available Courses': StudentAvalabileCourse(),
     //'Info' : Info(),
     'Library': SLibrary(),
