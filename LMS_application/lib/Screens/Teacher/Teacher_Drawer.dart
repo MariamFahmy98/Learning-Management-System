@@ -50,6 +50,12 @@ class TeacherDrawer extends StatelessWidget {
             isTeacher: true,
           ),
           CustomeTile(
+            myIcon: Icons.chat,
+            txt: "Discussion",
+            tap: () => {},
+            isTeacher: true,
+          ),
+          CustomeTile(
             myIcon: Icons.logout,
             txt: "LogOut",
             tap: () => {},
