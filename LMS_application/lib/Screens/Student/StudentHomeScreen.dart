@@ -53,20 +53,7 @@ class StudentHomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            body: Container(
-                // child: StreamBuilder(
-                //   stream: Database(_studentID).studentData,
-                //   builder: (context, snapshot) {
-                //     if (!snapshot.hasData) return CircularProgressIndicator();
-
-                //     var studentData = snapshot.data;
-                //     return Text(
-                //       "Hello " + studentData.name + " Student",
-                //       style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                //     );
-                //   },
-                // ),
-                ),
+            body: Container(),
           );
         });
   }
