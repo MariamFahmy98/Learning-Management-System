@@ -8,7 +8,6 @@ class ReqBooks extends StatefulWidget {
 
 class _ReqBooksState extends State<ReqBooks> {
   TextEditingController _bookController, _rController, _yearController;
-  String _typeSelected = '';
   DatabaseReference _ref;
 
   @override

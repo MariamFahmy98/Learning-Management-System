@@ -1,4 +1,3 @@
-import 'package:LMS_application/models/User.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stream_chat_flutter/stream_chat_flutter.dart';
@@ -36,15 +35,6 @@ class MyHome extends StatelessWidget {
         title: Text("Student Disscussion Form"),
         backgroundColor: Colors.purple,
       ),
-<<<<<<< HEAD
-      body: Center(
-        child: Container(
-          child: Text(
-            "منورين الديسكاشن يا طالب" + name.name,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-=======
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -55,7 +45,6 @@ class MyHome extends StatelessWidget {
                 width: 400.0,
                 child: Image.asset("images/logo.jpg"),
               ),
->>>>>>> Essam
             ),
           ),
           CustomForm(

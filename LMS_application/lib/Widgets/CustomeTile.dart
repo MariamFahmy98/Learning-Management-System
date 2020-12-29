@@ -2,23 +2,23 @@ import 'package:LMS_application/Screens/Student/Announcement/StudentAnnouncement
 import 'package:LMS_application/Screens/Student/Assignments/StudentAssignments.dart';
 import 'package:LMS_application/Screens/Student/Available_courses/students_avalabile_courses.dart';
 import 'package:LMS_application/Screens/Student/Discussion/StudentDiscussion.dart';
+import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
+import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourses.dart';
 import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncements.dart';
 import 'package:LMS_application/Screens/Teacher/Assignments/TeacherAssignments.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
 import 'package:LMS_application/Screens/Teacher/Quiz/TeacherQuize.dart';
+import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
 import 'package:LMS_application/models/User.dart';
-import 'package:LMS_application/models/quiz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
-import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
 
 class CustomeTile extends StatefulWidget {
   final IconData myIcon;
   final String txt;
   final Function tap;
   final bool isTeacher;
-  User user;
+  final User user;
 
   CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher, this.user});
 
@@ -27,9 +27,9 @@ class CustomeTile extends StatefulWidget {
 }
 
 class _CustomeTileState extends State<CustomeTile> {
-  Map<String, Widget> teacherScreens;
+  Map<String, dynamic> teacherScreens;
 
-  Map<String, Widget> studentScreens;
+  Map<String, dynamic> studentScreens;
 
   @override
   void initState() {
@@ -38,18 +38,18 @@ class _CustomeTileState extends State<CustomeTile> {
       'Announcements': TeacherAnnouncements(),
       'Courses': TeacherCourses(),
       'Quiz': TeacherQuize(),
-      //'Library' : Library(),
-      'LogOut': LogOut(),
+      'Library' : Library(),
+      'LogOut': () => FirebaseAuth.instance.signOut(),
     };
     studentScreens = {
       'Assignments': StudentAssignments(),
       'Announcements': StudentAnnouncements(),
       'My Courses': StudentCourses(widget.user),
-      'Discussion': StudentDiscussion(widget.user),
+      'Discussion': StudentDiscussionForm(),
       'Available Courses': StudentAvalabileCourse(),
       //'Info' : Info(),
-      //'Library' : Library(),
-      'LogOut': LogOut(),
+      'Library' : SLibrary(),
+      'LogOut': () => FirebaseAuth.instance.signOut(),
     };
     super.initState();
   }
@@ -69,7 +69,7 @@ class _CustomeTileState extends State<CustomeTile> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
       child: InkWell(
-        onTap: (txt == 'LogOut')? teacherScreens[txt] : () => selectScreen(context),
+        onTap: (widget.txt == 'LogOut')? teacherScreens[widget.txt] : () => selectScreen(context),
         splashColor: Colors.purple,
         child: Container(
           decoration: BoxDecoration(

@@ -1,5 +1,4 @@
 import 'package:LMS_application/Screens/Student/Registered_courses/StudentCoursesList.dart';
-import 'package:LMS_application/models/course.dart';
 import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
 
