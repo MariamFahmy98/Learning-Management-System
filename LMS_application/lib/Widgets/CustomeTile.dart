@@ -18,17 +18,17 @@ class CustomeTile extends StatelessWidget {
   final bool isTeacher;
   CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher});
 
-  final Map<String, Widget> teacherScreens = {
+  final Map<String, dynamic> teacherScreens = {
     'Assignments': TeacherAssignments(),
     'Announcements': TeacherAnnouncements(),
     'Courses': TeacherCourses(),
     'Discussion': TeacherDiscussionForm(),
     //'Info' : Info(),
     'Library': Library(),
-    'LogOut': LogOut(),
+    'LogOut': () => FirebaseAuth.instance.signOut(),
   };
 
-  final Map<String, Widget> studentScreens = {
+  final Map<String, dynamic> studentScreens = {
     'Assignments': StudentAssignments(),
     'Announcements': StudentAnnouncements(),
     //'My Courses': StudentCourses(),
@@ -36,7 +36,7 @@ class CustomeTile extends StatelessWidget {
     'Available Courses': StudentAvalabileCourse(),
     //'Info' : Info(),
     'Library': SLibrary(),
-    'LogOut': LogOut(),
+    'LogOut': () => FirebaseAuth.instance.signOut(),
   };
   void selectScreen(BuildContext ctx) {
     Navigator.of(ctx).push(
@@ -51,7 +51,7 @@ class CustomeTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
       child: InkWell(
-        onTap: () => selectScreen(context),
+        onTap: (txt == 'LogOut')? teacherScreens[txt] : () => selectScreen(context),
         splashColor: Colors.purple,
         child: Container(
           decoration: BoxDecoration(
@@ -74,16 +74,5 @@ class CustomeTile extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class LogOut extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return FlatButton(
-        child: Text('mmm'),
-        onPressed: () {
-          FirebaseAuth.instance.signOut();
-        });
   }
 }
