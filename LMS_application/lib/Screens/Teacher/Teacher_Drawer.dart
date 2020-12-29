@@ -1,3 +1,4 @@
+import 'package:LMS_application/Screens/Teacher/library/libraryP.dart';
 import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
 
@@ -46,12 +47,6 @@ class TeacherDrawer extends StatelessWidget {
           CustomeTile(
             myIcon: Icons.library_books,
             txt: "Library",
-            tap: () => {},
-            isTeacher: true,
-          ),
-          CustomeTile(
-            myIcon: Icons.chat,
-            txt: "Discussion",
             tap: () => {},
             isTeacher: true,
           ),

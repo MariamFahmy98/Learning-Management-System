@@ -6,9 +6,10 @@ import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourse
 import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncements.dart';
 import 'package:LMS_application/Screens/Teacher/Assignments/TeacherAssignments.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
-import 'package:LMS_application/Screens/Teacher/Discussion/TeacherDiscussion.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
+import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
 
 class CustomeTile extends StatelessWidget {
   IconData myIcon;
@@ -21,9 +22,8 @@ class CustomeTile extends StatelessWidget {
     'Assignments': TeacherAssignments(),
     'Announcements': TeacherAnnouncements(),
     'Courses': TeacherCourses(),
-    'Discussion': TeacherDiscussionForm(),
     //'Info' : Info(),
-    //'Library' : Library(),
+    'Library': Library(),
     'LogOut': LogOut(),
   };
 
@@ -31,10 +31,10 @@ class CustomeTile extends StatelessWidget {
     'Assignments': StudentAssignments(),
     'Announcements': StudentAnnouncements(),
     //'My Courses': StudentCourses(),
-    'Discussion': DiscussionForm(),
+    'Discussion': StudentDiscussion(),
     'Available Courses': StudentAvalabileCourse(),
     //'Info' : Info(),
-    //'Library' : Library(),
+    'Library': SLibrary(),
     'LogOut': LogOut(),
   };
   void selectScreen(BuildContext ctx) {
