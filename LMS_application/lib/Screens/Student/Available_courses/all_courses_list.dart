@@ -3,8 +3,8 @@ import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
 
 class AllCoursesList extends StatelessWidget {
-  Student user;
-  List<Course> myCourses;
+  final Student user;
+  final List<Course> myCourses;
   AllCoursesList({this.myCourses, this.user});
 
   @override

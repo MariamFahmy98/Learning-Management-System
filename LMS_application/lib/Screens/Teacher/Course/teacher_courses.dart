@@ -5,8 +5,8 @@ import 'teacher_course_list.dart';
 import 'teacher_add_course.dart';
 
 class TeacherCourses extends StatefulWidget {
-  Teacher teacher;
-  List<Course> allCoursesAll;
+  final Teacher teacher;
+  final List<Course> allCoursesAll;
   TeacherCourses({this.teacher, this.allCoursesAll});
   @override
   _TeacherCourses createState() => _TeacherCourses(teacher, allCoursesAll);

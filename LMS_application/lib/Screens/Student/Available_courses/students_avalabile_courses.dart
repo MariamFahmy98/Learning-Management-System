@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'all_courses_list.dart';
 
 class StudentAvalabileCourse extends StatelessWidget {
-  Student user;
-  List<Course> allCourses;
+  final Student user;
+  final List<Course> allCourses;
   StudentAvalabileCourse({this.user, this.allCourses});
 
   @override

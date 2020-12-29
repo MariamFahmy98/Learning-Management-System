@@ -1,5 +1,4 @@
 import 'package:LMS_application/models/course.dart';
-import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
 
 class RequestsPage extends StatelessWidget {

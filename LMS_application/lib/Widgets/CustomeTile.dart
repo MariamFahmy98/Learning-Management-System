@@ -2,7 +2,6 @@ import 'package:LMS_application/Screens/Student/Announcement/StudentAnnouncement
 import 'package:LMS_application/Screens/Student/Assignments/StudentAssignments.dart';
 import 'package:LMS_application/Screens/Student/Available_courses/students_avalabile_courses.dart';
 import 'package:LMS_application/Screens/Student/Discussion/StudentDiscussion.dart';
-import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourses.dart';
 import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncements.dart';
 import 'package:LMS_application/Screens/Teacher/Assignments/TeacherAssignments.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
@@ -11,6 +10,8 @@ import 'package:LMS_application/models/User.dart';
 import 'package:LMS_application/models/quiz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
+import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
 
 class CustomeTile extends StatefulWidget {
   final IconData myIcon;
@@ -68,7 +69,7 @@ class _CustomeTileState extends State<CustomeTile> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
       child: InkWell(
-        onTap: () => selectScreen(context),
+        onTap: (txt == 'LogOut')? teacherScreens[txt] : () => selectScreen(context),
         splashColor: Colors.purple,
         child: Container(
           decoration: BoxDecoration(
@@ -91,16 +92,5 @@ class _CustomeTileState extends State<CustomeTile> {
         ),
       ),
     );
-  }
-}
-
-class LogOut extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return FlatButton(
-        child: Text('mmm'),
-        onPressed: () {
-          FirebaseAuth.instance.signOut();
-        });
   }
 }

@@ -2,7 +2,7 @@ import 'package:LMS_application/models/quiz.dart';
 import 'package:flutter/material.dart';
 
 class QuizList extends StatelessWidget {
-  List<Quiz> myQuizes;
+  final List<Quiz> myQuizes;
   QuizList(this.myQuizes);
 
   void openQuiz(Quiz q, context) {
