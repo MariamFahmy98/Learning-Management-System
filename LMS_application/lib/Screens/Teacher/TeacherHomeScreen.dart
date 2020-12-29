@@ -17,15 +17,16 @@ class TeacherHomeScreen extends StatelessWidget {
       ),
       body: Container(
         child: StreamBuilder<Teacher>(
-            stream: Database(teacherId).teacherData,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) return CircularProgressIndicator();
+          stream: Database(teacherId).teacherData,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return CircularProgressIndicator();
 
-              return Text(
-                'Hello ' + snapshot.data.name + " Teacher",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              );
-            }),
+            return Text(
+              'Hello ' + snapshot.data.name + " Teacher",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            );
+          },
+        ),
       ),
     );
   }

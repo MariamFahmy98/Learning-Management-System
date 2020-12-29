@@ -16,11 +16,10 @@ import 'package:flutter/material.dart';
 class CustomeTile extends StatefulWidget {
   final IconData myIcon;
   final String txt;
-  final Function tap;
   final bool isTeacher;
   final User user;
 
-  CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher, this.user});
+  CustomeTile({this.myIcon, this.txt, this.isTeacher, this.user});
 
   @override
   _CustomeTileState createState() => _CustomeTileState();

@@ -56,18 +56,4 @@ class Database {
         .snapshots()
         .map(_courseDataFromSnapshot);
   }
-
-  //   List <Course> _allCoursesDataFromSnapshot(DocumentSnapshot snapshot) {
-  //   return Course(
-  //     id: documentID,
-  //     name: snapshot.data['Name'],
-  //     courses: snapshot.data['Courses'].cast<String>().toList(),
-  //   );
-  // }
-  // Stream<Course> get allcourseData {
-  //   return Firestore.instance
-  //       .collection('Courses')
-  //       .snapshots()
-  //       .map(_allCoursesDataFromSnapshot);
-  // }
 }
