@@ -17,22 +17,19 @@ class CustomeTile extends StatelessWidget {
   final String txt;
   final Function tap;
   final bool isTeacher;
-  CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher});
+  final String userId;
+
+  CustomeTile({this.myIcon, this.txt, this.tap, this.isTeacher, this.userId});
 
   final Map<String, dynamic> teacherScreens = {
     'Assignments': TeacherAssignments(),
     'Announcements': TeacherAnnouncements(),
     'Courses': TeacherCourses(),
-<<<<<<< HEAD
     'Discussion': TeacherDiscussionForm(),
     //'Info' : Info(),
     'Library': Library(),
     'LogOut': () => FirebaseAuth.instance.signOut(),
-=======
     'Quiz': TeacherQuize(),
-    //'Library' : Library(),
-    'LogOut': LogOut(),
->>>>>>> 9f8216d (edit the drawers)
   };
 
   final Map<String, dynamic> studentScreens = {

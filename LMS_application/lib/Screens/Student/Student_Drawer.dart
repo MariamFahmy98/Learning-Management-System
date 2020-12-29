@@ -3,8 +3,9 @@ import '../../Widgets/CustomeTile.dart';
 
 class StudentDrawer extends StatelessWidget {
   final Function ontap;
+  final String studentId;
 
-  StudentDrawer(this.ontap);
+  StudentDrawer(this.ontap, this.studentId);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -36,36 +37,42 @@ class StudentDrawer extends StatelessWidget {
             txt: "Info",
             tap: () => {},
             isTeacher: false,
+            userId: studentId,
           ),
           CustomeTile(
             myIcon: Icons.assignment_sharp,
             txt: "My Courses",
             tap: () => {},
             isTeacher: false,
+            userId: studentId,
           ),
           CustomeTile(
             myIcon: Icons.assignment_turned_in,
             txt: "Available Courses",
             tap: () => {},
             isTeacher: false,
+            userId: studentId,
           ),
           CustomeTile(
             myIcon: Icons.chat,
             txt: "Discussion",
             tap: () => {},
             isTeacher: false,
+            userId: studentId,
           ),
           CustomeTile(
             myIcon: Icons.library_books,
             txt: "Library",
             tap: () => {},
             isTeacher: false,
+            userId: studentId,
           ),
           CustomeTile(
             myIcon: Icons.logout,
             txt: "LogOut",
             tap: () => {},
             isTeacher: false,
+            userId: studentId,
           ),
         ]),
       ),

@@ -457,6 +457,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+<<<<<<< HEAD
   process:
     dependency: transitive
     description:
@@ -464,6 +465,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.13"
+=======
+>>>>>>> a12f4df (sending user id from drawer)
   provider:
     dependency: "direct main"
     description:
@@ -525,6 +528,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0-nullsafety.1"
+<<<<<<< HEAD
   start_jwt:
     dependency: "direct main"
     description:
@@ -532,6 +536,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+=======
+>>>>>>> a12f4df (sending user id from drawer)
   stream_channel:
     dependency: transitive
     description:
@@ -708,5 +714,10 @@ packages:
     source: hosted
     version: "4.5.1"
 sdks:
+<<<<<<< HEAD
   dart: ">=2.10.2 <2.11.0"
   flutter: ">=1.22.2 <2.0.0"
+=======
+  dart: ">=2.10.0-110 <2.11.0"
+  flutter: ">=1.16.0 <2.0.0"
+>>>>>>> a12f4df (sending user id from drawer)
