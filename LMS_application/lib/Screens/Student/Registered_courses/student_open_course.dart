@@ -11,7 +11,7 @@ class OpenCourse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: StudentCourseDrawer(),
+      drawer: StudentCourseDrawer(runningCourse),
       appBar: AppBar(
         title: Text(runningCourse.courseName),
       ),

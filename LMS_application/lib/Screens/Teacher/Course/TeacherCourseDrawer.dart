@@ -2,10 +2,9 @@ import 'package:LMS_application/Widgets/CustomeTile.dart';
 import 'package:LMS_application/models/course.dart';
 import 'package:flutter/material.dart';
 
-class StudentCourseDrawer extends StatelessWidget {
+class TeacherCourseDrawer extends StatelessWidget {
   final Course course;
-  StudentCourseDrawer(this.course);
-
+  TeacherCourseDrawer(this.course);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -36,22 +35,27 @@ class StudentCourseDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.article_sharp,
               txt: "Materials",
-              isTeacher: false,
+              isTeacher: true,
             ),
             CustomeTile(
               myIcon: Icons.assignment,
               txt: "Assignments",
-              isTeacher: false,
+              isTeacher: true,
             ),
             CustomeTile(
               myIcon: Icons.all_inbox,
               txt: "Announcements",
-              isTeacher: false,
+              isTeacher: true,
             ),
             CustomeTile(
               myIcon: Icons.assignment_returned_sharp,
               txt: "Quizzes",
-              isTeacher: false,
+              isTeacher: true,
+            ),
+            CustomeTile(
+              myIcon: Icons.request_page_rounded,
+              txt: "Requests",
+              isTeacher: true,
             ),
           ],
         ),

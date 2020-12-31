@@ -6,7 +6,7 @@ import 'teacher_add_course.dart';
 
 class TeacherCourses extends StatelessWidget {
   Teacher teacher;
-  //TeacherCourses(this.teacher);
+  TeacherCourses(this.teacher);
 
   @override
   Widget build(BuildContext context) {

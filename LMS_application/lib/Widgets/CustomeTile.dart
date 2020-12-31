@@ -34,20 +34,28 @@ class _CustomeTileState extends State<CustomeTile> {
   void initState() {
     teacherScreens = {
       'Assignments': TeacherAssignments(),
+      //'Materials' : TeacherMaterial(),
+      //'Info' : TeacherInfo(),
       'Announcements': TeacherAnnouncements(),
-      'Courses': TeacherCourses(),
-      'Quiz': TeacherQuize(),
-      'Library' : Library(),
+      //'Discussion': TeacherDiscussionForm(),
+      //'Requests' : TeacherRequest(),
+      'My Courses': widget.isTeacher
+          ? TeacherCourses(widget.user)
+          : StudentCourses(widget.user),
+      'Quizzes': TeacherQuize(),
+      'Library': Library(),
       'LogOut': () => FirebaseAuth.instance.signOut(),
     };
     studentScreens = {
       'Assignments': StudentAssignments(),
       'Announcements': StudentAnnouncements(),
-      'My Courses': StudentCourses(widget.user),
+      'My Courses': widget.isTeacher
+          ? TeacherCourses(widget.user)
+          : StudentCourses(widget.user),
       'Discussion': StudentDiscussionForm(),
       'Available Courses': StudentAvalabileCourse(),
       //'Info' : Info(),
-      'Library' : SLibrary(),
+      'Library': SLibrary(),
       'LogOut': () => FirebaseAuth.instance.signOut(),
     };
     super.initState();
@@ -68,7 +76,9 @@ class _CustomeTileState extends State<CustomeTile> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
       child: InkWell(
-        onTap: (widget.txt == 'LogOut')? teacherScreens[widget.txt] : () => selectScreen(context),
+        onTap: (widget.txt == 'LogOut')
+            ? teacherScreens[widget.txt]
+            : () => selectScreen(context),
         splashColor: Colors.purple,
         child: Container(
           decoration: BoxDecoration(
