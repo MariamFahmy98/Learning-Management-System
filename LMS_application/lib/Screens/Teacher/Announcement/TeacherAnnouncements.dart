@@ -38,6 +38,7 @@ class _TeacherAnnouncementsState extends State<TeacherAnnouncements> {
       body: StreamBuilder(
           stream: Firestore.instance
               .collection('/Teachers/PostDocument/Posts')
+              .orderBy('postTime', descending: true)
               .snapshots(),
           builder: (context, snapshot) {
             //   if (!snapshot.hasData) return CircularProgressIndicator();

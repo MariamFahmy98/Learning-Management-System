@@ -31,6 +31,9 @@ dependencies:
   expandable: ^4.1.4
   timeago: ^2.0.29
   readmore: ^1.0.1
+  #file_picker: ^2.1.4
+  #documents_picker: ^1.0.0
+  flutter_full_pdf_viewer: ^1.0.6
   firebase_database: ^3.1.3
 
 

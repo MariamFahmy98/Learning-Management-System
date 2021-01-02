@@ -80,19 +80,21 @@ class _PostTitleAndBody extends StatelessWidget {
     return Container(
       child: Expanded(
         flex: 2,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              postTitle,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                postTitle,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            SizedBox(height: 2.0),
-            Text(postBody),
-          ],
+              SizedBox(height: 2.0),
+              Text(postBody),
+            ],
+          ),
         ),
       ),
     );
