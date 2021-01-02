@@ -5,8 +5,8 @@ import 'teacher_course_list.dart';
 import 'teacher_add_course.dart';
 
 class TeacherCourses extends StatefulWidget {
-  Teacher teacher;
-  List<Course> allCoursesAll;
+  final Teacher teacher;
+  final List<Course> allCoursesAll;
   TeacherCourses({this.teacher, this.allCoursesAll});
   @override
   _TeacherCourses createState() => _TeacherCourses(teacher, allCoursesAll);
@@ -19,8 +19,8 @@ class _TeacherCourses extends State<TeacherCourses> {
 
   void addNewCourse(String crName, String crCode, String crDescription,
       String crCreditHours) {
-    final newCr = Course(crCode);
-    allCourses.add(newCr);
+//final newCr = Course(crCode);
+    //  allCourses.add(newCr);
     setState(() {
       // teacher.courses.add(newCr);
     });
@@ -59,9 +59,9 @@ class _TeacherCourses extends State<TeacherCourses> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TeacherCoursesList(
-              //myCourses: teacher.myCourses,
-              //deleteCourse: _deleteCourse,
-            ),
+                //myCourses: teacher.myCourses,
+                //deleteCourse: _deleteCourse,
+                ),
           ],
         ),
       ),

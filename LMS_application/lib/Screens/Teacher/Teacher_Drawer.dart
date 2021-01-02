@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
 
 class TeacherDrawer extends StatelessWidget {
-  Function ontap;
+  final Function ontap;
 
   TeacherDrawer(this.ontap);
   @override
@@ -34,25 +34,26 @@ class TeacherDrawer extends StatelessWidget {
           CustomeTile(
             myIcon: Icons.info,
             txt: "Info",
-            tap: () => {},
             isTeacher: true,
           ),
           CustomeTile(
             myIcon: Icons.assignment_sharp,
             txt: "Courses",
-            tap: () => {},
+            isTeacher: true,
+          ),
+          CustomeTile(
+            myIcon: Icons.chat,
+            txt: "Discussion",
             isTeacher: true,
           ),
           CustomeTile(
             myIcon: Icons.library_books,
             txt: "Library",
-            tap: () => {},
             isTeacher: true,
           ),
           CustomeTile(
             myIcon: Icons.logout,
             txt: "LogOut",
-            tap: () => {},
             isTeacher: true,
           ),
         ]),

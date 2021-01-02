@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'teacher_open_course.dart';
 
 class TeacherCoursesList extends StatelessWidget {
-  List<Course> myCourses;
+  final List<Course> myCourses;
   final Function deleteCourse;
   TeacherCoursesList({this.myCourses, this.deleteCourse});
 

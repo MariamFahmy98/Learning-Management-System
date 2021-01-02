@@ -2,7 +2,6 @@ import 'package:LMS_application/models/course.dart';
 import 'package:LMS_application/models/quiz.dart';
 import 'package:flutter/material.dart';
 import 'teacher_requests_list.dart';
-import 'teacher_requests_list.dart';
 
 class TeacherOpenCourse extends StatefulWidget {
   final Course runningCourse;
