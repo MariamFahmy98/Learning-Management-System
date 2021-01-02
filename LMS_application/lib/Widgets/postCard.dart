@@ -23,6 +23,7 @@ class PostCard extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(4.0),
           padding: const EdgeInsets.all(4.0),
+          height: double.infinity,
           child: Column(
             children: <Widget>[
               _PostDetails(teacherID, postTime),
@@ -35,15 +36,6 @@ class PostCard extends StatelessWidget {
         ),
       ),
     );
-    /*return ListView(
-      shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
-      children: <Widget>[
-        _PostDetails(teacherID, postTime),
-        Divider(color: Colors.grey),
-        _Post(postTitle, postBody),
-      ],
-    ); */
   }
 }
 
@@ -55,47 +47,39 @@ class _Post extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 3,
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _PostTitleAndBody(postTitle, postBody),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.thumb_up),
-                  tooltip: 'like',
-                  onPressed: () {},
-                ),
-                IconButton(
-                  icon: Icon(Icons.chat_bubble),
-                  tooltip: 'Write a comment',
-                  onPressed: () {},
-                ),
-              ],
-            )
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _PostTitleAndBody(postTitle, postBody),
+          //Divider(color: Colors.grey),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: Icon(Icons.thumb_up),
+                tooltip: 'like',
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.chat_bubble),
+                tooltip: 'Write a comment',
+                onPressed: () {},
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
 }
 
-class _PostTitleAndBody extends StatefulWidget {
+class _PostTitleAndBody extends StatelessWidget {
   final String postTitle;
   final String postBody;
   _PostTitleAndBody(this.postTitle, this.postBody);
-
-  @override
-  __PostTitleAndBodyState createState() => __PostTitleAndBodyState();
-}
-
-class __PostTitleAndBodyState extends State<_PostTitleAndBody> {
   @override
   Widget build(BuildContext context) {
-    /*return Container(
+    return Container(
       child: Expanded(
         flex: 2,
         child: Column(
@@ -113,8 +97,42 @@ class __PostTitleAndBodyState extends State<_PostTitleAndBody> {
           ],
         ),
       ),
-    ); */
-    return ExpandableNotifier(
+    );
+  }
+}
+
+/*class _PostTitleAndBody extends StatefulWidget {
+  final String postTitle;
+  final String postBody;
+  _PostTitleAndBody(this.postTitle, this.postBody);
+
+  @override
+  __PostTitleAndBodyState createState() => __PostTitleAndBodyState();
+}
+
+class __PostTitleAndBodyState extends State<_PostTitleAndBody> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Expanded(
+        flex: 2,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              widget.postTitle,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 2.0),
+            Text(widget.postBody),
+          ],
+        ),
+      ),
+    );
+    /* return ExpandableNotifier(
       child: Padding(
         padding: const EdgeInsets.all(3),
         child: Card(
@@ -168,9 +186,9 @@ class __PostTitleAndBodyState extends State<_PostTitleAndBody> {
           ),
         ),
       ),
-    );
+    ); */
   }
-}
+} */
 
 class _PostDetails extends StatelessWidget {
   final String teacherID;
@@ -261,7 +279,6 @@ class _PostTimeStamp extends StatelessWidget {
         flex: 2,
         child: postTime != null
             ? Text(
-                // DateFormat.yMd().add_jm().format(postTime),
                 timeUntil(),
                 style: TextStyle(
                   color: Colors.grey,

@@ -1,3 +1,4 @@
+import 'package:LMS_application/models/course.dart';
 import 'package:LMS_application/models/student.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:LMS_application/models/post.dart';
@@ -60,4 +61,21 @@ class Database {
         .snapshots()
         .map(_postDataFromSnapshot);
   }*/
+
+  Course _courseDataFromSnapshot(DocumentSnapshot snapshot) {
+    return Course(
+      courseCode: documentID,
+      courseCreditHours: snapshot.data['Credit Hours'],
+      courseDescription: snapshot.data['Description'],
+      courseName: snapshot.data['Name'],
+    );
+  }
+
+  Stream<Course> get courseData {
+    return Firestore.instance
+        .collection('Courses')
+        .document(documentID)
+        .snapshots()
+        .map(_courseDataFromSnapshot);
+  }
 }
