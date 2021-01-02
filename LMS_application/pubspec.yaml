@@ -30,6 +30,7 @@ dependencies:
   cached_network_image: ^2.5.0 
   expandable: ^4.1.4
   timeago: ^2.0.29
+  readmore: ^1.0.1
   firebase_database: ^3.1.3
 
 

@@ -28,9 +28,7 @@ class PostCard extends StatelessWidget {
             children: <Widget>[
               _PostDetails(teacherID, postTime),
               Divider(color: Colors.grey),
-              Expanded(
-                child: _Post(postTitle, postBody),
-              ),
+              _Post(postTitle, postBody),
             ],
           ),
         ),
@@ -100,95 +98,6 @@ class _PostTitleAndBody extends StatelessWidget {
     );
   }
 }
-
-/*class _PostTitleAndBody extends StatefulWidget {
-  final String postTitle;
-  final String postBody;
-  _PostTitleAndBody(this.postTitle, this.postBody);
-
-  @override
-  __PostTitleAndBodyState createState() => __PostTitleAndBodyState();
-}
-
-class __PostTitleAndBodyState extends State<_PostTitleAndBody> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Expanded(
-        flex: 2,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              widget.postTitle,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 2.0),
-            Text(widget.postBody),
-          ],
-        ),
-      ),
-    );
-    /* return ExpandableNotifier(
-      child: Padding(
-        padding: const EdgeInsets.all(3),
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          child: ScrollOnExpand(
-            scrollOnExpand: true,
-            scrollOnCollapse: false,
-            child: ExpandablePanel(
-              header: Padding(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  widget.postTitle,
-                  style: TextStyle(
-                    // color: Colors.deepPurple,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  //style: Theme.of(context).primaryColor,
-                ),
-              ),
-              collapsed: Text(
-                widget.postBody,
-                softWrap: true,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              expanded: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  for (var _ in Iterable.generate(10))
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 10),
-                      child: Text(
-                        widget.postBody,
-                        softWrap: true,
-                        overflow: TextOverflow.fade,
-                      ),
-                    ),
-                ],
-              ),
-              builder: (_, collapsed, expanded) {
-                return Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: Expandable(
-                    collapsed: collapsed,
-                    expanded: expanded,
-                    theme: const ExpandableThemeData(crossFadePoint: 0),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-      ),
-    ); */
-  }
-} */
 
 class _PostDetails extends StatelessWidget {
   final String teacherID;
