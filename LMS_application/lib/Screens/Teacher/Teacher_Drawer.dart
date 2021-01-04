@@ -1,9 +1,21 @@
+import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
+import 'package:LMS_application/Screens/Teacher/Discussion/TeacherDiscussion.dart';
+import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
 import 'package:LMS_application/models/teacher.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
 
 class TeacherDrawer extends StatelessWidget {
   final Teacher teacher;
+
+  void _selectScreen(BuildContext ctx, Widget nextScreen) {
+    Navigator.of(ctx).push(
+      MaterialPageRoute(builder: (_) {
+        return nextScreen;
+      }),
+    );
+  }
 
   TeacherDrawer(this.teacher);
   @override
@@ -36,32 +48,27 @@ class TeacherDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.info,
               txt: "Info",
-              isTeacher: true,
-              user: teacher,
+              onTap: () => {},
             ),
             CustomeTile(
               myIcon: Icons.assignment_sharp,
               txt: "My Courses",
-              isTeacher: true,
-              user: teacher,
+              onTap: () => _selectScreen(context, TeacherCourses(teacher)),
             ),
             CustomeTile(
               myIcon: Icons.chat,
               txt: "Discussion",
-              isTeacher: true,
-              user: teacher,
+              onTap: () => _selectScreen(context, TeacherDiscussionForm()),
             ),
             CustomeTile(
               myIcon: Icons.library_books,
               txt: "Library",
-              isTeacher: true,
-              user: teacher,
+              onTap: () => _selectScreen(context, Library()),
             ),
             CustomeTile(
               myIcon: Icons.logout,
               txt: "LogOut",
-              isTeacher: true,
-              user: teacher,
+              onTap: () => FirebaseAuth.instance.signOut(),
             ),
           ],
         ),

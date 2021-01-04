@@ -1,3 +1,4 @@
+import 'package:LMS_application/models/Assignmet.dart';
 import 'package:LMS_application/models/course.dart';
 import 'package:LMS_application/models/student.dart';
 import 'package:LMS_application/models/teacher.dart';
@@ -46,6 +47,7 @@ class Database {
       courseCreditHours: snapshot.data['Credit Hours'],
       courseDescription: snapshot.data['Description'],
       courseName: snapshot.data['Name'],
+      assignmentIDs: snapshot.data['AssignmentsIDs'].cast<String>().toList(),
     );
   }
 
@@ -55,5 +57,23 @@ class Database {
         .document(documentID)
         .snapshots()
         .map(_courseDataFromSnapshot);
+  }
+
+  Assignment _assignmentDataFromSnapshot(DocumentSnapshot snapshot) {
+    return Assignment(
+        title: snapshot.data['title'],
+        pdfURL: snapshot.data['pdfURL'],
+        grade: snapshot.data['grade'],
+        deadline: snapshot.data['deadline']);
+  }
+
+  Stream<Assignment> getAssignmentData(String assignmentID) {
+    return Firestore.instance
+        .collection('Courses')
+        .document(documentID)
+        .collection('Assignments')
+        .document(assignmentID)
+        .snapshots()
+        .map(_assignmentDataFromSnapshot);
   }
 }

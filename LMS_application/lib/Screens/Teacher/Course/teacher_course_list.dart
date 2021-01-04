@@ -9,9 +9,9 @@ class TeacherCoursesList extends StatelessWidget {
   //final Function deleteCourse;
   TeacherCoursesList(this.teacher);
 
-  void openCourse(Course cr, context) {
+  void openCourse(Course course, context) {
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return TeacherOpenCourse(cr);
+      return TeacherOpenCourse(course);
     }));
   }
 

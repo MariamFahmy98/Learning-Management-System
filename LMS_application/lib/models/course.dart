@@ -8,12 +8,14 @@ class Course {
   String courseCreditHours;
   List<Quiz> quizes;
   List<Student> requests;
+  List<String> assignmentIDs;
 
   Course({
     this.courseCode,
     this.courseCreditHours,
     this.courseDescription,
     this.courseName,
+    this.assignmentIDs
   });
 
   void studentRequest(Student input) {

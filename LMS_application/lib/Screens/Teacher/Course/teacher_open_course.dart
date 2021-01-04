@@ -1,11 +1,10 @@
 import 'package:LMS_application/Screens/Teacher/Course/TeacherCourseDrawer.dart';
 import 'package:LMS_application/models/course.dart';
-import 'package:LMS_application/models/quiz.dart';
 import 'package:flutter/material.dart';
 import 'teacher_requests_list.dart';
 
 class TeacherOpenCourse extends StatelessWidget {
-  Course runningCourse;
+  final Course runningCourse;
   TeacherOpenCourse(this.runningCourse);
 
   @override

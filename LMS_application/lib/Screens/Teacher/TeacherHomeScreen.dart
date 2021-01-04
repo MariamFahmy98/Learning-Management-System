@@ -16,10 +16,11 @@ class TeacherHomeScreen extends StatelessWidget {
         if (!snapshot.hasData) return CircularProgressIndicator();
 
         var teacher = snapshot.data;
+        print(teacher.runtimeType);
         return Scaffold(
           drawer: TeacherDrawer(teacher),
           appBar: AppBar(
-            title: Text("Flutter Chat"),
+            title: Text("Home Page"),
           ),
           body: Container(),
         );

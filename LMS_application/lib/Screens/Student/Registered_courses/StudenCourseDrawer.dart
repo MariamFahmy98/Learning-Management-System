@@ -4,7 +4,16 @@ import 'package:flutter/material.dart';
 
 class StudentCourseDrawer extends StatelessWidget {
   final Course course;
+
   StudentCourseDrawer(this.course);
+
+  void _selectScreen(BuildContext ctx, Widget nextScreen) {
+    Navigator.of(ctx).push(
+      MaterialPageRoute(builder: (_) {
+        return nextScreen;
+      }),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,22 +45,22 @@ class StudentCourseDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.article_sharp,
               txt: "Materials",
-              isTeacher: false,
+              onTap: () => {},
             ),
             CustomeTile(
               myIcon: Icons.assignment,
               txt: "Assignments",
-              isTeacher: false,
+              onTap: () => {},
             ),
             CustomeTile(
               myIcon: Icons.all_inbox,
               txt: "Announcements",
-              isTeacher: false,
+              onTap: () => {},
             ),
             CustomeTile(
               myIcon: Icons.assignment_returned_sharp,
               txt: "Quizzes",
-              isTeacher: false,
+              onTap: () => {},
             ),
           ],
         ),

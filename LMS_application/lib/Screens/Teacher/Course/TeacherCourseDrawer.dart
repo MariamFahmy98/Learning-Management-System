@@ -1,10 +1,21 @@
+import 'package:LMS_application/Screens/Teacher/Assignments/teacher_assignments_list.dart';
 import 'package:LMS_application/Widgets/CustomeTile.dart';
 import 'package:LMS_application/models/course.dart';
 import 'package:flutter/material.dart';
 
 class TeacherCourseDrawer extends StatelessWidget {
   final Course course;
+  
   TeacherCourseDrawer(this.course);
+
+  void _selectScreen(BuildContext ctx, Widget nextScreen) {
+    Navigator.of(ctx).push(
+      MaterialPageRoute(builder: (_) {
+        return nextScreen;
+      }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -35,27 +46,27 @@ class TeacherCourseDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.article_sharp,
               txt: "Materials",
-              isTeacher: true,
+              onTap: () => {},
             ),
             CustomeTile(
               myIcon: Icons.assignment,
               txt: "Assignments",
-              isTeacher: true,
+              onTap: () =>  _selectScreen(context, TeacherAssignmentsList(course)),
             ),
             CustomeTile(
               myIcon: Icons.all_inbox,
               txt: "Announcements",
-              isTeacher: true,
+              onTap: () => {},
             ),
             CustomeTile(
               myIcon: Icons.assignment_returned_sharp,
               txt: "Quizzes",
-              isTeacher: true,
+              onTap: () => {},
             ),
             CustomeTile(
               myIcon: Icons.request_page_rounded,
               txt: "Requests",
-              isTeacher: true,
+              onTap: () => {},
             ),
           ],
         ),

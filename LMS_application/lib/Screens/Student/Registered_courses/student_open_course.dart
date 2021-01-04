@@ -1,7 +1,6 @@
 import 'package:LMS_application/models/course.dart';
 import 'package:flutter/material.dart';
 
-import './student_quiz_list.dart';
 import 'StudenCourseDrawer.dart';
 
 class OpenCourse extends StatelessWidget {
