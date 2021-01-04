@@ -61,10 +61,11 @@ class Database {
 
   Assignment _assignmentDataFromSnapshot(DocumentSnapshot snapshot) {
     return Assignment(
-        title: snapshot.data['title'],
-        pdfURL: snapshot.data['pdfURL'],
-        grade: snapshot.data['grade'],
-        deadline: snapshot.data['deadline']);
+      title: snapshot.data['title'],
+      pdfURL: snapshot.data['pdfURL'],
+      grade: snapshot.data['grade'],
+      deadline: snapshot.data['deadline'].toDate(),
+    );
   }
 
   Stream<Assignment> getAssignmentData(String assignmentID) {
