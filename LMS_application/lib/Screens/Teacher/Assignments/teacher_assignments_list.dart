@@ -1,11 +1,22 @@
+import 'package:LMS_application/Screens/Teacher/Assignments/pdf_viewer.dart';
 import 'package:LMS_application/models/course.dart';
 import 'package:LMS_application/services/DataBase2.dart';
 import 'package:flutter/material.dart';
+
 
 class TeacherAssignmentsList extends StatelessWidget {
   final Course course;
 
   TeacherAssignmentsList(this.course);
+
+  void _openPDF(BuildContext context , String url) 
+  {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) {
+        return PDFViewer(url);
+      }),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +39,7 @@ class TeacherAssignmentsList extends StatelessWidget {
                         children: [
                           Text(assignmentData.title),
                           Text(assignmentData.grade),
+                          RaisedButton(onPressed: () => _openPDF(context, assignmentData.pdfURL))
                         ],
                       );
                     },
