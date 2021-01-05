@@ -2,7 +2,6 @@ import 'package:LMS_application/Screens/Student/StudentHomeScreen.dart';
 import 'package:LMS_application/Screens/Teacher/TeacherHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Widgets/auth/auth_form.dart';
 
@@ -52,7 +51,7 @@ class _AuthScreenState extends State<AuthScreen> {
         _isLoading = false;
       });
 
-    } on PlatformException catch (error) {
+    } on FirebaseAuthException catch (error) {
       var message = "An error occurred, please check your credentials";
       if (error.message != null) message = error.message;
       Scaffold.of(ctx).showSnackBar(

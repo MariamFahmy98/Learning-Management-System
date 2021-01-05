@@ -4,8 +4,9 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 
 class PDFViewer extends StatefulWidget {
   final String url;
+  final String title;
 
-  PDFViewer(this.url);
+  PDFViewer(this.url, this.title);
 
   @override
   _PDFViewerState createState() => _PDFViewerState();
@@ -28,7 +29,7 @@ class _PDFViewerState extends State<PDFViewer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("PDF Viewer"),
+        title: Text(widget.title),
         centerTitle: true,
       ),
       body: Center(

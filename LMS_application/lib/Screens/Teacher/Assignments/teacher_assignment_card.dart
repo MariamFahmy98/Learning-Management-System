@@ -9,10 +9,10 @@ class TeacherAssignmentCard extends StatelessWidget {
 
   final assignmentData;
 
-  void _openPDF(BuildContext context, String url) {
+  void _openPDF(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) {
-        return PDFViewer(url);
+        return PDFViewer(assignmentData.pdfURL, assignmentData.title);
       }),
     );
   }
@@ -68,7 +68,7 @@ class TeacherAssignmentCard extends StatelessWidget {
             Row(
               children: [
                 RaisedButton(
-                  onPressed: () => _openPDF(context, assignmentData.pdfURL),
+                  onPressed: () => _openPDF(context),
                   child: Text(
                     "View Assignment",
                     style: TextStyle(color: Theme.of(context).primaryColor),

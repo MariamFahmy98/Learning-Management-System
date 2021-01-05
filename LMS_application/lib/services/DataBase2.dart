@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:LMS_application/models/Assignmet.dart';
 import 'package:LMS_application/models/course.dart';
 import 'package:LMS_application/models/student.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 
 class Database {
   String documentID;
@@ -47,7 +51,6 @@ class Database {
       courseCreditHours: snapshot.data()['Credit Hours'],
       courseDescription: snapshot.data()['Description'],
       courseName: snapshot.data()['Name'],
-      assignmentIDs: snapshot.data()['AssignmentsIDs'].cast<String>().toList(),
     );
   }
 
@@ -59,22 +62,55 @@ class Database {
         .map(_courseDataFromSnapshot);
   }
 
-  Assignment _assignmentDataFromSnapshot(DocumentSnapshot snapshot) {
-    return Assignment(
-      title: snapshot.data()['title'],
-      pdfURL: snapshot.data()['pdfURL'],
-      grade: snapshot.data()['grade'],
-      deadline: snapshot.data()['deadline'].toDate(),
-    );
+  List<Assignment> _assignmentDataFromSnapshot(QuerySnapshot querySnapshot) {
+    var snapshots = querySnapshot.docs;
+    List<Assignment> assignments = List(snapshots.length);
+    for (int i = 0; i < snapshots.length; i++) {
+      var snapshotData = snapshots[i].data();
+      assignments[i] = Assignment(
+        title: snapshotData['title'],
+        grade: snapshotData['grade'],
+        deadline: snapshotData['deadline'].toDate(),
+        pdfURL: snapshotData['pdfURL'],
+      );
+    }
+
+    return assignments;
   }
 
-  Stream<Assignment> getAssignmentData(String assignmentID) {
+  Stream<List<Assignment>> get assignmentsData {
     return FirebaseFirestore.instance
         .collection('Courses')
         .doc(documentID)
         .collection('Assignments')
-        .doc(assignmentID)
         .snapshots()
         .map(_assignmentDataFromSnapshot);
+  }
+
+  Future<void> uploadAssignment({
+    @required String title,
+    @required String grade,
+    @required DateTime deadline,
+    @required File pdfFile,
+  }) async {
+    var filename = pdfFile.path.split("/").last;
+    final ref = FirebaseStorage.instance.ref().child(filename);
+
+    await ref.putFile(pdfFile).whenComplete(() => print('Upload Complete.'));
+    final url = await ref.getDownloadURL();
+    print(url);
+
+    await FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Assignments')
+        .add({
+      'title': title,
+      'grade': grade,
+      'deadline': Timestamp.fromDate(deadline),
+      'pdfURL': url,
+    });
+
+    print("Done!");
   }
 }
