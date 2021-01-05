@@ -2,21 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:LMS_application/services/DataBase2.dart';
 import 'package:LMS_application/models/course.dart';
-import 'assignment_card.dart';
-import 'pdf_viewer.dart';
+import 'teacher_assignment_card.dart';
 
 class TeacherAssignmentsList extends StatelessWidget {
   final Course course;
 
   TeacherAssignmentsList(this.course);
-
-  void _openPDF(BuildContext context, String url) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) {
-        return PDFViewer(url);
-      }),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +26,7 @@ class TeacherAssignmentsList extends StatelessWidget {
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) return CircularProgressIndicator();
                       var assignmentData = snapshot.data;
-                      return AssignmentCard(assignmentData: assignmentData);
+                      return TeacherAssignmentCard(assignmentData: assignmentData);
                     },
                   );
                 },
