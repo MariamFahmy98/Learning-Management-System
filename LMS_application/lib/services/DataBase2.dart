@@ -12,15 +12,15 @@ class Database {
   Student _studentDataFromSnapshot(DocumentSnapshot snapshot) {
     return Student(
       id: documentID,
-      name: snapshot.data['Name'],
-      courses: snapshot.data['Courses'].cast<String>().toList(),
+      name: snapshot.data()['Name'],
+      courses: snapshot.data()['Courses'].cast<String>().toList(),
     );
   }
 
   Stream<Student> get studentData {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('Students')
-        .document(documentID)
+        .doc(documentID)
         .snapshots()
         .map(_studentDataFromSnapshot);
   }
@@ -28,15 +28,15 @@ class Database {
   Teacher _teacherDataFromSnapshot(DocumentSnapshot snapshot) {
     return Teacher(
       id: documentID,
-      name: snapshot.data['Name'],
-      courses: snapshot.data['Courses'].cast<String>().toList(),
+      name: snapshot.data()['Name'],
+      courses: snapshot.data()['Courses'].cast<String>().toList(),
     );
   }
 
   Stream<Teacher> get teacherData {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('Teachers')
-        .document(documentID)
+        .doc(documentID)
         .snapshots()
         .map(_teacherDataFromSnapshot);
   }
@@ -44,36 +44,36 @@ class Database {
   Course _courseDataFromSnapshot(DocumentSnapshot snapshot) {
     return Course(
       courseCode: documentID,
-      courseCreditHours: snapshot.data['Credit Hours'],
-      courseDescription: snapshot.data['Description'],
-      courseName: snapshot.data['Name'],
-      assignmentIDs: snapshot.data['AssignmentsIDs'].cast<String>().toList(),
+      courseCreditHours: snapshot.data()['Credit Hours'],
+      courseDescription: snapshot.data()['Description'],
+      courseName: snapshot.data()['Name'],
+      assignmentIDs: snapshot.data()['AssignmentsIDs'].cast<String>().toList(),
     );
   }
 
   Stream<Course> get courseData {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('Courses')
-        .document(documentID)
+        .doc(documentID)
         .snapshots()
         .map(_courseDataFromSnapshot);
   }
 
   Assignment _assignmentDataFromSnapshot(DocumentSnapshot snapshot) {
     return Assignment(
-      title: snapshot.data['title'],
-      pdfURL: snapshot.data['pdfURL'],
-      grade: snapshot.data['grade'],
-      deadline: snapshot.data['deadline'].toDate(),
+      title: snapshot.data()['title'],
+      pdfURL: snapshot.data()['pdfURL'],
+      grade: snapshot.data()['grade'],
+      deadline: snapshot.data()['deadline'].toDate(),
     );
   }
 
   Stream<Assignment> getAssignmentData(String assignmentID) {
-    return Firestore.instance
+    return FirebaseFirestore.instance
         .collection('Courses')
-        .document(documentID)
+        .doc(documentID)
         .collection('Assignments')
-        .document(assignmentID)
+        .doc(assignmentID)
         .snapshots()
         .map(_assignmentDataFromSnapshot);
   }

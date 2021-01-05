@@ -26,12 +26,17 @@ class TeacherAssignmentsList extends StatelessWidget {
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) return CircularProgressIndicator();
                       var assignmentData = snapshot.data;
-                      return TeacherAssignmentCard(assignmentData: assignmentData);
+                      return TeacherAssignmentCard(
+                          assignmentData: assignmentData);
                     },
                   );
                 },
                 itemCount: course.assignmentIDs.length,
               ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }

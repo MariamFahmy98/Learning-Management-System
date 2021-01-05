@@ -19,11 +19,11 @@ class _AuthScreenState extends State<AuthScreen> {
   bool _isTeacher;
 
   Future<bool> _isSpecificUser(String userID, String users) async {
-    var snapshot = await Firestore.instance.collection(users).getDocuments();
-    var teachers = snapshot.documents;
+    var snapshot = await FirebaseFirestore.instance.collection(users).get();
+    var teachers = snapshot.docs;
 
     for (int i = 0; i < teachers.length; i++)
-      if (teachers[i].documentID == userID) return true;
+      if (teachers[i].id == userID) return true;
 
     return false;
   }
@@ -33,7 +33,7 @@ class _AuthScreenState extends State<AuthScreen> {
     String password,
     BuildContext ctx,
   ) async {
-    AuthResult authResult;
+    UserCredential authResult;
 
     try {
       setState(() {
@@ -70,7 +70,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseAuth.instance.onAuthStateChanged,
+      stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData && _isTeacher != null) {
           if (_isTeacher)
