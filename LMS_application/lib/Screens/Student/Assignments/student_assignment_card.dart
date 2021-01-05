@@ -1,18 +1,27 @@
+import 'package:LMS_application/Screens/PDF_Viewer/pdf_viewer.dart';
+import 'package:LMS_application/models/Assignmet.dart';
+import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
-
 import 'package:intl/intl.dart';
 
-import '../../PDF_Viewer/pdf_viewer.dart';
+class StudentAssignmentCard extends StatefulWidget {
+  final Student student;
+  final Assignment assignment;
 
-class TeacherAssignmentCard extends StatelessWidget {
-  TeacherAssignmentCard({@required this.assignmentData});
+  StudentAssignmentCard({
+    @required this.student,
+    @required this.assignment,
+  });
 
-  final assignmentData;
+  @override
+  _StudentAssignmentCardState createState() => _StudentAssignmentCardState();
+}
 
+class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
   void _openPDF(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) {
-        return PDFViewer(assignmentData.pdfURL, assignmentData.title);
+        return PDFViewer(widget.assignment.pdfURL, widget.assignment.title);
       }),
     );
   }
@@ -35,7 +44,7 @@ class TeacherAssignmentCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              assignmentData.title,
+              widget.assignment.title,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -46,7 +55,7 @@ class TeacherAssignmentCard extends StatelessWidget {
               height: 4,
             ),
             Text(
-              "Grade: ${assignmentData.grade} Marks.",
+              "Grade: ${widget.assignment.grade} Marks.",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
@@ -57,9 +66,19 @@ class TeacherAssignmentCard extends StatelessWidget {
             ),
             Text(
               "Deadline: " +
-                  DateFormat.MMMEd().format(assignmentData.deadline) +
+                  DateFormat.MMMEd().format(widget.assignment.deadline) +
                   "  " +
-                  DateFormat.jm().format(assignmentData.deadline),
+                  DateFormat.jm().format(widget.assignment.deadline),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            Text(
+              'Status: Not Submitted',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
@@ -82,7 +101,7 @@ class TeacherAssignmentCard extends StatelessWidget {
                 RaisedButton(
                   onPressed: () {},
                   child: Text(
-                    "View Submissions",
+                    "Submit",
                     style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                   color: Colors.white,

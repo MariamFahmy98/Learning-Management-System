@@ -1,11 +1,14 @@
+import 'package:LMS_application/Screens/Student/Assignments/student_assignments_list.dart';
 import 'package:LMS_application/Widgets/CustomeTile.dart';
 import 'package:LMS_application/models/course.dart';
+import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
 
 class StudentCourseDrawer extends StatelessWidget {
   final Course course;
+  final Student student;
 
-  StudentCourseDrawer(this.course);
+  StudentCourseDrawer(this.student, this.course);
 
   void _selectScreen(BuildContext ctx, Widget nextScreen) {
     Navigator.of(ctx).push(
@@ -50,7 +53,8 @@ class StudentCourseDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.assignment,
               txt: "Assignments",
-              onTap: () => {},
+              onTap: () =>
+                  _selectScreen(context, StudentAssignmentsList(student, course)),
             ),
             CustomeTile(
               myIcon: Icons.all_inbox,
