@@ -39,7 +39,10 @@ class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
       allowedExtensions: ['pdf'],
     );
 
-    setState(() => submissionState = 2);
+    if(submissionFile == null)
+      return;
+
+    setState(() => submissionState = 1);
 
     await Database(widget.courseCode).uploadAssignmentSubmission(
       assignmentID: widget.assignment.id,
@@ -52,9 +55,9 @@ class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
     if (submissionState == 0)
       return "Not Submitted.";
     else if (submissionState == 1)
-      return "Submitted.";
-    else if (submissionState == 2)
       return "Submitting...";
+    else if (submissionState == 2)
+      return "Submitted.";
     else
       return "Graded.";
   }
@@ -70,7 +73,7 @@ class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
         color: Colors.white,
         elevation: 50,
       );
-    else if (submissionState == 2)
+    else if (submissionState == 1)
       return CircularProgressIndicator();
     else
       return Container();
@@ -86,8 +89,10 @@ class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
             return Center(child: CircularProgressIndicator());
 
           AssignmentSubmission assignmentSubmission = snapshot.data;
-          print("Hi: ${assignmentSubmission.valid}");
-          submissionState = assignmentSubmission.valid ? 1 : submissionState;
+          if (assignmentSubmission.valid && assignmentSubmission.graded)
+            submissionState = 3;
+          else if (assignmentSubmission.valid)
+            submissionState = 2;
           
           return Card(
             elevation: 30,
@@ -140,6 +145,16 @@ class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
                   ),
                   Text(
                     'Status: ${_getSubmissionState()}',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  if (submissionState == 3) Text(
+                    'Recieved Grade: ${assignmentSubmission.grade}',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
