@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:LMS_application/models/Assignmet.dart';
+import 'package:LMS_application/models/assignment_submission.dart';
 import 'package:LMS_application/models/course.dart';
 import 'package:LMS_application/models/student.dart';
 import 'package:LMS_application/models/teacher.dart';
@@ -112,11 +113,24 @@ class Database {
     });
   }
 
-  bool _tmp(DocumentSnapshot snapshot) {
-    return snapshot.exists;
+  AssignmentSubmission _assignmentSubmissionDataFromSnapshot(
+      DocumentSnapshot snapshot) {
+    if (!snapshot.exists)
+      return AssignmentSubmission(valid: false);
+
+    var snapshotData = snapshot.data();
+    return AssignmentSubmission(
+      valid: true,
+      studentID: snapshot.id,
+      graded: snapshotData['graded'],
+      grade: snapshotData['grade'],
+      submittedAt: snapshotData['submittedAt'].toDate(),
+      pdfURL: snapshotData['pdfURL'],
+    );
   }
 
-  Stream<bool> isAssignmentSubmitted(String assignmentID, String studentID) {
+  Stream<AssignmentSubmission> getAssignmentSubmission(
+      String assignmentID, String studentID) {
     return FirebaseFirestore.instance
         .collection('Courses')
         .doc(documentID)
@@ -125,7 +139,7 @@ class Database {
         .collection('Submissions')
         .doc(studentID)
         .snapshots()
-        .map(_tmp);
+        .map(_assignmentSubmissionDataFromSnapshot);
   }
 
   Future<void> uploadAssignmentSubmission(

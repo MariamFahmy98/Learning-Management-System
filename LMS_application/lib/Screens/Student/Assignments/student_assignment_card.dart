@@ -1,5 +1,6 @@
 import 'package:LMS_application/Screens/PDF_Viewer/pdf_viewer.dart';
 import 'package:LMS_application/models/Assignmet.dart';
+import 'package:LMS_application/models/assignment_submission.dart';
 import 'package:LMS_application/models/student.dart';
 import 'package:LMS_application/services/DataBase2.dart';
 import 'package:flutter/material.dart';
@@ -79,11 +80,15 @@ class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
   Widget build(BuildContext context) {
     return StreamBuilder<Object>(
         stream: Database(widget.courseCode)
-            .isAssignmentSubmitted(widget.assignment.id, widget.student.id),
+            .getAssignmentSubmission(widget.assignment.id, widget.student.id),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Center(child: CircularProgressIndicator());
-          submissionState = snapshot.data ? 1 : submissionState;
+
+          AssignmentSubmission assignmentSubmission = snapshot.data;
+          print("Hi: ${assignmentSubmission.valid}");
+          submissionState = assignmentSubmission.valid ? 1 : submissionState;
+          
           return Card(
             elevation: 30,
             margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),

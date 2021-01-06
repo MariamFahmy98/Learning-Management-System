@@ -20,7 +20,6 @@ class StudentAssignmentsList extends StatelessWidget {
         child: StreamBuilder(
           stream: Database(course.courseCode).assignmentsData,
           builder: (context, snapshot) {
-            print(snapshot.error);
             if (!snapshot.hasData) return CircularProgressIndicator();
             var assignments = snapshot.data;
             return (assignments.length == 0)
