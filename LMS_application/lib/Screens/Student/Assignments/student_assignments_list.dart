@@ -32,6 +32,7 @@ class StudentAssignmentsList extends StatelessWidget {
                   )
                 : ListView.builder(
                     itemBuilder: (ctx, index) => StudentAssignmentCard(
+                      key: ValueKey(assignments[index].id),
                       student: student,
                       courseCode: course.courseCode,
                       assignment: assignments[index],

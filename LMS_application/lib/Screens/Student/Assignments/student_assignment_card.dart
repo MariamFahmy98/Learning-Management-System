@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:LMS_application/Screens/PDF_Viewer/pdf_viewer.dart';
 import 'package:LMS_application/models/Assignmet.dart';
 import 'package:LMS_application/models/assignment_submission.dart';
@@ -8,11 +10,13 @@ import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
 
 class StudentAssignmentCard extends StatefulWidget {
+  final Key key;
   final Student student;
   final Assignment assignment;
   final String courseCode;
 
   StudentAssignmentCard({
+    @required this.key,
     @required this.student,
     @required this.courseCode,
     @required this.assignment,
@@ -24,6 +28,21 @@ class StudentAssignmentCard extends StatefulWidget {
 
 class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
   int submissionState = 0;
+  bool deadlinePassed;
+  Timer timer;
+
+  @override
+  void initState() {
+    super.initState();
+    if (DateTime.now().isBefore(widget.assignment.deadline)) {
+      deadlinePassed = false;
+      timer = Timer(
+        widget.assignment.deadline.difference(DateTime.now()),
+        () => setState(() => deadlinePassed = true),
+      );
+    } else
+      deadlinePassed = true;
+  }
 
   void _openPDF(BuildContext context) {
     Navigator.of(context).push(
@@ -39,8 +58,7 @@ class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
       allowedExtensions: ['pdf'],
     );
 
-    if(submissionFile == null)
-      return;
+    if (submissionFile == null) return;
 
     setState(() => submissionState = 1);
 
@@ -63,7 +81,7 @@ class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
   }
 
   Widget _getSubmissionStateWidget() {
-    if (submissionState == 0)
+    if (submissionState == 0 && !deadlinePassed)
       return RaisedButton(
         onPressed: _submitAssignment,
         child: Text(
@@ -91,9 +109,8 @@ class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
           AssignmentSubmission assignmentSubmission = snapshot.data;
           if (assignmentSubmission.valid && assignmentSubmission.graded)
             submissionState = 3;
-          else if (assignmentSubmission.valid)
-            submissionState = 2;
-          
+          else if (assignmentSubmission.valid) submissionState = 2;
+
           return Card(
             elevation: 30,
             margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -153,13 +170,14 @@ class _StudentAssignmentCardState extends State<StudentAssignmentCard> {
                   SizedBox(
                     height: 4,
                   ),
-                  if (submissionState == 3) Text(
-                    'Recieved Grade: ${assignmentSubmission.grade}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+                  if (submissionState == 3)
+                    Text(
+                      'Recieved Grade: ${assignmentSubmission.grade}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
                   Row(
                     children: [
                       RaisedButton(
