@@ -68,6 +68,7 @@ class Database {
     for (int i = 0; i < snapshots.length; i++) {
       var snapshotData = snapshots[i].data();
       assignments[i] = Assignment(
+        id: snapshots[i].id,
         title: snapshotData['title'],
         grade: snapshotData['grade'],
         deadline: snapshotData['deadline'].toDate(),
@@ -93,12 +94,11 @@ class Database {
     @required DateTime deadline,
     @required File pdfFile,
   }) async {
-    var filename = pdfFile.path.split("/").last;
+    var filename = documentID + title + pdfFile.path.split("/").last;
     final ref = FirebaseStorage.instance.ref().child(filename);
 
     await ref.putFile(pdfFile).whenComplete(() => print('Upload Complete.'));
     final url = await ref.getDownloadURL();
-    print(url);
 
     await FirebaseFirestore.instance
         .collection('Courses')
@@ -110,7 +110,46 @@ class Database {
       'deadline': Timestamp.fromDate(deadline),
       'pdfURL': url,
     });
+  }
 
-    print("Done!");
+  bool _tmp(DocumentSnapshot snapshot) {
+    return snapshot.exists;
+  }
+
+  Stream<bool> isAssignmentSubmitted(String assignmentID, String studentID) {
+    return FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Assignments')
+        .doc(assignmentID)
+        .collection('Submissions')
+        .doc(studentID)
+        .snapshots()
+        .map(_tmp);
+  }
+
+  Future<void> uploadAssignmentSubmission(
+      {@required File pdfFile,
+      @required String assignmentID,
+      @required String studentID}) async {
+    var filename = studentID + assignmentID + '.pdf';
+    final ref = FirebaseStorage.instance.ref().child(filename);
+
+    await ref.putFile(pdfFile).whenComplete(() => print('Upload Complete.'));
+    final url = await ref.getDownloadURL();
+
+    await FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Assignments')
+        .doc(assignmentID)
+        .collection('Submissions')
+        .doc(studentID)
+        .set({
+      'submittedAt': Timestamp.now(),
+      'pdfURL': url,
+      'grade': "0",
+      'graded': false,
+    });
   }
 }
