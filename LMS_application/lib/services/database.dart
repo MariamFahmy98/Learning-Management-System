@@ -2,21 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DataBaseServices {
   Future<void> addQuizData(Map quizData, String quizId, String courseId) async {
-    await Firestore.instance
+    await FirebaseFirestore.instance
         .collection("Courses")
-        .document(courseId)
+        .doc(courseId)
         .collection("Quizes")
-        .document(quizId)
-        .setData(quizData)
+        .doc(quizId)
+        .set(quizData)
         .catchError((e) {
       print(e.toString());
     });
   }
 
   Future<void> addQuestionData(Map questionData, String quizId) async {
-    await Firestore.instance
+    await FirebaseFirestore.instance
         .collection("Quizes")
-        .document(quizId)
+        .doc(quizId)
         .collection("QNA")
         .add(questionData)
         .catchError((e) {

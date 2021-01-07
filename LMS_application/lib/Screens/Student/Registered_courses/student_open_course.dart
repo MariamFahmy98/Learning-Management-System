@@ -1,16 +1,19 @@
 import 'package:LMS_application/models/course.dart';
+import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
 
 import 'StudenCourseDrawer.dart';
 
 class OpenCourse extends StatelessWidget {
   final Course runningCourse;
-  OpenCourse(this.runningCourse);
+  final Student student;
+
+  OpenCourse(this.student, this.runningCourse);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: StudentCourseDrawer(runningCourse),
+      drawer: StudentCourseDrawer(student, runningCourse),
       appBar: AppBar(
         title: Text(runningCourse.courseName),
       ),

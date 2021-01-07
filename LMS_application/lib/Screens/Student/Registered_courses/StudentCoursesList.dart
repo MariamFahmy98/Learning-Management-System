@@ -12,7 +12,7 @@ class StudentCoursesList extends StatelessWidget {
 
   void openCourse(Course cr, context) {
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return OpenCourse(cr);
+      return OpenCourse(student, cr);
     }));
   }
 

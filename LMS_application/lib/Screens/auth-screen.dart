@@ -2,7 +2,6 @@ import 'package:LMS_application/Screens/Student/StudentHomeScreen.dart';
 import 'package:LMS_application/Screens/Teacher/TeacherHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Widgets/auth/auth_form.dart';
 
@@ -19,11 +18,11 @@ class _AuthScreenState extends State<AuthScreen> {
   bool _isTeacher;
 
   Future<bool> _isSpecificUser(String userID, String users) async {
-    var snapshot = await Firestore.instance.collection(users).getDocuments();
-    var teachers = snapshot.documents;
+    var snapshot = await FirebaseFirestore.instance.collection(users).get();
+    var teachers = snapshot.docs;
 
     for (int i = 0; i < teachers.length; i++)
-      if (teachers[i].documentID == userID) return true;
+      if (teachers[i].id == userID) return true;
 
     return false;
   }
@@ -33,7 +32,7 @@ class _AuthScreenState extends State<AuthScreen> {
     String password,
     BuildContext ctx,
   ) async {
-    AuthResult authResult;
+    UserCredential authResult;
 
     try {
       setState(() {
@@ -52,7 +51,7 @@ class _AuthScreenState extends State<AuthScreen> {
         _isLoading = false;
       });
 
-    } on PlatformException catch (error) {
+    } on FirebaseAuthException catch (error) {
       var message = "An error occurred, please check your credentials";
       if (error.message != null) message = error.message;
       Scaffold.of(ctx).showSnackBar(
@@ -70,7 +69,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: FirebaseAuth.instance.onAuthStateChanged,
+      stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData && _isTeacher != null) {
           if (_isTeacher)

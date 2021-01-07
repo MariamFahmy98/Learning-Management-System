@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-class AssignmentCard extends StatelessWidget {
-  const AssignmentCard({
-    @required this.assignmentData,
-  });
+import '../../PDF_Viewer/pdf_viewer.dart';
+
+class TeacherAssignmentCard extends StatelessWidget {
+  TeacherAssignmentCard({@required this.assignmentData});
 
   final assignmentData;
+
+  void _openPDF(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) {
+        return PDFViewer(assignmentData.pdfURL, assignmentData.title);
+      }),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +64,31 @@ class AssignmentCard extends StatelessWidget {
                 color: Colors.white,
                 fontSize: 16,
               ),
+            ),
+            Row(
+              children: [
+                RaisedButton(
+                  onPressed: () => _openPDF(context),
+                  child: Text(
+                    "View Assignment",
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                  color: Colors.white,
+                  elevation: 50,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                RaisedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "View Submissions",
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                  color: Colors.white,
+                  elevation: 50,
+                ),
+              ],
             )
           ],
         ),

@@ -1,22 +1,14 @@
-import 'package:LMS_application/Screens/Teacher/Assignments/new_assignment.dart';
+import 'package:LMS_application/Screens/Student/Assignments/student_assignment_card.dart';
+import 'package:LMS_application/models/course.dart';
+import 'package:LMS_application/models/student.dart';
+import 'package:LMS_application/services/DataBase2.dart';
 import 'package:flutter/material.dart';
 
-import 'package:LMS_application/services/DataBase2.dart';
-import 'package:LMS_application/models/course.dart';
-import 'teacher_assignment_card.dart';
-
-class TeacherAssignmentsList extends StatelessWidget {
+class StudentAssignmentsList extends StatelessWidget {
   final Course course;
+  final Student student;
 
-  TeacherAssignmentsList(this.course);
-
-  void _startAddNewAssignment(BuildContext ctx) {
-    showModalBottomSheet(
-      context: ctx,
-      builder: (_) => NewAssignment(course.courseCode),
-      isScrollControlled: true,
-    );
-  }
+  StudentAssignmentsList(this.student, this.course);
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +31,16 @@ class TeacherAssignmentsList extends StatelessWidget {
                     ),
                   )
                 : ListView.builder(
-                    itemBuilder: (ctx, index) => TeacherAssignmentCard(
-                        assignmentData: assignments[index]),
+                    itemBuilder: (ctx, index) => StudentAssignmentCard(
+                      key: ValueKey(assignments[index].id),
+                      student: student,
+                      courseCode: course.courseCode,
+                      assignment: assignments[index],
+                    ),
                     itemCount: assignments.length,
                   );
           },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _startAddNewAssignment(context),
-        child: Icon(Icons.add),
       ),
     );
   }
