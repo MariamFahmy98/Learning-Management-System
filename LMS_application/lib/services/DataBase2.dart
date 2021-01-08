@@ -115,8 +115,7 @@ class Database {
 
   AssignmentSubmission _assignmentSubmissionDataFromSnapshot(
       DocumentSnapshot snapshot) {
-    if (!snapshot.exists)
-      return AssignmentSubmission(valid: false);
+    if (!snapshot.exists) return AssignmentSubmission(valid: false);
 
     var snapshotData = snapshot.data();
     return AssignmentSubmission(
@@ -162,8 +161,42 @@ class Database {
         .set({
       'submittedAt': Timestamp.now(),
       'pdfURL': url,
-      'grade': "0",
+      'grade': "",
       'graded': false,
     });
+  }
+
+  List<AssignmentSubmission> _allAssignmentSubmissionsFromSnapshot(
+      QuerySnapshot querySnapshot) {
+    return querySnapshot.docs
+        .map(_assignmentSubmissionDataFromSnapshot)
+        .toList();
+  }
+
+  Stream<List<AssignmentSubmission>> getAllAssignmentSubmissions(
+      String assignmentID) {
+    return FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Assignments')
+        .doc(assignmentID)
+        .collection('Submissions')
+        .snapshots()
+        .map(_allAssignmentSubmissionsFromSnapshot);
+  }
+
+  Future<void> setAssignmentSubmissionGrade({
+    @required String assignmentID,
+    @required String studentID,
+    @required String grade,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Assignments')
+        .doc(assignmentID)
+        .collection('Submissions')
+        .doc(studentID)
+        .set({'graded': true, 'grade': grade}, SetOptions(merge: true));
   }
 }

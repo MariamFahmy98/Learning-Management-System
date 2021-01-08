@@ -40,7 +40,9 @@ class TeacherAssignmentsList extends StatelessWidget {
                   )
                 : ListView.builder(
                     itemBuilder: (ctx, index) => TeacherAssignmentCard(
-                        assignmentData: assignments[index]),
+                      courseCode: course.courseCode,
+                      assignmentData: assignments[index],
+                    ),
                     itemCount: assignments.length,
                   );
           },
