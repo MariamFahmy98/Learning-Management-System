@@ -1,13 +1,18 @@
 class Quiz {
-  String question;
-  int hours;
-  int minutes;
-  int secounds;
-  Quiz({this.question, this.hours, this.minutes, this.secounds});
+  String question, option1, option2, option3, option4, quizId, duration;
 
-  void setQuizDuration({int h, int m, int s}) {
+  Quiz(
+      {this.quizId,
+      this.question,
+      this.option1,
+      this.option2,
+      this.option3,
+      this.option4,
+      this.duration});
+
+/*  void setQuizDuration({int h, int m, int s}) {
     secounds = s;
     hours = h;
     minutes = m;
-  }
+  }*/
 }

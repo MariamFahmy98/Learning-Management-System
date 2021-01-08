@@ -29,9 +29,10 @@ class QuizList extends StatelessWidget {
                 {
                   Future.delayed(
                       Duration(
-                          hours: myQuizes[index].hours,
-                          minutes: myQuizes[index].minutes,
-                          seconds: myQuizes[index].secounds), () {
+                          hours: 1, //myQuizes[index].hours,
+                          minutes: 1, //myQuizes[index].minutes,
+                          seconds: 1), //myQuizes[index].secounds),
+                      () {
                     print('Nice');
                   });
                 }

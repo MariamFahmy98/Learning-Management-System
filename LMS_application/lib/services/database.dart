@@ -1,3 +1,4 @@
+import 'package:LMS_application/models/quiz.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DataBaseServices {
@@ -24,11 +25,33 @@ class DataBaseServices {
     });
   }
 
-  getQuizData(String courseId) async {
-    return await Firestore.instance
+  getQuizesData(String courseId) async {
+    return await FirebaseFirestore.instance
         .collection("Courses")
-        .document(courseId)
+        .doc(courseId)
         .collection("Quizes")
         .snapshots();
   }
+
+  getQuizData(String quizId) async {
+    return await FirebaseFirestore.instance
+        .collection("Quizes")
+        .doc(quizId)
+        .collection("QNA")
+        // ignore: deprecated_member_use
+        .getDocuments();
+  }
+
+  // Quiz _quizDataFromSnapshot(DocumentSnapshot snapshot, String quizID) {
+  //   return Quiz(
+  //     quizId: quizID,
+  //     question: snapshot.data()["question"],
+  //     option1: snapshot.data()["option1"],
+  //     option2: snapshot.data()["option2"],
+  //     option3: snapshot.data()["option3"],
+  //     option4: snapshot.data()["option4"],
+  //     duration: snapshot.data()['Name'],
+  //   );
+  // }
+
 }

@@ -1,4 +1,5 @@
 import 'package:LMS_application/Screens/Student/Assignments/student_assignments_list.dart';
+import 'package:LMS_application/Screens/Student/Quiz/StudentQuiz.dart';
 import 'package:LMS_application/Widgets/CustomeTile.dart';
 import 'package:LMS_application/models/course.dart';
 import 'package:LMS_application/models/student.dart';
@@ -53,8 +54,8 @@ class StudentCourseDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.assignment,
               txt: "Assignments",
-              onTap: () =>
-                  _selectScreen(context, StudentAssignmentsList(student, course)),
+              onTap: () => _selectScreen(
+                  context, StudentAssignmentsList(student, course)),
             ),
             CustomeTile(
               myIcon: Icons.all_inbox,
@@ -64,7 +65,7 @@ class StudentCourseDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.assignment_returned_sharp,
               txt: "Quizzes",
-              onTap: () => {},
+              onTap: () => _selectScreen(context, StudentQuiz(course)),
             ),
           ],
         ),
