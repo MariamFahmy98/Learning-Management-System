@@ -2,6 +2,8 @@ import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
 import 'package:LMS_application/Screens/Teacher/Discussion/TeacherDiscussion.dart';
 import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
 import 'package:LMS_application/models/teacher.dart';
+import 'package:LMS_application/Screens/Teacher/calender/Dcalender.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
@@ -54,6 +56,11 @@ class TeacherDrawer extends StatelessWidget {
               myIcon: Icons.assignment_sharp,
               txt: "My Courses",
               onTap: () => _selectScreen(context, TeacherCourses(teacher)),
+            ),
+            CustomeTile(
+              myIcon: Icons.assignment_sharp,
+              txt: "OfficeHours",
+              onTap: () => _selectScreen(context, OfficeHours()),
             ),
             CustomeTile(
               myIcon: Icons.chat,
