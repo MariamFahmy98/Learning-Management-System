@@ -22,7 +22,7 @@ class QuizTile extends StatelessWidget {
             border: Border.all(
               color: Colors.purple,
             ),
-            borderRadius: BorderRadius.all(Radius.circular(20))),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

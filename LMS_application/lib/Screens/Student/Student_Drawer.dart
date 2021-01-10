@@ -37,7 +37,7 @@ class StudentDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Student/Teacher full name",
+                      student.name,
                       style: TextStyle(
                         fontSize: 20.0,
                       ),

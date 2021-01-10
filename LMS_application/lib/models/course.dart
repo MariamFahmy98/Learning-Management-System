@@ -1,12 +1,12 @@
 import './student.dart';
-import './quiz.dart';
+import 'QuizQuestion.dart';
 
 class Course {
   String courseName;
   String courseCode;
   String courseDescription;
   String courseCreditHours;
-  List<Quiz> quizes;
+  List<QuizQuestion> quizes;
   List<Student> requests;
 
   Course({

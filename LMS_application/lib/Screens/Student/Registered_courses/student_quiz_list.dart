@@ -1,11 +1,11 @@
-import 'package:LMS_application/models/quiz.dart';
+import 'package:LMS_application/models/QuizQuestion.dart';
 import 'package:flutter/material.dart';
 
 class QuizList extends StatelessWidget {
-  final List<Quiz> myQuizes;
+  final List<QuizQuestion> myQuizes;
   QuizList(this.myQuizes);
 
-  void openQuiz(Quiz q, context) {
+  void openQuiz(QuizQuestion q, context) {
     Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
       return;
       //OpenCourse(q);

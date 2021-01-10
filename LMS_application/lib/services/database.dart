@@ -1,4 +1,4 @@
-import 'package:LMS_application/models/quiz.dart';
+import 'package:LMS_application/models/QuizQuestion.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DataBaseServices {
@@ -26,14 +26,14 @@ class DataBaseServices {
   }
 
   getQuizesData(String courseId) async {
-    return await FirebaseFirestore.instance
+    return FirebaseFirestore.instance
         .collection("Courses")
         .doc(courseId)
         .collection("Quizes")
         .snapshots();
   }
 
-  getQuizData(String quizId) async {
+  getQuizQuestionData(String quizId) async {
     return await FirebaseFirestore.instance
         .collection("Quizes")
         .doc(quizId)
@@ -42,16 +42,27 @@ class DataBaseServices {
         .getDocuments();
   }
 
-  // Quiz _quizDataFromSnapshot(DocumentSnapshot snapshot, String quizID) {
-  //   return Quiz(
-  //     quizId: quizID,
-  //     question: snapshot.data()["question"],
-  //     option1: snapshot.data()["option1"],
-  //     option2: snapshot.data()["option2"],
-  //     option3: snapshot.data()["option3"],
-  //     option4: snapshot.data()["option4"],
-  //     duration: snapshot.data()['Name'],
-  //   );
-  // }
+  QuizQuestion getQuestionFromSnapshot(DocumentSnapshot questionSnapshot) {
+    QuizQuestion quizQuestion = new QuizQuestion();
 
+    quizQuestion.question = questionSnapshot.data()["question"];
+
+    List<String> options = [
+      questionSnapshot.data()["option1"],
+      questionSnapshot.data()["option2"],
+      questionSnapshot.data()["option3"],
+      questionSnapshot.data()["option4"],
+    ];
+
+    options.shuffle();
+
+    quizQuestion.option1 = options[0];
+    quizQuestion.option2 = options[1];
+    quizQuestion.option3 = options[2];
+    quizQuestion.option4 = options[3];
+
+    quizQuestion.correctOption = questionSnapshot.data()["option1"];
+
+    return quizQuestion;
+  }
 }

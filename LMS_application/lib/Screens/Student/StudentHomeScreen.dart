@@ -19,7 +19,7 @@ class StudentHomeScreen extends StatelessWidget {
         return Scaffold(
           drawer: StudentDrawer(student),
           appBar: AppBar(
-            title: Text("Flutter Chat"),
+            title: Text("Home Page"),
           ),
           body: Container(),
         );
