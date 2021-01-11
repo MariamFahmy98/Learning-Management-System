@@ -1,6 +1,7 @@
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
 import 'package:LMS_application/Screens/Teacher/Discussion/TeacherDiscussion.dart';
 import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
+import 'package:LMS_application/Screens/auth-screen.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class TeacherDrawer extends StatelessWidget {
   final Teacher teacher;
 
   void _selectScreen(BuildContext ctx, Widget nextScreen) {
+    Navigator.of(ctx).pop();
     Navigator.of(ctx).push(
       MaterialPageRoute(builder: (_) {
         return nextScreen;
@@ -68,7 +70,11 @@ class TeacherDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.logout,
               txt: "LogOut",
-              onTap: () => FirebaseAuth.instance.signOut(),
+              onTap: () {
+                Navigator.of(context).pop();
+                FirebaseAuth.instance.signOut();
+                _selectScreen(context, AuthScreen());
+              },
             ),
           ],
         ),

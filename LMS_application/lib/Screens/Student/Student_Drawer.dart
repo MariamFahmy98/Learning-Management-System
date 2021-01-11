@@ -5,6 +5,7 @@ import 'package:LMS_application/models/student.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
+import '../auth-screen.dart';
 
 class StudentDrawer extends StatelessWidget {
   final Student student;
@@ -12,6 +13,7 @@ class StudentDrawer extends StatelessWidget {
   StudentDrawer(this.student);
 
   void _selectScreen(BuildContext ctx, Widget nextScreen) {
+    Navigator.of(ctx).pop();
     Navigator.of(ctx).push(
       MaterialPageRoute(builder: (_) {
         return nextScreen;
@@ -74,7 +76,11 @@ class StudentDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.logout,
               txt: "LogOut",
-              onTap: () => FirebaseAuth.instance.signOut(),
+              onTap: () {
+                Navigator.of(context).pop();
+                FirebaseAuth.instance.signOut();
+                _selectScreen(context, AuthScreen());
+              },
             ),
           ],
         ),

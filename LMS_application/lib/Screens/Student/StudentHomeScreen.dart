@@ -1,7 +1,7 @@
+import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourses.dart';
 import 'package:LMS_application/models/student.dart';
 import 'package:LMS_application/services/DataBase2.dart';
 import 'package:flutter/material.dart';
-import 'package:LMS_application/Screens/Student/Student_Drawer.dart';
 
 class StudentHomeScreen extends StatelessWidget {
   final String _studentID;
@@ -13,16 +13,10 @@ class StudentHomeScreen extends StatelessWidget {
     return StreamBuilder<Student>(
       stream: Database(_studentID).studentData,
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return CircularProgressIndicator();
+        if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
 
         var student = snapshot.data;
-        return Scaffold(
-          drawer: StudentDrawer(student),
-          appBar: AppBar(
-            title: Text("Flutter Chat"),
-          ),
-          body: Container(),
-        );
+        return StudentCourses(student);
       },
     );
   }
