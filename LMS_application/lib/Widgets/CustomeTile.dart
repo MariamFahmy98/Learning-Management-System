@@ -4,6 +4,7 @@ import 'package:LMS_application/Screens/Student/Available_courses/students_avala
 import 'package:LMS_application/Screens/Student/Discussion/StudentDiscussion.dart';
 import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
 import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourses.dart';
+import 'package:LMS_application/Screens/Student/info.dart';
 import 'package:LMS_application/Screens/Teacher/Announcement/TeacherAnnouncements.dart';
 import 'package:LMS_application/Screens/Teacher/Assignments/TeacherAssignments.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
@@ -46,7 +47,7 @@ class _CustomeTileState extends State<CustomeTile> {
       'My Courses': StudentCourses(widget.user),
       'Discussion': StudentDiscussionForm(),
       'Available Courses': StudentAvalabileCourse(),
-      //'Info' : Info(),
+      'Info': StudentInfo(),
       'Library': SLibrary(),
       'LogOut': () => FirebaseAuth.instance.signOut(),
     };
