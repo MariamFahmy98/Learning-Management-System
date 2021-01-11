@@ -1,28 +1,52 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class ReqBooks extends StatefulWidget {
+class AddMaterials extends StatefulWidget {
   @override
-  _ReqBooksState createState() => _ReqBooksState();
+  _AddMaterialsState createState() => _AddMaterialsState();
 }
 
-class _ReqBooksState extends State<ReqBooks> {
-  TextEditingController _bookController, _rController, _yearController;
+class _AddMaterialsState extends State<AddMaterials> {
+  TextEditingController _name, _des, _link;
+  String _typeSelected = '';
   DatabaseReference _ref;
 
   @override
   void initState() {
     super.initState();
-    _bookController = TextEditingController();
-    _rController = TextEditingController();
-    _yearController = TextEditingController();
-    _ref = FirebaseDatabase.instance.reference().child('booksReq');
+    _name = TextEditingController();
+    _des = TextEditingController();
+    _link = TextEditingController();
+    _ref = FirebaseDatabase.instance.reference().child('Materials');
+  }
+
+  Widget _buildBookType(String type) {
+    return InkWell(
+        child: Container(
+          height: 40,
+          width: 90,
+          decoration: BoxDecoration(
+            color: _typeSelected == type ? Colors.red : Colors.blueAccent,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Center(
+            child: Text(
+              type,
+              style: TextStyle(fontSize: 18, color: Colors.white),
+            ),
+          ),
+        ),
+        onTap: () {
+          setState(() {
+            _typeSelected = type;
+          });
+        });
   }
 
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Request Books'),
+          title: Text('Add Materials'),
         ),
         body: Container(
           margin: EdgeInsets.all(15),
@@ -30,11 +54,11 @@ class _ReqBooksState extends State<ReqBooks> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
-                controller: _bookController,
+                controller: _name,
                 decoration: InputDecoration(
-                  hintText: 'Enter Book Name',
+                  hintText: 'Enter Material Name',
                   prefixIcon: Icon(
-                    Icons.book,
+                    Icons.list_alt_sharp,
                     size: 30,
                   ),
                   fillColor: Colors.blue[50],
@@ -44,11 +68,11 @@ class _ReqBooksState extends State<ReqBooks> {
               ),
               SizedBox(height: 15),
               TextFormField(
-                controller: _yearController,
+                controller: _des,
                 decoration: InputDecoration(
-                  hintText: 'Enter Release year',
+                  hintText: 'Enter Descritpion',
                   prefixIcon: Icon(
-                    Icons.calendar_today,
+                    Icons.border_color,
                     size: 30,
                   ),
                   fillColor: Colors.blue[50],
@@ -58,11 +82,11 @@ class _ReqBooksState extends State<ReqBooks> {
               ),
               SizedBox(height: 15),
               TextFormField(
-                controller: _rController,
+                controller: _link,
                 decoration: InputDecoration(
-                  hintText: 'Reasons to Borrow',
+                  hintText: 'Enter Link',
                   prefixIcon: Icon(
-                    Icons.question_answer,
+                    Icons.link,
                     size: 30,
                   ),
                   fillColor: Colors.blue[50],
@@ -70,7 +94,6 @@ class _ReqBooksState extends State<ReqBooks> {
                   contentPadding: EdgeInsets.all(15),
                 ),
               ),
-              SizedBox(height: 15),
               SizedBox(
                 height: 25,
               ),
@@ -79,7 +102,7 @@ class _ReqBooksState extends State<ReqBooks> {
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: RaisedButton(
                   child: Text(
-                    'Send Request',
+                    'Add Materials',
                     style: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
@@ -87,7 +110,7 @@ class _ReqBooksState extends State<ReqBooks> {
                     ),
                   ),
                   onPressed: () {
-                    addRequest();
+                    addBook();
                   },
                   color: Colors.blue,
                 ),
@@ -97,16 +120,17 @@ class _ReqBooksState extends State<ReqBooks> {
         ));
   }
 
-  void addRequest() {
-    String bookname = _bookController.text;
-    String releaseYear = _yearController.text;
-    String reason = _rController.text;
-    Map<String, String> req = {
-      'bookname': bookname,
-      'year': releaseYear,
-      'reason': reason,
+  void addBook() {
+    String name = _name.text;
+    String des = _des.text;
+    String link = _link.text;
+
+    Map<String, String> material = {
+      'name': name,
+      'description': des,
+      'link': link,
     };
-    _ref.push().set(req).then((value) {
+    _ref.push().set(material).then((value) {
       Navigator.pop(context);
     });
   }

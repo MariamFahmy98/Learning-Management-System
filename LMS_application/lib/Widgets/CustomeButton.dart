@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomeButton extends StatelessWidget {
   final String title;
-  BuildContext context;
+  final BuildContext context;
   CustomeButton({this.title, this.context});
 
   @override
