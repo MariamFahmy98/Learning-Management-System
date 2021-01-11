@@ -28,6 +28,7 @@ dependencies:
   http: ^0.12.2
   path_provider: ^1.6.24
   intl: ^0.16.1
+  timeago: ^2.0.29 
 
   # Firebase Dependancies
   firebase_core: ^0.5.3
