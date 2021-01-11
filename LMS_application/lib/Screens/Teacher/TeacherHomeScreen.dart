@@ -13,9 +13,9 @@ class TeacherHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: TeacherDrawer(() => {}),
-      appBar: AppBar(
+      /* appBar: AppBar(
         title: Text("Flutter Chat"),
-      ),
+      ), */
       body: Container(
         child: StreamBuilder<Teacher>(
             stream: Database(teacherId).teacherData,
