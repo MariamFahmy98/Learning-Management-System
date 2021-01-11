@@ -52,6 +52,7 @@ class Database {
       courseCreditHours: snapshot.data()['Credit Hours'],
       courseDescription: snapshot.data()['Description'],
       courseName: snapshot.data()['Name'],
+      requests: snapshot.data()['Requests'].cast<String>().toList(),
     );
   }
 
@@ -96,10 +97,12 @@ class Database {
     for (int i = 0; i < snapshots.length; i++) {
       var snapshotData = snapshots[i].data();
       courses[i] = Course(
-          courseCode: snapshots[i].id,
-          courseCreditHours: snapshotData['Credit Hours'],
-          courseDescription: snapshotData['Description'],
-          courseName: snapshotData['Name']);
+        courseCode: snapshots[i].id,
+        courseCreditHours: snapshotData['Credit Hours'],
+        courseDescription: snapshotData['Description'],
+        courseName: snapshotData['Name'],
+        requests: snapshotData['Requests'].cast<String>().toList(),
+      );
     }
     return courses;
   }
@@ -109,6 +112,14 @@ class Database {
         .collection('Courses')
         .snapshots()
         .map(_courseAllDataFromSnapshot);
+  }
+
+  Future<void> requestCourse(String studentId, Course course) async {
+    course.requests.add(studentId);
+    await FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .set({'Requests': course.requests}, SetOptions(merge: true));
   }
 
 /////////////////////////////////////////////////////////////////////////////

@@ -31,7 +31,10 @@ class AllCoursesList extends StatelessWidget {
                     ),
                   )
                 : ListView.builder(
-                    itemBuilder: (ctx, index) => CourseCard(courses[index]),
+                    itemBuilder: (ctx, index) => CourseCard(
+                      course: courses[index],
+                      student: student,
+                    ),
                     itemCount: courses.length,
                   );
           },

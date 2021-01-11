@@ -1,9 +1,12 @@
 import 'package:LMS_application/models/course.dart';
+import 'package:LMS_application/models/student.dart';
+import 'package:LMS_application/services/DataBase2.dart';
 import 'package:flutter/material.dart';
 
 class CourseCard extends StatelessWidget {
   final Course course;
-  CourseCard(this.course);
+  final Student student;
+  CourseCard({this.course, this.student});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +42,22 @@ class CourseCard extends StatelessWidget {
                 Text(
                   'Credit hours: ' + course.courseCreditHours + 'h',
                   style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                FlatButton(
+                  child: Text(
+                    'Request Course',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  color: Theme.of(context).accentColor,
+                  onPressed: () {
+                    Database(course.courseCode)
+                        .requestCourse(student.id, course);
+                  },
                 ),
               ],
             ),
