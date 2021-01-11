@@ -19,40 +19,6 @@ class _NewMaterialState extends State<NewMaterial> {
   //DateTime _selectedDeadline;
   var _isLoading = false;
 
-  /*_pickFile() async {
-    FilePicker.getFile(
-      type: FileType.custom,
-      allowedExtensions: ['pdf'],
-    ).then((value) => setState(() => _pdfFile = value));
-  }*/
-/*
-  void _presentDateTimePricker() {
-    showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime.now(),
-            lastDate: DateTime(DateTime.now().year + 1))
-        .then((pickedDate) {
-      if (pickedDate == null) return;
-
-      showTimePicker(context: context, initialTime: TimeOfDay.now()).then(
-        (pickedTime) {
-          if (pickedDate == null) return;
-
-          setState(() {
-            _selectedDeadline = DateTime(
-              pickedDate.year,
-              pickedDate.month,
-              pickedDate.day,
-              pickedTime.hour,
-              pickedTime.minute,
-            );
-          });
-        },
-      );
-    });
-  }*/
-
   void _addMaterial() async {
     if (_linkController.text.isEmpty) return;
     final enteredTitle = _titleController.text;
