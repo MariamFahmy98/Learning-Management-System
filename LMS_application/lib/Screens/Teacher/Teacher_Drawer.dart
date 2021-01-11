@@ -1,12 +1,12 @@
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
 import 'package:LMS_application/Screens/Teacher/Discussion/TeacherDiscussion.dart';
 import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
+import 'package:LMS_application/models/course.dart';
 import 'package:LMS_application/models/teacher.dart';
-import 'package:LMS_application/Screens/Teacher/calender/Dcalender.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
+import 'Office_Hours/officehours.dart';
 
 class TeacherDrawer extends StatelessWidget {
   final Teacher teacher;
@@ -58,20 +58,20 @@ class TeacherDrawer extends StatelessWidget {
               onTap: () => _selectScreen(context, TeacherCourses(teacher)),
             ),
             CustomeTile(
-              myIcon: Icons.assignment_sharp,
-              txt: "OfficeHours",
-              onTap: () => _selectScreen(context, OfficeHours()),
-            ),
-            CustomeTile(
               myIcon: Icons.chat,
               txt: "Discussion",
               onTap: () => _selectScreen(context, TeacherDiscussionForm()),
             ),
             CustomeTile(
-              myIcon: Icons.library_books,
+              myIcon: Icons.auto_stories,
               txt: "Library",
               onTap: () => _selectScreen(context, Library()),
             ),
+            /* CustomeTile(
+              myIcon: Icons.add_to_drive,
+              txt: "Materials",
+              onTap: () => _selectScreen(context, Mat()),
+            ),*/
             CustomeTile(
               myIcon: Icons.logout,
               txt: "LogOut",

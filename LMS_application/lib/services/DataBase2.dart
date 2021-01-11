@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:LMS_application/models/Assignmet.dart';
 import 'package:LMS_application/models/assignment_submission.dart';
+import 'package:LMS_application/models/material.dart';
 import 'package:LMS_application/models/course.dart';
+import 'package:LMS_application/models/officehours.dart';
 import 'package:LMS_application/models/student.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -89,6 +91,77 @@ class Database {
         .map(_assignmentDataFromSnapshot);
   }
 
+  List<Officehour> _officehourDataFromSnapshot(QuerySnapshot querySnapshot) {
+    var snapshots = querySnapshot.docs;
+    List<Officehour> officehours = List(snapshots.length);
+    for (int i = 0; i < snapshots.length; i++) {
+      var snapshotData = snapshots[i].data();
+      officehours[i] = Officehour(
+        place: snapshotData['place'],
+        name: snapshotData['name'],
+        appointment: snapshotData['appointment'].toDate(),
+      );
+    }
+
+    return officehours;
+  }
+
+  Stream<List<Officehour>> get officehoursData {
+    return FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Officehours')
+        .snapshots()
+        .map(_officehourDataFromSnapshot);
+  }
+
+  List<Materiala> _materialDataFromSnapshot(QuerySnapshot querySnapshot) {
+    var snapshots = querySnapshot.docs;
+    List<Materiala> materials = List(snapshots.length);
+    for (int i = 0; i < snapshots.length; i++) {
+      var snapshotData = snapshots[i].data();
+      materials[i] = Materiala(
+        title: snapshotData['title'],
+        link: snapshotData['link'],
+      );
+    }
+
+    return materials;
+  }
+
+  Stream<List<Materiala>> get materialsData {
+    return FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Materials')
+        .snapshots()
+        .map(_materialDataFromSnapshot);
+  }
+
+  Future<void> uploadMaterial({
+    @required String title,
+    @required String link,
+    //@required DateTime deadline,
+    //@required File pdfFile,
+  }) async {
+    //var filename = documentID + title + pdfFile.path.split("/").last;
+    //final ref = FirebaseStorage.instance.ref().child(filename);
+
+    //await ref.putFile(pdfFile).whenComplete(() => print('Upload Complete.'));
+    //final url = await ref.getDownloadURL();
+
+    await FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Materials')
+        .add({
+      'title': title,
+      'link': link,
+      //'deadline': Timestamp.fromDate(deadline),
+      //'pdfURL': url,
+    });
+  }
+
   Future<void> uploadAssignment({
     @required String title,
     @required String grade,
@@ -113,12 +186,30 @@ class Database {
     });
   }
 
+  Future<void> uploadOfficehour({
+    @required String place,
+    @required String name,
+    @required DateTime appointment,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Officehours')
+        .add({
+      'place': place,
+      'name': name,
+      'appointment': Timestamp.fromDate(appointment),
+    });
+  }
+
   AssignmentSubmission _assignmentSubmissionDataFromSnapshot(
       DocumentSnapshot snapshot) {
-    if (!snapshot.exists)
-      return AssignmentSubmission(valid: false);
+    if (!snapshot.exists) return AssignmentSubmission(valid: false);
 
     var snapshotData = snapshot.data();
+    var ab = (snapshot.data()["pdfURL"]);
+    ab.toUri(ab);
+
     return AssignmentSubmission(
       valid: true,
       studentID: snapshot.id,
@@ -162,8 +253,42 @@ class Database {
         .set({
       'submittedAt': Timestamp.now(),
       'pdfURL': url,
-      'grade': "0",
+      'grade': "",
       'graded': false,
     });
+  }
+
+  List<AssignmentSubmission> _allAssignmentSubmissionsFromSnapshot(
+      QuerySnapshot querySnapshot) {
+    return querySnapshot.docs
+        .map(_assignmentSubmissionDataFromSnapshot)
+        .toList();
+  }
+
+  Stream<List<AssignmentSubmission>> getAllAssignmentSubmissions(
+      String assignmentID) {
+    return FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Assignments')
+        .doc(assignmentID)
+        .collection('Submissions')
+        .snapshots()
+        .map(_allAssignmentSubmissionsFromSnapshot);
+  }
+
+  Future<void> setAssignmentSubmissionGrade({
+    @required String assignmentID,
+    @required String studentID,
+    @required String grade,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .collection('Assignments')
+        .doc(assignmentID)
+        .collection('Submissions')
+        .doc(studentID)
+        .set({'graded': true, 'grade': grade}, SetOptions(merge: true));
   }
 }

@@ -1,9 +1,8 @@
 import 'package:LMS_application/Screens/Student/Discussion/StudentDiscussion.dart';
 import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
+import 'package:LMS_application/Screens/Student/Materials/studentMaterial.dart';
 import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourses.dart';
 import 'package:LMS_application/models/student.dart';
-import 'package:LMS_application/Screens/Student/Office_Hours/Doctor_Office_Hours.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
@@ -67,11 +66,6 @@ class StudentDrawer extends StatelessWidget {
               myIcon: Icons.chat,
               txt: "Discussion",
               onTap: () => _selectScreen(context, StudentDiscussionForm()),
-            ),
-            CustomeTile(
-              myIcon: Icons.chat,
-              txt: "OfficeHours",
-              onTap: () => _selectScreen(context, DoctorOfficeHours()),
             ),
             CustomeTile(
               myIcon: Icons.library_books,
