@@ -1,6 +1,7 @@
 import 'package:LMS_application/Screens/Student/Discussion/StudentDiscussion.dart';
 import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
 import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourses.dart';
+import 'package:LMS_application/Screens/Student/Available_courses/AllCoursesList.dart';
 import 'package:LMS_application/models/student.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class StudentDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.assignment_turned_in,
               txt: "Available Courses",
-              onTap: () => {},
+              onTap: () => _selectScreen(context, AllCoursesList(student)),
             ),
             CustomeTile(
               myIcon: Icons.chat,

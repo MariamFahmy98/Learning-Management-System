@@ -89,6 +89,29 @@ class Database {
         .map(_assignmentDataFromSnapshot);
   }
 
+////////////////////////////////////////////////////////////////////////////////
+  List<Course> _courseAllDataFromSnapshot(QuerySnapshot querySnapshot) {
+    var snapshots = querySnapshot.docs;
+    List<Course> courses = List(snapshots.length);
+    for (int i = 0; i < snapshots.length; i++) {
+      var snapshotData = snapshots[i].data();
+      courses[i] = Course(
+          courseCode: snapshots[i].id,
+          courseCreditHours: snapshotData['Credit Hours'],
+          courseDescription: snapshotData['Description'],
+          courseName: snapshotData['Name']);
+    }
+    return courses;
+  }
+
+  Stream<List<Course>> get allCoursesData {
+    return FirebaseFirestore.instance
+        .collection('Courses')
+        .snapshots()
+        .map(_courseAllDataFromSnapshot);
+  }
+
+/////////////////////////////////////////////////////////////////////////////
   Future<void> uploadAssignment({
     @required String title,
     @required String grade,
@@ -115,8 +138,7 @@ class Database {
 
   AssignmentSubmission _assignmentSubmissionDataFromSnapshot(
       DocumentSnapshot snapshot) {
-    if (!snapshot.exists)
-      return AssignmentSubmission(valid: false);
+    if (!snapshot.exists) return AssignmentSubmission(valid: false);
 
     var snapshotData = snapshot.data();
     return AssignmentSubmission(
