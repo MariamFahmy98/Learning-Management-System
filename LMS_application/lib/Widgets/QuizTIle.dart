@@ -1,19 +1,44 @@
-import 'package:LMS_application/Screens/Student/Quiz/PlayQuiz.dart';
+import 'package:LMS_application/Screens/Student/Quiz/PlayQuizStudent.dart';
+import 'package:LMS_application/Screens/Teacher/Quiz/PlayQuizTeacher.dart';
+import 'package:LMS_application/models/course.dart';
 import 'package:flutter/material.dart';
 
 class QuizTile extends StatelessWidget {
   final String title;
   final String description;
   final String quizId;
+  final bool isTeacher;
+  final Course course;
 
-  QuizTile({this.title, this.description, this.quizId});
+  QuizTile(
+      {this.title, this.description, this.quizId, this.isTeacher, this.course});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => PlayQuiz(quizId)));
-      },
+      onTap: isTeacher
+          ? () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PlayQuizTeacher(
+                    quizId: quizId,
+                    quizTitle: title,
+                  ),
+                ),
+              );
+            }
+          : () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PlayQuizStudent(
+                    quizId: quizId,
+                    quizTitle: title,
+                    course: course,
+                  ),
+                ),
+              );
+            },
       child: Container(
         margin: EdgeInsets.fromLTRB(0, 8, 0, 8),
         height: 100,

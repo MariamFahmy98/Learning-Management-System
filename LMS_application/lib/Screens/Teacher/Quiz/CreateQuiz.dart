@@ -54,7 +54,7 @@ class _CreateQuizeState extends State<CreateQuize> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple,
-        title: Text("كورسات مجنونة"),
+        title: Text("New quiz"),
       ),
       body: _isLoading
           ? Container(

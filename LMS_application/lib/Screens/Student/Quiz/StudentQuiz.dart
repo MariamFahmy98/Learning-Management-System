@@ -41,6 +41,8 @@ class _StudentQuizState extends State<StudentQuiz> {
                       title: snapshot.data.docs[index].data()["quizTitle"],
                       description: snapshot.data.docs[index].data()["quizDes"],
                       quizId: snapshot.data.docs[index].data()["quizId"],
+                      isTeacher: false,
+                      course: widget.course,
                     );
                   });
         },
@@ -69,16 +71,6 @@ class _StudentQuizState extends State<StudentQuiz> {
             "Quizes"),
       ),
       body: quizList(),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => CreateQuize(widget.course.courseCode)),
-          );
-        },
-      ),
     );
   }
 }

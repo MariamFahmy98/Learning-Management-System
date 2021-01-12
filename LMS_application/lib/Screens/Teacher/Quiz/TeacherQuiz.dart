@@ -41,6 +41,8 @@ class _TeacherQuizState extends State<TeacherQuiz> {
                       title: snapshot.data.docs[index].data()["quizTitle"],
                       description: snapshot.data.docs[index].data()["quizDes"],
                       quizId: snapshot.data.docs[index].data()["quizId"],
+                      course: widget.course,
+                      isTeacher: true,
                     );
                   });
         },

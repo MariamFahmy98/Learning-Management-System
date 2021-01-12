@@ -1,6 +1,4 @@
 import 'package:LMS_application/Screens/Student/Quiz/OptionTile.dart';
-import 'package:LMS_application/Screens/Teacher/Discussion/utils.dart';
-import 'package:LMS_application/Widgets/CustomeButton.dart';
 import 'package:LMS_application/models/QuizQuestion.dart';
 import 'package:flutter/material.dart';
 

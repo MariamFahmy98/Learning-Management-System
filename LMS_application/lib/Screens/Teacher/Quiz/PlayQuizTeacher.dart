@@ -1,18 +1,20 @@
 import 'package:LMS_application/Screens/Student/Quiz/QuestionTile.dart';
 import 'package:LMS_application/Screens/Student/Quiz/Result.dart';
 import 'package:LMS_application/Widgets/CustomeButton.dart';
+import 'package:LMS_application/Widgets/QuizTIle.dart';
 import 'package:LMS_application/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class PlayQuiz extends StatefulWidget {
+class PlayQuizTeacher extends StatefulWidget {
   final String quizId;
-  PlayQuiz(this.quizId);
+  final String quizTitle;
+  PlayQuizTeacher({this.quizId, this.quizTitle});
   @override
-  _PlayQuizState createState() => _PlayQuizState();
+  _PlayQuizTeacherState createState() => _PlayQuizTeacherState();
 }
 
-class _PlayQuizState extends State<PlayQuiz> {
+class _PlayQuizTeacherState extends State<PlayQuizTeacher> {
   bool isLoading = true;
   DataBaseServices dataBaseServices = new DataBaseServices();
   QuerySnapshot questionSnapshot;
@@ -35,7 +37,7 @@ class _PlayQuizState extends State<PlayQuiz> {
         brightness: Brightness.light,
         title: Text(
             //widget.course.courseName +
-            "Empty now"),
+            "${widget.quizTitle}"),
       ),
       body: isLoading
           ? Container(
@@ -66,18 +68,6 @@ class _PlayQuizState extends State<PlayQuiz> {
                                       questionSnapshot.documents[index]),
                                   index);
                             }),
-                    SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return Result();
-                        }));
-                      },
-                      child: CustomeButton(
-                        context: context,
-                        title: "Submit the Quiz",
-                      ),
-                    ),
                     SizedBox(height: 20),
                   ],
                 ),
