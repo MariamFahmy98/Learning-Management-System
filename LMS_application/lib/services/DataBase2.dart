@@ -115,7 +115,9 @@ class Database {
   }
 
   Future<void> requestCourse(String studentId, Course course) async {
-    course.requests.add(studentId);
+    if (!course.requests.contains(studentId)) {
+      course.requests.add(studentId);
+    }
     await FirebaseFirestore.instance
         .collection('Courses')
         .doc(documentID)
