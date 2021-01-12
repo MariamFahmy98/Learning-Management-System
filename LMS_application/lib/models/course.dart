@@ -9,7 +9,12 @@ class Course {
   List<Quiz> quizes;
   List<Student> requests;
 
-  Course(this.courseCode);
+  Course({
+    this.courseCode,
+    this.courseCreditHours,
+    this.courseDescription,
+    this.courseName,
+  });
 
   void studentRequest(Student input) {
     requests = [input];
