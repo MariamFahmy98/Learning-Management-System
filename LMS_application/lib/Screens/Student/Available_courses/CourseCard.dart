@@ -55,8 +55,10 @@ class CourseCard extends StatelessWidget {
                   ),
                   color: Theme.of(context).accentColor,
                   onPressed: () {
-                    Database(course.courseCode)
-                        .requestCourse(student.id, course);
+                    if (!course.requests.contains(student.id)) {
+                      Database(course.courseCode)
+                          .requestCourse(student.id, course);
+                    }
                   },
                 ),
               ],

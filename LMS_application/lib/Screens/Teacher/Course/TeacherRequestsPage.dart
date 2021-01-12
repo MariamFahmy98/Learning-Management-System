@@ -3,17 +3,31 @@ import 'package:LMS_application/models/student.dart';
 import 'package:LMS_application/services/DataBase2.dart';
 import 'package:flutter/material.dart';
 
-class TeacherRequestsPage extends StatelessWidget {
+class TeacherRequestsPage extends StatefulWidget {
   final Course course;
   TeacherRequestsPage(this.course);
+
+  @override
+  _TeacherRequestsPageState createState() => _TeacherRequestsPageState(course);
+}
+
+class _TeacherRequestsPageState extends State<TeacherRequestsPage> {
+  final Course course;
+  _TeacherRequestsPageState(this.course);
+
+  void _reloadRequestList(String studentId) {
+    setState(() {
+      course.requests.removeWhere((item) => item == studentId);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(course.courseCode + ' Requests'),
+        title: Text(widget.course.courseCode + ' Requests'),
       ),
-      body: course.requests.length == 0
+      body: widget.course.requests.length == 0
           ? Text(
               'No Requests found for this Course.',
               style: TextStyle(
@@ -26,7 +40,8 @@ class TeacherRequestsPage extends StatelessWidget {
               child: ListView.builder(
                 itemBuilder: (ctx, index) {
                   return StreamBuilder<Object>(
-                      stream: Database(course.requests[index]).studentData,
+                      stream:
+                          Database(widget.course.requests[index]).studentData,
                       builder: (context, snapshot) {
                         if (!snapshot.hasData)
                           return CircularProgressIndicator();
@@ -48,9 +63,9 @@ class TeacherRequestsPage extends StatelessWidget {
                                 ),
                                 Text(student.name +
                                     ' has requested to join ' +
-                                    course.courseName +
+                                    widget.course.courseName +
                                     ' (' +
-                                    course.courseCode +
+                                    widget.course.courseCode +
                                     ') course.'),
                                 Row(
                                   mainAxisAlignment:
@@ -64,7 +79,14 @@ class TeacherRequestsPage extends StatelessWidget {
                                         ),
                                       ),
                                       color: Theme.of(context).accentColor,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Database(student.id).addStudentToCourse(
+                                            student, widget.course);
+                                        Database(widget.course.courseCode)
+                                            .remveStudentFromRequestsList(
+                                                student.id, widget.course);
+                                        _reloadRequestList(student.id);
+                                      },
                                     ),
                                     FlatButton(
                                       child: Text(
@@ -74,7 +96,12 @@ class TeacherRequestsPage extends StatelessWidget {
                                         ),
                                       ),
                                       color: Theme.of(context).accentColor,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Database(widget.course.courseCode)
+                                            .remveStudentFromRequestsList(
+                                                student.id, widget.course);
+                                        _reloadRequestList(student.id);
+                                      },
                                     ),
                                   ],
                                 )
@@ -82,7 +109,7 @@ class TeacherRequestsPage extends StatelessWidget {
                             ));
                       });
                 },
-                itemCount: course.requests.length,
+                itemCount: widget.course.requests.length,
               ),
             ),
     );

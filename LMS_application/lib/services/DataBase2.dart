@@ -115,13 +115,29 @@ class Database {
   }
 
   Future<void> requestCourse(String studentId, Course course) async {
-    if (!course.requests.contains(studentId)) {
-      course.requests.add(studentId);
-    }
+    course.requests.add(studentId);
+
     await FirebaseFirestore.instance
         .collection('Courses')
         .doc(documentID)
         .set({'Requests': course.requests}, SetOptions(merge: true));
+  }
+
+  Future<void> remveStudentFromRequestsList(
+      String studentId, Course course) async {
+    course.requests.removeWhere((item) => item == studentId);
+    await FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .set({'Requests': course.requests}, SetOptions(merge: true));
+  }
+
+  Future<void> addStudentToCourse(Student student, Course course) async {
+    student.courses.add(course.courseCode);
+    await FirebaseFirestore.instance
+        .collection('Students')
+        .doc(documentID)
+        .set({'Courses': student.courses}, SetOptions(merge: true));
   }
 
 /////////////////////////////////////////////////////////////////////////////
