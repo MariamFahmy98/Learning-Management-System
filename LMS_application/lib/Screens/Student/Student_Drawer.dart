@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
 import '../auth-screen.dart';
 import './Info/info.dart';
+import 'package:LMS_application/Screens/Student/Available_courses/AllCoursesList.dart';
+
 class StudentDrawer extends StatelessWidget {
   final Student student;
 
@@ -63,7 +65,7 @@ class StudentDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.assignment_turned_in,
               txt: "Available Courses",
-              onTap: () => {},
+              onTap: () => _selectScreen(context, AllCoursesList(student)),
             ),
             CustomeTile(
               myIcon: Icons.chat,

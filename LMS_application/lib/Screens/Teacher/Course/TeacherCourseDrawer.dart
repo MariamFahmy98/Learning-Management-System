@@ -5,6 +5,7 @@ import 'package:LMS_application/Screens/Teacher/Office_Hours/officehours.dart';
 import 'package:LMS_application/Widgets/CustomeTile.dart';
 import 'package:LMS_application/models/course.dart';
 import 'package:flutter/material.dart';
+import 'package:LMS_application/Screens/Teacher/Course/TeacherRequestsPage.dart';
 
 class TeacherCourseDrawer extends StatelessWidget {
   final Course course;
@@ -75,8 +76,8 @@ class TeacherCourseDrawer extends StatelessWidget {
             ),
             CustomeTile(
               myIcon: Icons.request_page_rounded,
-              txt: "Requests",
-              onTap: () => {},
+              txt: 'Requests   '+'(${course.requests.length})',
+              onTap: () => _selectScreen(context, TeacherRequestsPage(course)),
             ),
           ],
         ),

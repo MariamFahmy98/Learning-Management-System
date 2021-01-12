@@ -11,6 +11,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
+
+
 class Database {
   String documentID;
 
@@ -54,6 +56,7 @@ class Database {
       courseCreditHours: snapshot.data()['Credit Hours'],
       courseDescription: snapshot.data()['Description'],
       courseName: snapshot.data()['Name'],
+      requests: snapshot.data()['Requests'].cast<String>().toList(),
     );
   }
 
@@ -90,6 +93,58 @@ class Database {
         .snapshots()
         .map(_assignmentDataFromSnapshot);
   }
+
+////////////////////////////////////////////////////////////////////////////////
+  List<Course> _courseAllDataFromSnapshot(QuerySnapshot querySnapshot) {
+    var snapshots = querySnapshot.docs;
+    List<Course> courses = List(snapshots.length);
+    for (int i = 0; i < snapshots.length; i++) {
+      var snapshotData = snapshots[i].data();
+      courses[i] = Course(
+        courseCode: snapshots[i].id,
+        courseCreditHours: snapshotData['Credit Hours'],
+        courseDescription: snapshotData['Description'],
+        courseName: snapshotData['Name'],
+        requests: snapshotData['Requests'].cast<String>().toList(),
+      );
+    }
+    return courses;
+  }
+
+  Stream<List<Course>> get allCoursesData {
+    return FirebaseFirestore.instance
+        .collection('Courses')
+        .snapshots()
+        .map(_courseAllDataFromSnapshot);
+  }
+
+  Future<void> requestCourse(String studentId, Course course) async {
+    course.requests.add(studentId);
+
+    await FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .set({'Requests': course.requests}, SetOptions(merge: true));
+  }
+
+  Future<void> remveStudentFromRequestsList(
+      String studentId, Course course) async {
+    course.requests.removeWhere((item) => item == studentId);
+    await FirebaseFirestore.instance
+        .collection('Courses')
+        .doc(documentID)
+        .set({'Requests': course.requests}, SetOptions(merge: true));
+  }
+
+  Future<void> addStudentToCourse(Student student, Course course) async {
+    student.courses.add(course.courseCode);
+    await FirebaseFirestore.instance
+        .collection('Students')
+        .doc(documentID)
+        .set({'Courses': student.courses}, SetOptions(merge: true));
+  }
+
+/////////////////////////////////////////////////////////////////////////////
 
   List<Officehour> _officehourDataFromSnapshot(QuerySnapshot querySnapshot) {
     var snapshots = querySnapshot.docs;
@@ -292,3 +347,4 @@ class Database {
         .set({'graded': true, 'grade': grade}, SetOptions(merge: true));
   }
 }
+
