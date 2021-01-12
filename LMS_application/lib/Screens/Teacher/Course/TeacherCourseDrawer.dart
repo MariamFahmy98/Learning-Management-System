@@ -67,7 +67,7 @@ class TeacherCourseDrawer extends StatelessWidget {
             ),
             CustomeTile(
               myIcon: Icons.request_page_rounded,
-              txt: "Requests",
+              txt: "Requests   " + '(${course.requests.length})',
               onTap: () => _selectScreen(context, TeacherRequestsPage(course)),
             ),
           ],
