@@ -1,24 +1,26 @@
+import 'package:LMS_application/models/course.dart';
 import 'package:flutter/material.dart';
 import 'package:LMS_application/Widgets/postCard.dart';
 import './Add_New_Announcement.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TeacherAnnouncements extends StatefulWidget {
-  final String teacherID;
-  TeacherAnnouncements(this.teacherID);
+  final Course course;
+  TeacherAnnouncements(this.course);
 
   @override
   _TeacherAnnouncementsState createState() => _TeacherAnnouncementsState();
 }
 
 class _TeacherAnnouncementsState extends State<TeacherAnnouncements> {
-  void startAddNewPost(BuildContext ctx) {
+  void startAddNewPost(BuildContext ctx, Course course) {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: AddNewPost(),
+          child: AddNewPost(course),
           behavior: HitTestBehavior.opaque,
         );
       },
@@ -27,14 +29,16 @@ class _TeacherAnnouncementsState extends State<TeacherAnnouncements> {
 
   @override
   Widget build(BuildContext context) {
+    final String collectionPath =
+        '/Courses/ ${widget.course.courseCode} /Announcements';
+    var user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple,
-        title: Text("Announcements"),
+        title: Text('${widget.course.courseCode} - Announcements'),
       ),
       body: StreamBuilder(
-          stream: Firestore.instance
-              .collection('/Teachers/PostDocument/Posts')
+          stream: FirebaseFirestore.instance
+              .collection(collectionPath)
               .orderBy('postTime', descending: true)
               .snapshots(),
           builder: (context, snapshot) {
@@ -55,13 +59,13 @@ class _TeacherAnnouncementsState extends State<TeacherAnnouncements> {
                     final String body = getPostsNum[index]['body'];
                     Timestamp pTime = getPostsNum[index]['postTime'];
                     DateTime postTime = pTime.toDate();
-                    return PostCard(title, body, postTime, widget.teacherID);
+                    return PostCard(title, body, postTime, user);
                   });
             } else {
               return Center(
                 child: FittedBox(
                   fit: BoxFit.cover,
-                  child: Image.asset('assets/images/announcements.png'),
+                  child: Image.asset('images/announcements.png'),
                 ),
               );
             }
@@ -69,7 +73,7 @@ class _TeacherAnnouncementsState extends State<TeacherAnnouncements> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          startAddNewPost(context);
+          startAddNewPost(context, widget.course);
         },
       ),
     );

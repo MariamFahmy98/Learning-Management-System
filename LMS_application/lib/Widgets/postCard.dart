@@ -10,7 +10,7 @@ class PostCard extends StatelessWidget {
   final String postTitle;
   final String postBody;
   final DateTime postTime;
-  final String teacherID;
+  var teacherID;
   PostCard(this.postTitle, this.postBody, this.postTime, this.teacherID);
   @override
   Widget build(BuildContext context) {
@@ -101,7 +101,7 @@ class _PostTitleAndBody extends StatelessWidget {
 }
 
 class _PostDetails extends StatelessWidget {
-  final String teacherID;
+  var teacherID;
   final DateTime postTime;
   _PostDetails(this.teacherID, this.postTime);
   @override
@@ -151,7 +151,7 @@ class _UserImage extends StatelessWidget {
 }
 
 class _UserName extends StatelessWidget {
-  final String teacherID;
+  var teacherID;
   _UserName(this.teacherID);
   //var user = FirebaseAuth.instance.currentUser();
   @override
@@ -161,16 +161,17 @@ class _UserName extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: StreamBuilder<Teacher>(
-            stream: Database(teacherID).teacherData,
+            //stream: Database(teacherID).teacherData,
             builder: (context, snapshot) {
-              return Text(
-                snapshot.data.name,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              );
-            }),
+          return Text(
+            //snapshot.data.name,
+            "Ahmed Essam",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          );
+        }),
       ),
     );
   }

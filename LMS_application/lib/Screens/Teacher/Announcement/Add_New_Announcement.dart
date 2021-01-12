@@ -1,10 +1,11 @@
+import 'package:LMS_application/models/course.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AddNewPost extends StatefulWidget {
-  // final Function addPost;
-  // AddNewPost(this.addPost);
+  final Course course;
+  AddNewPost(this.course);
   @override
   _AddNewPostState createState() => _AddNewPostState();
 }
@@ -15,7 +16,9 @@ class _AddNewPostState extends State<AddNewPost> {
   final authorController = TextEditingController();
   void submitPost() {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) return;
-    FirebaseFirestore.instance.collection('/Teachers/PostDocument/Posts').add({
+    final String collectionPath =
+        '/Courses/ ${widget.course.courseCode} /Announcements';
+    FirebaseFirestore.instance.collection(collectionPath).add({
       'title': titleController.text,
       'body': bodyController.text,
       'postTime': DateTime.now(),
