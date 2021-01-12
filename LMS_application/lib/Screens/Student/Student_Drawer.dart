@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
 import '../auth-screen.dart';
+import './Info/info.dart';
 
 class StudentDrawer extends StatelessWidget {
   final Student student;
@@ -51,7 +52,7 @@ class StudentDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.info,
               txt: "Info",
-              onTap: () => {},
+              onTap: () => _selectScreen(context, StudentInfo(student)),
             ),
             CustomeTile(
               myIcon: Icons.assignment_sharp,
