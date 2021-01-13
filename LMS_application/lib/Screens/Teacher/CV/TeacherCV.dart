@@ -4,19 +4,19 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'utils.dart';
 
-class StudentTraining extends StatefulWidget {
+class TeacherCV extends StatefulWidget {
   @override
-  _StudentTrainingState createState() => _StudentTrainingState();
+  _TeacherCVState createState() => _TeacherCVState();
 }
 
-class _StudentTrainingState extends State<StudentTraining> {
+class _TeacherCVState extends State<TeacherCV> {
   Query _ref;
   void initState() {
     super.initState();
     _ref = FirebaseDatabase.instance
         .reference()
-        .child('Trainings')
-        .orderByChild('Trainings');
+        .child('CVs')
+        .orderByChild('CVs');
   }
 
   Widget _buildTrainingItem({Map trainings}) {
@@ -32,7 +32,7 @@ class _StudentTrainingState extends State<StudentTraining> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.all(10),
-      height: 220,
+      height: 90,
       //maxHeight: double.infinity,
       color: Colors.purple[100],
       child: Column(
@@ -44,11 +44,8 @@ class _StudentTrainingState extends State<StudentTraining> {
               icon: Icon(Icons.cast_for_education_rounded),
               color: Colors.blue,
               iconSize: 30,
-              onPressed: () => Utils.openEmail(
-                  toEmail: trainings["link"],
-                  subject: 'Apply for Intern',
-                  body: 'My CV must be here'),
-            ),
+              onPressed: () => _launchurl(),
+              ),
             SizedBox(
               width: 6,
             ),
@@ -63,33 +60,6 @@ class _StudentTrainingState extends State<StudentTraining> {
           SizedBox(
             height: 10,
           ),
-          Row(
-            children: [
-              Icon(
-                Icons.create,
-                color: Colors.purple,
-                size: 20,
-              ),
-              SizedBox(
-                width: 6,
-              ),
-              Flexible(
-              child: Center(
-              child:Text(
-                trainings['description'],
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.blueAccent,
-                    fontWeight: FontWeight.w600),
-                    softWrap: true,
-                    maxLines: 6,
-                    //overflow: TextOverflow.ellipsis,
-              ),
-              ),
-              ),
-              SizedBox(width: 15),
-            ],
-          ),
         ],
       ),
     );
@@ -101,7 +71,7 @@ class _StudentTrainingState extends State<StudentTraining> {
       backgroundColor: Colors.purple,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Trainings'),
+        title: Text('CVs'),
       ),
       body: Container(
         height: double.infinity,

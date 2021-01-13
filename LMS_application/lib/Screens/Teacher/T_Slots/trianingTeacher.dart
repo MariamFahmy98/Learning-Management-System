@@ -31,7 +31,7 @@ class _TrainingState extends State<TeacherTraining> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.all(10),
-      height: 160,
+      height: 220,
       color: Colors.purple[100],
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

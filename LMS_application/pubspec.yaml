@@ -29,7 +29,8 @@ dependencies:
   path_provider: ^1.6.24
   intl: ^0.16.1
   timeago: ^2.0.29 
-  url_launcher: ^5.7.10  
+  url_launcher: ^5.7.10
+
   # Firebase Dependancies
   firebase_core: ^0.5.3
   cloud_firestore: ^0.14.4
@@ -47,8 +48,12 @@ dependencies:
 
 dev_dependencies:
   mailto: ^1.1.0
+  flutter_driver:
+    sdk: flutter
   flutter_test:
     sdk: flutter
+  mockito: 4.0.0
+  test: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

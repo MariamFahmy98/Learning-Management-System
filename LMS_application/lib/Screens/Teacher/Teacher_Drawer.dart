@@ -1,7 +1,9 @@
+import 'package:LMS_application/Screens/Teacher/CV/TeacherCV.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
 import 'package:LMS_application/Screens/Teacher/Discussion/TeacherDiscussion.dart';
 import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
 import 'package:LMS_application/Screens/Teacher/T_Slots/trianingTeacher.dart';
+import 'package:LMS_application/Screens/Teacher/CV/TeacherCV.dart';
 import 'package:LMS_application/Screens/auth-screen.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -51,7 +53,7 @@ class TeacherDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.info,
               txt: "Info",
-              onTap: () => {},
+              onTap: () => _selectScreen(context, TeacherCV()),
             ),
             CustomeTile(
               myIcon: Icons.assignment_sharp,

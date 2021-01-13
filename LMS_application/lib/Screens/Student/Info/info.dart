@@ -1,8 +1,11 @@
+import 'dart:async';
+
+import 'package:LMS_application/Screens/Student/Info/addCV.dart';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:LMS_application/models/student.dart';
-import 'package:LMS_application/Screens/PDF_Viewer/pdf_viewer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+bool cvState = false;
 
 class StudentInfo extends StatefulWidget {
   final Student student;
@@ -14,27 +17,9 @@ class StudentInfo extends StatefulWidget {
 class _StudentInfoState extends State<StudentInfo> {
   String text = 'No File Chosen';
   String pathPDF = "";
-
-  void _openPDF(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) {
-        return PDFViewer(pathPDF, "");
-      }),
-    );
-  }
-
-  void _submitCV() async {
-    var submissionFile = await FilePicker.getFile(
-      type: FileType.custom,
-      allowedExtensions: ['pdf'],
-    );
-    FirebaseFirestore.instance
-        .collection("/Students/Info")
-        .add({"PDFfile": submissionFile});
-  }
-
   @override
   Widget build(BuildContext context) {
+    cvState = false;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple,
@@ -58,12 +43,26 @@ class _StudentInfoState extends State<StudentInfo> {
               height: 20,
             ),
             RaisedButton(
-              color: Colors.purple,
-              child: Text(
-                'Pick File',
-              ),
-              onPressed: _submitCV,
-            ),
+                color: Colors.purple,
+                child: Text(
+                  'Pick File',
+                ),
+                onPressed: () {
+                  if (!cvState) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddCV()),
+                    );
+                    cvState = true;
+                  }
+                  Timer _timer;
+                  _timer = new Timer(const Duration(milliseconds: 1000), () {
+                    setState(() {
+                      text = "CV Uploaded Successfully";
+                      cvState = true;
+                    });
+                  });
+                }),
             SizedBox(
               height: 20,
             ),
@@ -72,7 +71,9 @@ class _StudentInfoState extends State<StudentInfo> {
               child: Text(
                 'View File',
               ),
-              onPressed: () => _openPDF(context),
+              onPressed: () {
+                  launch(link);
+              },
             ),
           ],
         ),

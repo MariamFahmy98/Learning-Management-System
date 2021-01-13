@@ -1,4 +1,5 @@
 import 'package:LMS_application/Screens/Student/Discussion/StudentDiscussion.dart';
+import 'package:LMS_application/Screens/Student/Info/info.dart';
 import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
 import 'package:LMS_application/Screens/Student/Materials/studentMaterial.dart';
 import 'package:LMS_application/Screens/Student/T_Slots/trianingStudent.dart';
@@ -8,7 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
 import '../auth-screen.dart';
-import './Info/info.dart';
+import './Info/CV.dart';
+import './Info/addCV.dart';
 import 'package:LMS_application/Screens/Student/Available_courses/AllCoursesList.dart';
 
 class StudentDrawer extends StatelessWidget {
