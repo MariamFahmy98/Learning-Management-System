@@ -30,6 +30,7 @@ class StudentDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      key: ValueKey('courseDrawer'),
       child: Container(
         child: ListView(
           children: <Widget>[
@@ -55,6 +56,7 @@ class StudentDrawer extends StatelessWidget {
               ),
             ),
             CustomeTile(
+              //key: ValueKey('courseButton'),
               myIcon: Icons.info,
               txt: "Info",
               onTap: () => _selectScreen(context, StudentInfo(student)),

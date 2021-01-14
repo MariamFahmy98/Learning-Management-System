@@ -6,7 +6,8 @@ import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
 import 'package:LMS_application/Screens/Student/Materials/studentMaterial.dart';
 import 'package:LMS_application/Screens/Student/officehours/officehours.dart';
-import 'package:LMS_application/Screens/Student/officehours/officehours_list.dart';
+import 'package:LMS_application/Screens/Student/Quiz/StudentQuiz.dart';
+
 
 class StudentCourseDrawer extends StatelessWidget {
   final Course course;
@@ -74,7 +75,7 @@ class StudentCourseDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.assignment_returned_sharp,
               txt: "Quizzes",
-              onTap: () => {},
+              onTap: () => _selectScreen(context, StudentQuiz(course, student)),
             ),
           ],
         ),
