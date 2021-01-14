@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:LMS_application/Screens/Student/Quiz/QuestionTile.dart';
 import 'package:LMS_application/Screens/Student/Quiz/Result.dart';
 import 'package:LMS_application/Widgets/CustomeButton.dart';
 import 'package:LMS_application/models/QuizQuestion.dart';
