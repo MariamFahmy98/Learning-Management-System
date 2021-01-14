@@ -262,9 +262,6 @@ class Database {
     if (!snapshot.exists) return AssignmentSubmission(valid: false);
 
     var snapshotData = snapshot.data();
-    var ab = (snapshot.data()["pdfURL"]);
-    ab.toUri(ab);
-
     return AssignmentSubmission(
       valid: true,
       studentID: snapshot.id,
