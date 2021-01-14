@@ -1,4 +1,3 @@
-import 'package:LMS_application/Screens/Student/Quiz/QuestionTile.dart';
 import 'package:LMS_application/Screens/Student/Quiz/Result.dart';
 import 'package:LMS_application/Screens/Teacher/Quiz/QuestionTileTeacher.dart';
 import 'package:LMS_application/Widgets/CustomeButton.dart';
