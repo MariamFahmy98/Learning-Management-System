@@ -24,9 +24,9 @@ class _PlayQuizTeacherState extends State<PlayQuizTeacher> {
     print("${widget.quizId}");
     dataBaseServices.getQuizQuestionData(widget.quizId).then((value) {
       questionSnapshot = value;
-    });
-    setState(() {
-      isLoading = false;
+      setState(() {
+        isLoading = false;
+      });
     });
   }
 
