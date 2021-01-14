@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import 'package:LMS_application/Screens/Teacher/Assignments/submissions_list.dart';
+import 'package:LMS_application/models/Assignmet.dart';
+>>>>>>> sharnoby
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
@@ -5,9 +10,16 @@ import 'package:intl/intl.dart';
 import '../../PDF_Viewer/pdf_viewer.dart';
 
 class TeacherAssignmentCard extends StatelessWidget {
+<<<<<<< HEAD
   TeacherAssignmentCard({@required this.assignmentData});
 
   final assignmentData;
+=======
+  TeacherAssignmentCard({@required this.courseCode, @required this.assignmentData});
+
+  final Assignment assignmentData;
+  final String courseCode;
+>>>>>>> sharnoby
 
   void _openPDF(BuildContext context) {
     Navigator.of(context).push(
@@ -17,6 +29,21 @@ class TeacherAssignmentCard extends StatelessWidget {
     );
   }
 
+<<<<<<< HEAD
+=======
+  void _viewSubmissions(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) {
+        return SubmissionsList(
+          courseCode: courseCode,
+          assignmentTitle: assignmentData.title,
+          assignmentID: assignmentData.id,
+        );
+      }),
+    );
+  }
+
+>>>>>>> sharnoby
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -80,7 +107,11 @@ class TeacherAssignmentCard extends StatelessWidget {
                   width: 10,
                 ),
                 RaisedButton(
+<<<<<<< HEAD
                   onPressed: () {},
+=======
+                  onPressed: () => _viewSubmissions(context),
+>>>>>>> sharnoby
                   child: Text(
                     "View Submissions",
                     style: TextStyle(color: Theme.of(context).primaryColor),

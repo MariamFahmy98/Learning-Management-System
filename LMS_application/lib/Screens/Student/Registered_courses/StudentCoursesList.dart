@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import './student_open_course.dart';
 
+
 class StudentCoursesList extends StatelessWidget {
   //final List<Course> myCourses;
   final Student student;
@@ -72,6 +73,10 @@ class StudentCoursesList extends StatelessWidget {
                     ),
                   ),
                   onPressed: () => openCourse(myCourses, context),
+<<<<<<< HEAD
+=======
+                  key: ValueKey('courseButton'),
+>>>>>>> sharnoby
                 );
               });
         },

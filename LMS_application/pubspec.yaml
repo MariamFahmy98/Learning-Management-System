@@ -28,6 +28,11 @@ dependencies:
   http: ^0.12.2
   path_provider: ^1.6.24
   intl: ^0.16.1
+<<<<<<< HEAD
+=======
+  timeago: ^2.0.29 
+  url_launcher: ^5.7.10
+>>>>>>> sharnoby
 
   # Firebase Dependancies
   firebase_core: ^0.5.3
@@ -45,8 +50,10 @@ dependencies:
   provider: ^4.0.4
 
 dev_dependencies:
-  flutter_test:
+  mailto: ^1.1.0
+  flutter_driver:
     sdk: flutter
+  test: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -60,6 +67,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/LMS.png
+<<<<<<< HEAD
+=======
+    - images/announcements.png
+    - images/logo.jpg
+>>>>>>> sharnoby
 
   # To add assets to your application, add an assets section, like this:
   # assets:

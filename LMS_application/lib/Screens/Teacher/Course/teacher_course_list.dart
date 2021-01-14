@@ -71,6 +71,10 @@ class TeacherCoursesList extends StatelessWidget {
                     ),
                   ),
                   onPressed: () => openCourse(myCourses, context),
+<<<<<<< HEAD
+=======
+                  key: ValueKey('courseButton'),
+>>>>>>> sharnoby
                 );
               });
         },

@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Widgets/auth/auth_form.dart';
 
+
+
 class AuthScreen extends StatefulWidget {
   AuthScreen();
   @override
@@ -50,7 +52,10 @@ class _AuthScreenState extends State<AuthScreen> {
       setState(() {
         _isLoading = false;
       });
+<<<<<<< HEAD
 
+=======
+>>>>>>> sharnoby
     } on FirebaseAuthException catch (error) {
       var message = "An error occurred, please check your credentials";
       if (error.message != null) message = error.message;

@@ -2,6 +2,7 @@ import 'package:LMS_application/Screens/Teacher/library/addBooks.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Library extends StatefulWidget {
   @override
@@ -19,6 +20,15 @@ class _LibraryState extends State<Library> {
   }
 
   Widget _buildBookItem({Map books}) {
+    _launchurl() async {
+      var url = books["link"];
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        throw "can't launch";
+      }
+    }
+
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.all(10),
@@ -28,25 +38,24 @@ class _LibraryState extends State<Library> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(
-                Icons.book,
-                color: Colors.blue,
-                size: 20,
-              ),
-              SizedBox(
-                width: 6,
-              ),
-              Text(
-                books['bookname'],
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.blue,
-                    fontWeight: FontWeight.w600),
-              ),
-            ],
-          ),
+          Row(children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.picture_as_pdf),
+              color: Colors.blue,
+              iconSize: 30,
+              onPressed: _launchurl,
+            ),
+            SizedBox(
+              width: 6,
+            ),
+            Text(
+              books['bookname'],
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.blueAccent,
+                  fontWeight: FontWeight.w600),
+            ),
+          ]),
           SizedBox(
             height: 10,
           ),

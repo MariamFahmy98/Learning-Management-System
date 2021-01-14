@@ -1,4 +1,8 @@
 import 'package:LMS_application/Screens/Student/Registered_courses/StudentCoursesList.dart';
+<<<<<<< HEAD
+=======
+import 'package:LMS_application/Screens/Student/Student_Drawer.dart';
+>>>>>>> sharnoby
 import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +13,7 @@ class StudentCourses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: StudentDrawer(student),
       appBar: AppBar(
         title: Text('My Courses'),
       ),

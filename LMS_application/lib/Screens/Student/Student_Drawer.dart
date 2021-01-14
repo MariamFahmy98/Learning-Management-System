@@ -1,10 +1,21 @@
 import 'package:LMS_application/Screens/Student/Discussion/StudentDiscussion.dart';
+<<<<<<< HEAD
 import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
+=======
+import 'package:LMS_application/Screens/Student/Info/info.dart';
+import 'package:LMS_application/Screens/Student/Library/studentLibrary.dart';
+import 'package:LMS_application/Screens/Student/Materials/studentMaterial.dart';
+import 'package:LMS_application/Screens/Student/T_Slots/trianingStudent.dart';
+>>>>>>> sharnoby
 import 'package:LMS_application/Screens/Student/Registered_courses/StudentCourses.dart';
 import 'package:LMS_application/models/student.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../Widgets/CustomeTile.dart';
+import '../auth-screen.dart';
+import './Info/CV.dart';
+import './Info/addCV.dart';
+import 'package:LMS_application/Screens/Student/Available_courses/AllCoursesList.dart';
 
 class StudentDrawer extends StatelessWidget {
   final Student student;
@@ -12,6 +23,10 @@ class StudentDrawer extends StatelessWidget {
   StudentDrawer(this.student);
 
   void _selectScreen(BuildContext ctx, Widget nextScreen) {
+<<<<<<< HEAD
+=======
+    Navigator.of(ctx).pop();
+>>>>>>> sharnoby
     Navigator.of(ctx).push(
       MaterialPageRoute(builder: (_) {
         return nextScreen;
@@ -22,6 +37,7 @@ class StudentDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      key: ValueKey('courseDrawer'),
       child: Container(
         child: ListView(
           children: <Widget>[
@@ -37,7 +53,11 @@ class StudentDrawer extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
+<<<<<<< HEAD
                       "Student/Teacher full name",
+=======
+                      student.name,
+>>>>>>> sharnoby
                       style: TextStyle(
                         fontSize: 20.0,
                       ),
@@ -47,9 +67,16 @@ class StudentDrawer extends StatelessWidget {
               ),
             ),
             CustomeTile(
+<<<<<<< HEAD
               myIcon: Icons.info,
               txt: "Info",
               onTap: () => {},
+=======
+              //key: ValueKey('courseButton'),
+              myIcon: Icons.info,
+              txt: "Info",
+              onTap: () => _selectScreen(context, StudentInfo(student)),
+>>>>>>> sharnoby
             ),
             CustomeTile(
               myIcon: Icons.assignment_sharp,
@@ -59,7 +86,11 @@ class StudentDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.assignment_turned_in,
               txt: "Available Courses",
+<<<<<<< HEAD
               onTap: () => {},
+=======
+              onTap: () => _selectScreen(context, AllCoursesList(student)),
+>>>>>>> sharnoby
             ),
             CustomeTile(
               myIcon: Icons.chat,
@@ -71,10 +102,27 @@ class StudentDrawer extends StatelessWidget {
               txt: "Library",
               onTap: () => _selectScreen(context, SLibrary()),
             ),
+<<<<<<< HEAD
             CustomeTile(
               myIcon: Icons.logout,
               txt: "LogOut",
               onTap: () => FirebaseAuth.instance.signOut(),
+=======
+              
+            CustomeTile(
+              myIcon: Icons.work,
+              txt: "Trainings",
+              onTap: () => _selectScreen(context, StudentTraining()),
+            ),
+            CustomeTile(
+              myIcon: Icons.logout,
+              txt: "LogOut",
+              onTap: () {
+                Navigator.of(context).pop();
+                FirebaseAuth.instance.signOut();
+                _selectScreen(context, AuthScreen());
+              },
+>>>>>>> sharnoby
             ),
           ],
         ),

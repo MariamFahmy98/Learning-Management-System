@@ -1,7 +1,6 @@
 import 'package:LMS_application/Screens/Teacher/Course/TeacherCourseDrawer.dart';
 import 'package:LMS_application/models/course.dart';
 import 'package:flutter/material.dart';
-import 'teacher_requests_list.dart';
 
 class TeacherOpenCourse extends StatelessWidget {
   final Course runningCourse;
@@ -13,6 +12,7 @@ class TeacherOpenCourse extends StatelessWidget {
       drawer: TeacherCourseDrawer(runningCourse),
       appBar: AppBar(
         title: Text(runningCourse.courseCode),
+<<<<<<< HEAD
         actions: [
           IconButton(
               icon: Icon(Icons.request_page),
@@ -23,6 +23,8 @@ class TeacherOpenCourse extends StatelessWidget {
                 }));
               }),
         ],
+=======
+>>>>>>> sharnoby
       ),
       body: ListView(
         children: <Widget>[
@@ -45,6 +47,7 @@ class TeacherOpenCourse extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
           ),
+<<<<<<< HEAD
           // Column(
           //   crossAxisAlignment: CrossAxisAlignment.stretch,
           //   children: <Widget>[
@@ -103,6 +106,8 @@ class TeacherOpenCourse extends StatelessWidget {
           //     ),
           //   ],
           // ),
+=======
+>>>>>>> sharnoby
         ],
       ),
     );

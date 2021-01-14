@@ -48,7 +48,7 @@ class _AddQuestionState extends State<AddQuestion> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         brightness: Brightness.light,
-        title: Text("كويزات مجنونة"),
+        title: Text("Quizzes"),
       ),
       body: _isLoading
           ? Container(
@@ -60,7 +60,7 @@ class _AddQuestionState extends State<AddQuestion> {
               key: _formKey,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
+                child: ListView(
                   children: [
                     TextFormField(
                       validator: (val) => val.isEmpty ? "enter Question" : null,
@@ -119,21 +119,11 @@ class _AddQuestionState extends State<AddQuestion> {
                         option4 = val;
                       },
                     ),
-                    Spacer(),
+                    SizedBox(
+                      height: 200,
+                    ),
                     Column(
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: CustomeButton(
-                            title: "Submit",
-                            context: context,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
                         GestureDetector(
                           onTap: () {
                             uploadQuistionData();
@@ -144,7 +134,19 @@ class _AddQuestionState extends State<AddQuestion> {
                           ),
                         ),
                         SizedBox(
-                          height: 80,
+                          height: 10,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: CustomeButton(
+                            title: "Submit",
+                            context: context,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50,
                         ),
                       ],
                     )
