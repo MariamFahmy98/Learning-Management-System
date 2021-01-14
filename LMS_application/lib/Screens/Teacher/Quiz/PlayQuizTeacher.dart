@@ -20,6 +20,7 @@ class _PlayQuizTeacherState extends State<PlayQuizTeacher> {
   QuerySnapshot questionSnapshot;
   @override
   void initState() {
+    super.initState();
     print("${widget.quizId}");
     dataBaseServices.getQuizQuestionData(widget.quizId).then((value) {
       questionSnapshot = value;
@@ -27,7 +28,6 @@ class _PlayQuizTeacherState extends State<PlayQuizTeacher> {
     setState(() {
       isLoading = false;
     });
-    super.initState();
   }
 
   @override

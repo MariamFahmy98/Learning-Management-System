@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'OptionTile.dart';
+import 'StudentQuiz.dart';
 
 class PlayQuizStudent extends StatefulWidget {
   final String quizId;
@@ -34,6 +35,7 @@ class PlayQuizStudent extends StatefulWidget {
 }
 
 int _correct = 0;
+int buffer = 0;
 
 class _PlayQuizStudentState extends State<PlayQuizStudent> {
   bool isLoading = true;
@@ -134,6 +136,8 @@ class _PlayQuizStudentState extends State<PlayQuizStudent> {
                                   print("${_correct}");
                                   setState(() {
                                     isSubmitted = true;
+                                    buffer = _correct;
+                                    _correct = 0;
                                   });
                                   Navigator.pushReplacement(
                                     context,
@@ -143,7 +147,7 @@ class _PlayQuizStudentState extends State<PlayQuizStudent> {
                                           total:
                                               // ignore: deprecated_member_use
                                               questionSnapshot.documents.length,
-                                          correct: _correct,
+                                          correct: buffer,
                                           student: widget.student);
                                     }),
                                   );
@@ -167,18 +171,42 @@ class _PlayQuizStudentState extends State<PlayQuizStudent> {
                     style: TextStyle(fontSize: 30, color: Colors.black87),
                   ),
                 )
-              : Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) {
-                    return Result(
-                      course: widget.course,
-                      total:
-                          // ignore: deprecated_member_use
-                          questionSnapshot.documents.length,
-                      correct: _correct,
-                      student: widget.student,
-                    );
-                  }),
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "You score: ",
+                          style: TextStyle(fontSize: 30, color: Colors.black87),
+                        )),
+                    Text(
+                      // ignore: deprecated_member_use
+                      "$_correct out of ${questionSnapshot.documents.length}",
+                      style: TextStyle(fontSize: 25, color: Colors.black87),
+                    ),
+                    SizedBox(
+                      height: 150,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (_) {
+                          return StudentQuiz(
+                            widget.course,
+                            widget.student,
+                          );
+                        }));
+                      },
+                      child: Text(
+                        "return to quizzes",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.purple,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
                 ),
     );
   }

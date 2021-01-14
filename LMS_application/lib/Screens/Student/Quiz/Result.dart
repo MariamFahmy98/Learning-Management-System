@@ -38,21 +38,22 @@ class Result extends StatelessWidget {
             height: 150,
           ),
           GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return StudentQuiz(
-                    course,
-                    student,
-                  );
-                }));
-              },
-              child: Text(
-                "return to quizzes",
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.purple,
-                    fontWeight: FontWeight.bold),
-              )),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_) {
+                return StudentQuiz(
+                  course,
+                  student,
+                );
+              }));
+            },
+            child: Text(
+              "return to quizzes",
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.purple,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
         ],
       ),
     );
