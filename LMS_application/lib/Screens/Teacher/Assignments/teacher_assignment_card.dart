@@ -1,3 +1,5 @@
+import 'package:LMS_application/Screens/Teacher/Assignments/submissions_list.dart';
+import 'package:LMS_application/models/Assignmet.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
@@ -5,14 +7,27 @@ import 'package:intl/intl.dart';
 import '../../PDF_Viewer/pdf_viewer.dart';
 
 class TeacherAssignmentCard extends StatelessWidget {
-  TeacherAssignmentCard({@required this.assignmentData});
+  TeacherAssignmentCard({@required this.courseCode, @required this.assignmentData});
 
-  final assignmentData;
+  final Assignment assignmentData;
+  final String courseCode;
 
   void _openPDF(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) {
         return PDFViewer(assignmentData.pdfURL, assignmentData.title);
+      }),
+    );
+  }
+
+  void _viewSubmissions(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) {
+        return SubmissionsList(
+          courseCode: courseCode,
+          assignmentTitle: assignmentData.title,
+          assignmentID: assignmentData.id,
+        );
       }),
     );
   }
@@ -80,7 +95,7 @@ class TeacherAssignmentCard extends StatelessWidget {
                   width: 10,
                 ),
                 RaisedButton(
-                  onPressed: () {},
+                  onPressed: () => _viewSubmissions(context),
                   child: Text(
                     "View Submissions",
                     style: TextStyle(color: Theme.of(context).primaryColor),

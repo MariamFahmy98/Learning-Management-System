@@ -7,17 +7,18 @@ class Course {
   String courseDescription;
   String courseCreditHours;
   List<Quiz> quizes;
-  List<Student> requests;
+  List<String> requests;
 
   Course({
     this.courseCode,
     this.courseCreditHours,
     this.courseDescription,
     this.courseName,
+    this.requests,
   });
 
   void studentRequest(Student input) {
-    requests = [input];
+    // requests = [input];
 
     teacherApprove(input);
   }

@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+class EmailFieldValidator {
+  static String validate(String value) {
+    if (value.isEmpty || !value.contains('@')) {
+      return 'Please enter a valid email address.';
+    }
+    return null;
+  }
+}
+
+class PasswordFieldValidator {
+  static String validate(String value) {
+    if (value.isEmpty || value.length < 6) {
+      return 'Password must be at least 6 characters long.';
+    }
+    return null;
+  }
+}
+
 class AuthForm extends StatefulWidget {
   AuthForm(this.submitFn, this.isLoading);
   final bool isLoading;
@@ -46,12 +64,7 @@ class _AuthFormState extends State<AuthForm> {
                 children: [
                   TextFormField(
                     key: ValueKey('email'),
-                    validator: (value) {
-                      if (value.isEmpty || !value.contains('@')) {
-                        return 'Please enter a valid email address.';
-                      }
-                      return null;
-                    },
+                    validator: EmailFieldValidator.validate,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       labelText: 'Email Address',
@@ -62,12 +75,7 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   TextFormField(
                     key: ValueKey('Password'),
-                    validator: (value) {
-                      if (value.isEmpty || value.length < 6) {
-                        return 'Password must be at least 6 characters long.';
-                      }
-                      return null;
-                    },
+                    validator: PasswordFieldValidator.validate,
                     decoration: InputDecoration(
                       labelText: 'Password',
                     ),

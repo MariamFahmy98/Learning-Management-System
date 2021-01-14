@@ -29,7 +29,7 @@ class RequestsPage extends StatelessWidget {
                 ),
               ),
               title: Text(
-                requestedCr.requests[index].name,
+                requestedCr.requests[index],
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               subtitle: Column(

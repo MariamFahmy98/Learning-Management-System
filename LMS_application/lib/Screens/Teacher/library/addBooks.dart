@@ -7,7 +7,7 @@ class AddBooks extends StatefulWidget {
 }
 
 class _AddBooksState extends State<AddBooks> {
-  TextEditingController _bookNameController, _desController;
+  TextEditingController _bookNameController, _desController, _webLink;
   String _typeSelected = '';
   DatabaseReference _ref;
 
@@ -16,6 +16,7 @@ class _AddBooksState extends State<AddBooks> {
     super.initState();
     _bookNameController = TextEditingController();
     _desController = TextEditingController();
+    _webLink = TextEditingController();
     _ref = FirebaseDatabase.instance.reference().child('booksName');
   }
 
@@ -80,6 +81,22 @@ class _AddBooksState extends State<AddBooks> {
                 ),
               ),
               SizedBox(height: 15),
+              TextFormField(
+                controller: _webLink,
+                decoration: InputDecoration(
+                  hintText: 'Enter Link',
+                  prefixIcon: Icon(
+                    Icons.link,
+                    size: 30,
+                  ),
+                  fillColor: Colors.blue[50],
+                  filled: true,
+                  contentPadding: EdgeInsets.all(15),
+                ),
+              ),
+              SizedBox(
+                height: 25,
+              ),
               Container(
                 height: 40,
                 child: ListView(
@@ -127,10 +144,12 @@ class _AddBooksState extends State<AddBooks> {
   void addBook() {
     String bookname = _bookNameController.text;
     String author = _desController.text;
+    String link = _webLink.text;
     Map<String, String> book = {
       'bookname': bookname,
       'author': author,
       'type': _typeSelected,
+      'link': link,
     };
     _ref.push().set(book).then((value) {
       Navigator.pop(context);

@@ -1,6 +1,10 @@
+import 'package:LMS_application/Screens/Teacher/CV/TeacherCV.dart';
 import 'package:LMS_application/Screens/Teacher/Course/teacher_courses.dart';
 import 'package:LMS_application/Screens/Teacher/Discussion/TeacherDiscussion.dart';
 import 'package:LMS_application/Screens/Teacher/library/Libraryp.dart';
+import 'package:LMS_application/Screens/Teacher/T_Slots/trianingTeacher.dart';
+import 'package:LMS_application/Screens/Teacher/CV/TeacherCV.dart';
+import 'package:LMS_application/Screens/auth-screen.dart';
 import 'package:LMS_application/models/teacher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +14,7 @@ class TeacherDrawer extends StatelessWidget {
   final Teacher teacher;
 
   void _selectScreen(BuildContext ctx, Widget nextScreen) {
+    Navigator.of(ctx).pop();
     Navigator.of(ctx).push(
       MaterialPageRoute(builder: (_) {
         return nextScreen;
@@ -48,7 +53,7 @@ class TeacherDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.info,
               txt: "Info",
-              onTap: () => {},
+              onTap: () => _selectScreen(context, TeacherCV()),
             ),
             CustomeTile(
               myIcon: Icons.assignment_sharp,
@@ -66,9 +71,18 @@ class TeacherDrawer extends StatelessWidget {
               onTap: () => _selectScreen(context, Library()),
             ),
             CustomeTile(
+              myIcon: Icons.work,
+              txt: "Trainings",
+              onTap: () => _selectScreen(context, TeacherTraining()),
+            ),
+            CustomeTile(
               myIcon: Icons.logout,
               txt: "LogOut",
-              onTap: () => FirebaseAuth.instance.signOut(),
+              onTap: () {
+                Navigator.of(context).pop();
+                FirebaseAuth.instance.signOut();
+                _selectScreen(context, AuthScreen());
+              },
             ),
           ],
         ),
