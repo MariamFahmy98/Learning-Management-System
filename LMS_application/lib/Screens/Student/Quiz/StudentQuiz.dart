@@ -1,12 +1,14 @@
 import 'package:LMS_application/Screens/Teacher/Quiz/CreateQuiz.dart';
 import 'package:LMS_application/Widgets/QuizTIle.dart';
 import 'package:LMS_application/models/course.dart';
+import 'package:LMS_application/models/student.dart';
 import 'package:LMS_application/services/database.dart';
 import 'package:flutter/material.dart';
 
 class StudentQuiz extends StatefulWidget {
   final Course course;
-  StudentQuiz(this.course);
+  final Student student;
+  StudentQuiz(this.course, this.student);
 
   @override
   _StudentQuizState createState() => _StudentQuizState();
@@ -48,6 +50,7 @@ class _StudentQuizState extends State<StudentQuiz> {
                       course: widget.course,
                       duration:
                           snapshot.data.docs[index].data()["quizDuration"],
+                      student: widget.student,
                     );
                   });
         },

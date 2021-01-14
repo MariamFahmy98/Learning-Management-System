@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:LMS_application/Screens/Student/Quiz/PlayQuizStudent.dart';
 import 'package:LMS_application/Screens/Teacher/Quiz/PlayQuizTeacher.dart';
 import 'package:LMS_application/models/course.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:LMS_application/models/student.dart';
 
 import 'package:flutter/material.dart';
 
@@ -15,14 +13,17 @@ class QuizTile extends StatefulWidget {
   final Course course;
   final DateTime quizDeadLine;
   final int duration;
-  QuizTile(
-      {this.title,
-      this.description,
-      this.quizId,
-      this.isTeacher,
-      this.course,
-      this.quizDeadLine,
-      this.duration});
+  final Student student;
+  QuizTile({
+    this.title,
+    this.description,
+    this.quizId,
+    this.isTeacher,
+    this.course,
+    this.quizDeadLine,
+    this.duration,
+    this.student,
+  });
 
   @override
   _QuizTileState createState() => _QuizTileState();
@@ -55,6 +56,7 @@ class _QuizTileState extends State<QuizTile> {
                     quizDeadLine: widget.quizDeadLine,
                     startTime: DateTime.now(),
                     duration: widget.duration,
+                    student: widget.student,
                   ),
                 ),
               );

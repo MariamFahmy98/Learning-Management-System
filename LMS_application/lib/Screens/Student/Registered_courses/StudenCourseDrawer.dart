@@ -65,7 +65,7 @@ class StudentCourseDrawer extends StatelessWidget {
             CustomeTile(
               myIcon: Icons.assignment_returned_sharp,
               txt: "Quizzes",
-              onTap: () => _selectScreen(context, StudentQuiz(course)),
+              onTap: () => _selectScreen(context, StudentQuiz(course, student)),
             ),
           ],
         ),

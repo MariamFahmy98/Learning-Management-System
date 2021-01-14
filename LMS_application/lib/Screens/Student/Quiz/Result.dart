@@ -1,5 +1,6 @@
 import 'package:LMS_application/Widgets/CustomeButton.dart';
 import 'package:LMS_application/models/course.dart';
+import 'package:LMS_application/models/student.dart';
 import 'package:flutter/material.dart';
 
 import 'StudentQuiz.dart';
@@ -7,7 +8,8 @@ import 'StudentQuiz.dart';
 class Result extends StatelessWidget {
   final Course course;
   final int total, correct;
-  Result({this.course, this.total, this.correct});
+  final Student student;
+  Result({this.course, this.total, this.correct, this.student});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +40,10 @@ class Result extends StatelessWidget {
           GestureDetector(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (_) {
-                  return StudentQuiz(course);
+                  return StudentQuiz(
+                    course,
+                    student,
+                  );
                 }));
               },
               child: Text(
