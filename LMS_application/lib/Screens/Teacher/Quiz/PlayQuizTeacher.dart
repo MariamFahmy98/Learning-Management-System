@@ -1,5 +1,6 @@
 import 'package:LMS_application/Screens/Student/Quiz/QuestionTile.dart';
 import 'package:LMS_application/Screens/Student/Quiz/Result.dart';
+import 'package:LMS_application/Screens/Teacher/Quiz/QuestionTileTeacher.dart';
 import 'package:LMS_application/Widgets/CustomeButton.dart';
 import 'package:LMS_application/Widgets/QuizTIle.dart';
 import 'package:LMS_application/services/database.dart';
@@ -23,9 +24,10 @@ class _PlayQuizTeacherState extends State<PlayQuizTeacher> {
     print("${widget.quizId}");
     dataBaseServices.getQuizQuestionData(widget.quizId).then((value) {
       questionSnapshot = value;
+    });
+    setState(() {
       isLoading = false;
     });
-    setState(() {});
     super.initState();
   }
 
@@ -62,7 +64,7 @@ class _PlayQuizTeacherState extends State<PlayQuizTeacher> {
                             // ignore: deprecated_member_use
                             itemCount: questionSnapshot.documents.length,
                             itemBuilder: (context, index) {
-                              return QuestionTile(
+                              return QuestionTileTeacher(
                                   dataBaseServices.getQuestionFromSnapshot(
                                       // ignore: deprecated_member_use
                                       questionSnapshot.documents[index]),

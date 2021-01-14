@@ -6,7 +6,8 @@ import 'StudentQuiz.dart';
 
 class Result extends StatelessWidget {
   final Course course;
-  Result(this.course);
+  final int total, correct;
+  Result({this.course, this.total, this.correct});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +29,7 @@ class Result extends StatelessWidget {
                 style: TextStyle(fontSize: 30, color: Colors.black87),
               )),
           Text(
-            "2 out of 3",
+            "${correct} out of ${total}",
             style: TextStyle(fontSize: 25, color: Colors.black87),
           ),
           SizedBox(

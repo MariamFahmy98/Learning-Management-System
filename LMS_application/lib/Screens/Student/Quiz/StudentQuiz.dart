@@ -23,17 +23,18 @@ class _StudentQuizState extends State<StudentQuiz> {
       child: StreamBuilder(
         stream: quizStream,
         builder: (context, snapshot) {
-          return snapshot.data == null
+          return !snapshot.hasData
               ? Center(
                   child: Container(
-                  child: Text(
-                    "there's no quizes yet",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                    child: Text(
+                      "there's no quizes yet",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ))
+                )
               : ListView.builder(
                   itemCount: snapshot.data.docs.length,
                   itemBuilder: (contex, index) {
@@ -41,8 +42,12 @@ class _StudentQuizState extends State<StudentQuiz> {
                       title: snapshot.data.docs[index].data()["quizTitle"],
                       description: snapshot.data.docs[index].data()["quizDes"],
                       quizId: snapshot.data.docs[index].data()["quizId"],
+                      quizDeadLine:
+                          snapshot.data.docs[index].data()["deadline"].toDate(),
                       isTeacher: false,
                       course: widget.course,
+                      duration:
+                          snapshot.data.docs[index].data()["quizDuration"],
                     );
                   });
         },

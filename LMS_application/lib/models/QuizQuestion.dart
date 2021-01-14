@@ -7,13 +7,12 @@ class QuizQuestion {
       quizId,
       duration,
       correctOption;
-  bool answered;
+  bool answered = false;
+  bool isCorrect = false;
 
   QuizQuestion();
 
-/*  void setQuizDuration({int h, int m, int s}) {
-    secounds = s;
-    hours = h;
-    minutes = m;
-  }*/
+  void setCorrect(bool boolean) {
+    isCorrect = boolean;
+  }
 }

@@ -1,28 +1,45 @@
+import 'dart:async';
+
 import 'package:LMS_application/Screens/Student/Quiz/PlayQuizStudent.dart';
 import 'package:LMS_application/Screens/Teacher/Quiz/PlayQuizTeacher.dart';
 import 'package:LMS_application/models/course.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 
-class QuizTile extends StatelessWidget {
+class QuizTile extends StatefulWidget {
   final String title;
   final String description;
   final String quizId;
   final bool isTeacher;
   final Course course;
-
+  final DateTime quizDeadLine;
+  final int duration;
   QuizTile(
-      {this.title, this.description, this.quizId, this.isTeacher, this.course});
+      {this.title,
+      this.description,
+      this.quizId,
+      this.isTeacher,
+      this.course,
+      this.quizDeadLine,
+      this.duration});
+
+  @override
+  _QuizTileState createState() => _QuizTileState();
+}
+
+class _QuizTileState extends State<QuizTile> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: isTeacher
+      onTap: widget.isTeacher
           ? () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => PlayQuizTeacher(
-                    quizId: quizId,
-                    quizTitle: title,
+                    quizId: widget.quizId,
+                    quizTitle: widget.title,
                   ),
                 ),
               );
@@ -32,9 +49,12 @@ class QuizTile extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => PlayQuizStudent(
-                    quizId: quizId,
-                    quizTitle: title,
-                    course: course,
+                    quizId: widget.quizId,
+                    quizTitle: widget.title,
+                    course: widget.course,
+                    quizDeadLine: widget.quizDeadLine,
+                    startTime: DateTime.now(),
+                    duration: widget.duration,
                   ),
                 ),
               );
@@ -52,14 +72,14 @@ class QuizTile extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(title,
+            Text(widget.title,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
                   fontWeight: FontWeight.w500,
                 )),
             Text(
-              description,
+              widget.description,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,

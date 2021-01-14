@@ -2,14 +2,20 @@ import 'package:LMS_application/models/QuizQuestion.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DataBaseServices {
-  Future<void> addQuizData(Map quizData, String quizId, String courseId) async {
+  Future<void> addQuizData(String title, String des, int duration,
+      String quizId, String courseId, DateTime deadline) async {
     await FirebaseFirestore.instance
         .collection("Courses")
         .doc(courseId)
         .collection("Quizes")
         .doc(quizId)
-        .set(quizData)
-        .catchError((e) {
+        .set({
+      "quizDes": des,
+      "quizDuration": duration,
+      "quizId": quizId,
+      "quizTitle": title,
+      "deadline": Timestamp.fromDate(deadline),
+    }).catchError((e) {
       print(e.toString());
     });
   }
@@ -34,7 +40,7 @@ class DataBaseServices {
   }
 
   getQuizQuestionData(String quizId) async {
-    return await FirebaseFirestore.instance
+    return FirebaseFirestore.instance
         .collection("Quizes")
         .doc(quizId)
         .collection("QNA")

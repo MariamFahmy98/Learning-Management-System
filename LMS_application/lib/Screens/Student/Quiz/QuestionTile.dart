@@ -2,9 +2,11 @@ import 'package:LMS_application/Screens/Student/Quiz/OptionTile.dart';
 import 'package:LMS_application/models/QuizQuestion.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class QuestionTile extends StatefulWidget {
   final QuizQuestion quizQuestion;
   final int index;
+  //bool isCorrect;
 
   QuestionTile(this.quizQuestion, this.index);
 
@@ -35,20 +37,22 @@ class _QuestionTileState extends State<QuestionTile> {
             height: 16,
           ),
           GestureDetector(
-            onTap: () {
-              if (widget.quizQuestion.option1 ==
-                  widget.quizQuestion.correctOption) {
-                setState(() {
-                  optionSelected = widget.quizQuestion.option1;
-                  _correct += 1;
-                });
-              } else {
-                setState(() {
-                  optionSelected = widget.quizQuestion.option1;
-                  _wrong += 1;
-                });
-              }
-            },
+            onTap: widget.quizQuestion.answered == false
+                ? () {
+                    if (widget.quizQuestion.option1 ==
+                        widget.quizQuestion.correctOption) {
+                      setState(() {
+                        optionSelected = widget.quizQuestion.option1;
+                        // widget.quizQuestion.setCorrect(true);
+                      });
+                    } else {
+                      setState(() {
+                        optionSelected = widget.quizQuestion.option1;
+                        //widget.quizQuestion.setCorrect(false);
+                      });
+                    }
+                  }
+                : null,
             child: OptionTile(
               optionDes: widget.quizQuestion.option1,
               optionSymbol: 'A',
@@ -60,20 +64,22 @@ class _QuestionTileState extends State<QuestionTile> {
             height: 8,
           ),
           GestureDetector(
-            onTap: () {
-              if (widget.quizQuestion.option2 ==
-                  widget.quizQuestion.correctOption) {
-                setState(() {
-                  optionSelected = widget.quizQuestion.option2;
-                  _correct += 1;
-                });
-              } else {
-                setState(() {
-                  optionSelected = widget.quizQuestion.option2;
-                  _wrong += 1;
-                });
-              }
-            },
+            onTap: widget.quizQuestion.answered == false
+                ? () {
+                    if (widget.quizQuestion.option2 ==
+                        widget.quizQuestion.correctOption) {
+                      setState(() {
+                        optionSelected = widget.quizQuestion.option2;
+                        // widget.quizQuestion.setCorrect(true);
+                      });
+                    } else {
+                      setState(() {
+                        optionSelected = widget.quizQuestion.option2;
+                        //widget.quizQuestion.setCorrect(false);
+                      });
+                    }
+                  }
+                : null,
             child: OptionTile(
               optionDes: widget.quizQuestion.option2,
               optionSymbol: 'B',
@@ -85,20 +91,22 @@ class _QuestionTileState extends State<QuestionTile> {
             height: 8,
           ),
           GestureDetector(
-            onTap: () {
-              if (widget.quizQuestion.option3 ==
-                  widget.quizQuestion.correctOption) {
-                setState(() {
-                  optionSelected = widget.quizQuestion.option3;
-                  _correct += 1;
-                });
-              } else {
-                setState(() {
-                  optionSelected = widget.quizQuestion.option3;
-                  _wrong += 1;
-                });
-              }
-            },
+            onTap: widget.quizQuestion.answered == false
+                ? () {
+                    if (widget.quizQuestion.option3 ==
+                        widget.quizQuestion.correctOption) {
+                      setState(() {
+                        optionSelected = widget.quizQuestion.option3;
+                        //widget.quizQuestion.setCorrect(true);
+                      });
+                    } else {
+                      setState(() {
+                        optionSelected = widget.quizQuestion.option3;
+                        //widget.quizQuestion.setCorrect(false);
+                      });
+                    }
+                  }
+                : null,
             child: OptionTile(
               optionDes: widget.quizQuestion.option3,
               optionSymbol: 'C',
@@ -110,20 +118,22 @@ class _QuestionTileState extends State<QuestionTile> {
             height: 8,
           ),
           GestureDetector(
-            onTap: () {
-              if (widget.quizQuestion.option4 ==
-                  widget.quizQuestion.correctOption) {
-                setState(() {
-                  optionSelected = widget.quizQuestion.option4;
-                  _correct += 1;
-                });
-              } else {
-                setState(() {
-                  optionSelected = widget.quizQuestion.option4;
-                  _wrong += 1;
-                });
-              }
-            },
+            onTap: widget.quizQuestion.answered == false
+                ? () {
+                    if (widget.quizQuestion.option4 ==
+                        widget.quizQuestion.correctOption) {
+                      setState(() {
+                        optionSelected = widget.quizQuestion.option4;
+                        //widget.quizQuestion.setCorrect(true);
+                      });
+                    } else {
+                      setState(() {
+                        optionSelected = widget.quizQuestion.option4;
+                        //widget.quizQuestion.setCorrect(false);
+                      });
+                    }
+                  }
+                : null,
             child: OptionTile(
               optionDes: widget.quizQuestion.option4,
               optionSymbol: 'D',
@@ -133,6 +143,21 @@ class _QuestionTileState extends State<QuestionTile> {
           ),
           SizedBox(
             height: 8,
+          ),
+          FloatingActionButton(
+            child: Icon(Icons.check),
+            onPressed: widget.quizQuestion.answered
+                ? null
+                : () {
+                    if (widget.quizQuestion.answered == false)
+                      setState(() {
+                        widget.quizQuestion.answered = true;
+                      });
+                    print("${widget.quizQuestion.answered}");
+                  },
+            backgroundColor: widget.quizQuestion.answered == false
+                ? Colors.purple
+                : Colors.grey,
           ),
         ],
       ),

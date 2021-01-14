@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 class OptionTile extends StatefulWidget {
   final String optionSymbol, correctAnswer, optionSelected, optionDes;
-  OptionTile(
-      {this.optionSymbol,
-      this.correctAnswer,
-      this.optionDes,
-      this.optionSelected});
+  OptionTile({
+    this.optionSymbol,
+    this.correctAnswer,
+    this.optionDes,
+    this.optionSelected,
+  });
   @override
   _OptionTileState createState() => _OptionTileState();
 }
